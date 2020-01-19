@@ -2,11 +2,6 @@
 
 Felicity Xu (velo.x) 
 
-
-MATH 145:<br/>
-prof: David Jao <br/>
-term: 2019/09<br/>
-<br/>
 MATH 147: <br/>
 prof: Kenneth Davidson<br/>
 term: 2019/09<br/>
