@@ -1,0 +1,746 @@
+\documentclass[12pt]{article}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[10pt]{moresize}
+%usepackage[utf8]{inputenc}
+\usepackage{latexsym,amsfonts,amssymb,amsthm,amsmath}
+\usepackage[letterpaper, portrait, margin=0.7in]{geometry}
+\usepackage{parskip}
+\usepackage{tkz-euclide}
+\usepackage{pgfplots}
+\usetkzobj{all}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\pgfplotsset{compat=1.16}
+
+\theoremstyle{plain}
+
+\newtheorem{theorem*}{Theorem}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{thm}{\textit{Theorem}}
+
+%      Blackboard bold letters
+\newcommand{\bC}{{\mathbb{C}}}
+\newcommand{\bN}{{\mathbb{N}}}
+\newcommand{\bQ}{{\mathbb{Q}}}
+\newcommand{\bR}{{\mathbb{R}}}
+\newcommand{\bZ}{{\mathbb{Z}}}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{proposition}{Proposition}[subsection]
+\newtheorem{example}{Example}[section]
+\newtheorem{corollary}{Corollary}[subsection]
+
+
+\newcommand{\de}{\delta}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+
+\newcommand{\dlim}{\displaystyle\lim\limits}
+\newcommand{\dsum}{\displaystyle\sum\limits}
+\let\emptyset\varnothing
+
+\DeclareMathOperator{\Dom}{dom}
+\DeclareMathOperator{\Img}{img}
+\DeclareMathOperator{\Ran}{ran}
+
+\begin{document}
+MATH 147 EXAM REVIEW
+velo.x
+
+\section{Definitions}
+	\begin{definition}[\textbf{limit of a sequence}]
+		$\dlim_{n\to\infty} x_n=L$ mean for every $\epsilon >0$, 
+		exists $N$ so that $\abs{a_n-L} < \epsilon$ for all $n\geq N$.
+		i.e.  $\forall\,\, \epsilon > 0$ , $\exists N$, 
+		$\forall n\geq N$, $\abs{a_n-L} < \epsilon$.\\
+	\end{definition}
+	
+  \begin{definition}[\textbf{Supremum and Infimum}]
+  	If $\emptyset \neq S \subseteq \mathbb{R}$. 
+        
+		If S is bounded above. ($\exists M$, $\forall s \in S$, $S \leq M$),
+		then the least upper bound, or supremum
+		is the smallest possible upper bound, written as \textbf{$\sup S$}. 
+
+		Similarly, if S is bounded below, the greatest lower bound or infinium, 
+		written as \textbf{$\inf S$}.\\
+  \end{definition}
+
+	\begin{definition}[\textbf{Cauchy Sequence}]
+		a sequence $(a_n)_{n=1}^\infty$ that for every $\epsilon > 0$, 
+		$\exists \,\, N\in\mathbb{N}$ s.t. if $m,n\in\mathbb{N}$, $m, n \geq N$, 
+		then $\abs{a_n - a_m} < \epsilon$.\\
+	\end{definition}
+
+	\begin{definition}[\textbf{Complete}] 
+		A subset $S\subseteq \mathbb{R}$ is \textbf{complete} if every
+		Cauchy Sequenece $(a_n)_{n=1}^\infty$ with $a_n\in S$ has a limit 
+		$\dlim_{n\to\infty} a_n=L \in S$. \\
+	\end{definition}
+
+	\begin{definition}[\textbf{Domain and Range}]
+		Given two nonempty sets $A$ and $B$, a function $f$ from $A$ to $B$ is a 
+		subset of $A \times B$, denoted $G(f)$, so that
+		\begin{enumerate}
+			\item for each $a\in A$, there is some $b\in B$ so that $(a,b) \in G(f)$,
+			\item for each $a\in A$, there is only one $b\in B$ so that $(a,b) \in 
+				G(f)$.
+		\end{enumerate}
+		That is for each $a\in A$, there is exactly one elements $b\in B$ with 
+		$(a,b)\in G(f)$. We then write $f(a)=b$. A concise way to specify the 
+		function $f$ and the sets $A$ and $B$ all at once is to write $f:A\to B$.
+		We call $G(f)$ the graph of the function $f$. 
+
+		The property of a subset of $A\times B$ that makes it the graph of a 
+		function is that $\{b \in B : (a,b) \in G(f)\}$ has precisely one element
+		for each $a\in A$.
+
+		We call $A$ the domain of the function $f: A\to B$ and $B$ is the condomain.
+		The range of the function is $Ran(f):=\{b\in B : b= f(a)$
+		for some $a\in A \}$.\\
+	\end{definition}
+
+	\begin{definition}[\textbf{Injective, Surjective, Bijective}]
+		$ $
+		\begin{description}
+		\item $f: A\to B$ is one to one (injective) if $a_1\neq a_2$ 
+			then $f(a_1)\neq f(a_2)$ 
+		\item $f: A\to B$ is onto (surjective) if for every $b\in B$, 
+			there is an $a\in A$ with $f(a)=b$. 
+		\item $f: A \to B$ is one-to-one and onto then it is bijective.
+			
+			$\bullet$ In this case there is the function $g(=f^{-1}): B\to A$
+			has the property $g(f(a))=a$, $a\in A$ and $f(g(b)) = b$, $b\in B$.\\
+		\end{description}
+	\end{definition}
+
+	\begin{definition}[\textbf{Inverse Function}]
+		If $f:x \to y$ is $1:1$, $Ran(f): Z\subseteq y$, then there is an inverse 
+		function $f^{-1}:Z \to y$, s.t. $f(x)=Z$ $\iff $ $f^{-1}(Z)=x$. \\
+	\end{definition}
+
+	\begin{definition}[\textbf{Composition of Functions}]
+		$(g\cdot f)(x)=g(f(x))$, $\Ran f \subseteq \Dom  g$\\
+	\end{definition}
+	
+	\begin{definition}[\textbf{Limits of Functions}]
+		$\dlim_{x\to x_0} f(x) = L$ means $\forall \epsilon >0$, there
+		is an $\delta>0$ s.t. if $0<\abs{x-x_0}<\delta$,
+		then $\abs{f(x)-L}<\epsilon$.\\
+	\end{definition}
+
+	\begin{definition}[\textbf{Continuity of Functions}]
+		$f(a,b) \to\mathbb{R}$, $a<c<b$, then $f$ is continuous at $c$
+		if $\dlim_{x\to c} f(x) =f(c)$.
+
+		($\epsilon$-$\delta$ version) $\forall \epsilon>0$, $\exists \delta >0$ s.t. 
+		$\abs{x-c}<\delta \to \abs{f(x)-f(c)}<\epsilon$.
+
+		If $f:(a,b)\to\mathbb{R}$ say is continuous at $a$ if
+		$\dlim_{x\to a^+} f(x) = f(a)$; 
+		and continuous at $b$ if $\dlim_{x\to b^-}f(x) =f(b)$.
+
+		Say $f$ is continuous on a set $A$ if $f$ continuous at every $a\in A$.\\
+	\end{definition}
+
+	\begin{definition}[\textbf{Monotone}]
+		A function $f$ is called increasing on an interval $(a,b)$ if 
+		$f(x)\leq f(y)$ where $a<x\leq y<b$. 
+		
+		It is strictly increasing on $(a,b)$
+		if $f(x)<f(y)$ whenever $a<x\leq y<b$. 
+
+		Similarly, we define decreasing and strictly decreasing function. 
+		All of these functions are called monotone. 
+	\end{definition}
+
+	\begin{definition}[\textbf{Differentiable Function}]
+		$f:(a,b)\to\mathbb{R}$, say  $f$ is differentiable at $x$ 
+		if 
+		\[
+			\dlim_{h\to 0} \frac{f(x+h)-f(x)}h
+		\]
+		exists. The limit of $f'(x)$
+		or $\frac d{dx} f(x)$. 
+
+		Say $f$ is differentiable on $(a,b)$, if it is differentiable at $x$,
+		for every $x\in (a,b)$.\\
+	\end{definition}
+
+	\begin{definition}[\textbf{Tangent Line}]
+		The tangent line to $f$ at $x$ is 
+    \[
+			T(x+h) = f(x)+f'(x)h
+		\]
+    \[
+    	T(y) = f(x) + f'(x) (y-x)
+    \]\\
+	\end{definition}
+
+	\begin{definition}[\textbf{Critical Point}]
+		Where $f'(x) = 0$ or undefined. \\
+	\end{definition}
+	
+	\begin{definition}[\textbf{Inflection Point}]
+		When $f''(x)$ changes sign, say from $+ \to -$, then $f(x)$ is an 
+		inflection point.\\
+	\end{definition}
+
+	\begin{definition}[\textbf{Asymptote}]
+		A line or curve that get close to a given curve arbitrarily closely. \\
+	\end{definition}
+
+	\begin{definition} [\textbf{Convexity}]
+		A function $f:(a,b) : \mathbb{R}$ is convex,
+		if	$\forall\,\, a < c < d < b$,$\forall\,\, 0 < t< 1$, 
+		\begin{center}
+			$f(tc+(1-t)d) \leq tf(c) +(1-t)f(d)$, 
+		\end{center}
+		means the graph of $f$ from $c$ to $d$
+		lies below the line between $(c, f(c))$, and $(d, f(d))$. \\
+
+		Suppose $c \leq x\leq d$, define 
+		\begin{description}
+			\item $t = \dfrac{d-x}{d-c} \in [0,1]$
+			\item $tc + (1-t)d= \dfrac{d-x}{d-x}c+\dfrac{x-c}{d-c}d 
+							=\dfrac{dc-xc+xd-cd}{d-c}=x$
+			\item $L(x) = f(c) + \dfrac{f(d) - f(1)}{d-c}(x-c)$
+			\item $L(tc+(1-t)d) = f(c) + \dfrac{f(d)-f(c)}{d-c}(1-t)(d-c) 
+							= tf(c)+(1-t)f(d)$.\\
+		\end{description}
+	\end{definition}
+
+	\begin{definition}[\textbf{Taylor's Polynomial}]
+		If $f'(x)$ has $n$ derivative
+		$f'$, $f^{(2)}$, $f^{(3)}$, $\cdots$, $f^{(n)}$,
+		the Taylor Polynomial of degree $n$ at $x=a$ is 
+		\[
+			P_{n,a}(x) = f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2
+			+\frac{f^{(3)}(x)}{3!}(x-a)^3+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n
+			=\dsum_{k=0}^n \frac{f^{(k)}(x)}{k!}(x-a)^k
+		\]
+		\underline {Convention:} $f^{(0)}(x) = f(x)$\\
+	\end{definition}
+
+	\begin{definition}[\textbf{Newton's Method}]
+		$ $
+		\begin{enumerate}
+			\item $f$ is $c^2$, 
+			\item $\exists x_*$, $f(x_*) = 0$, and $f'(x_*) \neq 0$.
+			\item Need to start "close" enough\\
+		\end{enumerate}
+		
+	\textbf{\underline{Idea:}}
+	
+	Pick $x_0 $ starting point, solve for the zero of the tangent line at $x_0$.
+	\[
+		L(x) = f(x_0) +f'(x_0) (x-x_0)
+	\]
+	Solve $0 = f(x)+f'(x_0) (x-x_0)$ 
+	\begin{align*}
+		x - x_0	&=\frac{f(x_0)}{f'(x_0)}\\
+		\therefore x_1 &= x_0-\frac{x_0}{f'(x_0)}\\
+		\text{Repeat\qquad }x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} &= T(x_n)
+	\end{align*}
+	Define $T(x) = x - \frac{f(x)}{f'(x)}$
+	
+	Note $T(x_*)=x_* - \frac{f(x_*)}{f'(x_*)}=x_*$ fixed point of T.
+	\begin{align*}
+		T'(x) &= 1-\frac{f'(x)f'(x)-f(x)f''(x)}{f'(x)^2}
+			= \frac{f(x)f''(x)}{f'(x)^2}\\\\
+	 	%
+	 	x_{n+1}-x_* 
+	 				&\,\,\,= T_{x_n} -T_{x_*} 
+	 				\overset{MVT}{=} T'(c) (x_n -x_*) \tag{c between $x_n$ and $x_*$}
+	\end{align*}
+	$T'(x)$ is continuous near $x_*$, so $\exists \epsilon > 0$ such that
+	$\abs{T'(x)} \leq \frac12$ on $[x_0-\epsilon, x_0+\epsilon]$.
+
+	If $\abs{x_0-x_*}\leq \epsilon$, then 
+	\begin{description}
+		\item $\abs{x_1-x_*} \leq \frac{x_0-x_*}2
+			\Rightarrow x_1\in [x_*-\epsilon, x^*+\epsilon]$
+		\item $\abs{x_2-x_*} \leq \frac{x_1-x_*}2 \leq \frac14 \abs{x_0-x_*}$
+		\item $\abs{x_n-x_*} \leq \frac{x_0-x_*}{2^n}$
+	\end{description}
+
+	$\therefore$, $x_n\to x_*$.
+
+	Let $m = \underset{a\leq x\leq b}{\min}\abs{f'(x)}$ 
+	where $x_* \in [a,b]$ and $f'(x) \neq 0$ on $[ a , b ]$;
+	and let $C=\underset{a\leq x \leq b}{\max} \abs{f''(x)}$ 
+
+	For $x \in [a.b]$, $f(x) = f(x) - f(x_*) = f'(c)(x-x_*)$ 
+	$c$ between $x$ and $x_0$ . 
+
+	\[
+		\therefore \ \abs{x-x_*} =\abs{ \frac{f(x)}{f'(c)}} \leq \frac{\abs{f(x)}}m
+	\]
+	\begin{align*}
+		x_{n+1}-x_* 
+		&= x_{n+1}-x_n + x_n -x_*\\
+		&= -\frac{f(x_n)}{f'(x_n)}+\frac{f(x_n)}{f'(c)}\\
+		&= \frac{f(x_n)f'(x_n)-f(x_n)f'(c)}{f'(x_n)f'(c)}\\
+		&= \frac{f(x_n)(f'(x_n)-f'(c))}{f'(x_n) f'(c)} 
+		\tag*{
+		$
+		\begin{array}{l}
+		 	\text{$d$ between $x_n$ and c} \\ 
+		 	\text{$d$ between $x_n$ and $x_*$}
+		\end{array}
+		$
+	  }\\ 
+		&\overset{MVT}{=} \frac{f(x_n)}{f'(x_c)}\frac{f''(d)(x_n-c)}{f'(n)}
+		\\
+		%
+		&= (x_n-x_*)(x_n-c)\frac{f''(d)}{f'(s_n)} \\
+		&\leq \abs{x_n-x_*}\abs{x_n-x_*} \frac Cm
+	\end{align*}
+	\[
+		\therefore \abs{x_{n+1}-x_*} \leq \frac Cm \abs{x_n-x_*}^2
+	\]
+	Quadratic Convergence
+	
+	Once $\abs{x_n-x_*}$ is sufficiently small, this goes to zero very fast,
+	almost double a numbered accurate decimal each step.\\
+	\end{definition}
+
+	\begin{definition}[\textbf{Uniform Continuity}]
+		$f: [a,b]$ $\to \mathbb{R}$ is uniformly continuous if $\forall \ep > 0$,
+		$\exists \delta > 0$, $\forall x, y \in [a, b]$, $\abs{x-y}<\delta\Rightarrow
+		\abs{f(x)-f(y)} < \epsilon$. \\
+	\end{definition}
+
+
+	\section{Theorems}
+	\begin{theorem}[\textbf{Squeeze Theorem}]
+        If $a_n \leq x_n \leq b_n$, and 
+        $\dlim_{n\to\infty} a_n= L = \dlim_{n\to\infty} b_n$, 
+        then $\dlim_{n\to\infty} x_n = L$. \\
+  \end{theorem}
+
+	\begin{theorem}[\textbf{Least Upper Bound Principle}]
+		If $S \subseteq \mathbb{R}$ is bounded above, then $S$ has a least 
+		upper bound $\sup S$; if $S \subseteq \mathbb{R}$ is bounded below,
+		then $S$ has a greatest lower bound $\inf S$.\\
+	\end{theorem}
+	
+	\begin{theorem}[\textbf{Monotone Convergence Theorem}]
+		If $(a_n)_{n=1}^{\infty}$ is monotone increasing and bounded above, 
+		then $\dlim_{n\to\infty} a_n$ exists.\\
+	\end{theorem}
+  
+  \begin{theorem}[\textbf{Bolzano-Weierstrass Theorem}]
+  	If $(x_n)_{n=1}^\infty$ is a bounded sequence of real numbers,
+  	then it has a convergent subsequence. \\
+  \end{theorem}
+
+	\begin{theorem}[\textbf{Completeness Theorem}]
+		$\mathbb{R}$ is complete. i.e. every Cauchy Sequence of 
+		$\mathbb{R}$ converges to a value in $\mathbb{R}$.
+	\end{theorem}
+	\begin{proof}
+		Let $a_{n=1}^{\infty}$ be a Cauchy sequence on $\mathbb{R}$.
+		
+		Prove first that $a_n$ is bounded. 
+		
+		Let $\ep>0$, 
+		since $a_n$ is Cauchy, there exists a $N\in\mathbb{N}$ such that 
+		for all $n > N$, $\abs{a_n-a_N}<1$. 
+
+		Then the sequence is bounded above by 
+		$\max\{\abs{a_1}, \abs{a_2}, \cdots, \abs{a_N}+1\}$, 
+		
+		and bounded below	by $\min\{-\abs{a_1}, -\abs{a_2},\cdots, -\abs{a_N}-1\}$.
+		
+		Therefore, $a_n$ is bounded. 
+
+		Hence, by Bolzano Weierstrass Theorem, 
+		there is a subsequence $a_{n_k}$ which has $\dlim_{k\to\infty}a_{n_k}=L$.
+		So, there exists a number $p$ such that for all $k>p$,
+		$\abs{a_{n_k}-L}<\frac{\ep}2$. 
+		
+		Also, since $a_n$ is a Cauchy sequence, there exists a number $T$ such 
+		that for all $n,m>T$, $\abs{a_n-a_m}<\frac{\ep}2$. 
+
+		Therefore, choose $k>p$ which $n_k>T$, then for all $n\geq T$, 
+		\[
+			\abs{a_n-L}=\abs{a_n-a_{n_k}+a_{n_k}-L}
+			\leq \abs{a_n-a_{n_k}}+\abs{a_{n_k}-L}
+			<\ep
+		\]
+		Hence $\dlim_{n\to\infty} a_n = L$. \\
+	\end{proof}
+
+
+
+	\begin{theorem}[\textbf{Extreme Value Theorem}]
+		$f:[a,b]\to \mathbb{R}$ is continuous, 
+		then $f$ attains its $\min$, $\max$ values.
+
+		i.e. $\exists x_1, x_1\in [a,b], s.t. f(x_1)=\sup f(x)$ 
+		and $f(x_2) = \inf f(x)$.
+	\end{theorem}    
+	\begin{proof}
+		For $a\leq x\leq b$, let $L = \sup f(x)$. $L$ can possibly be $\infty$.
+
+		Choose $L_1<L_2<L_3<\cdots<L_n<L_{n+1}<\cdots$ such that
+		$\dlim_{n\to\infty} L_n=L$. 
+
+		If $L=\infty$, then let $L_n = n$. Otherwise, let $L_n=L-\frac1n$. 
+
+		$L_n<Sup f(x)$, therefore, we can pick $x_n\in[a,b]$ such that
+		$f(x_n)>L_n$, and $(x_n)_{n=1}^{\infty}$ is a bounded sequence since 
+		$x\in[a,b]$. 
+
+		Therefore, by Bolzano Weierstrass Theorem, there is a subsequence $x_{n_k}$
+		such that $\dlim_{k\to\infty}x_{n_k}=x_0$ exists. Since $a\leq x\leq b$,
+		$a\leq x_0\leq b$. 
+  
+ 		Since $f$ is continuous,
+ 		$\sup f(a)= L\geq f(x_0)=\dlim_{i\to\infty} f(x_{n_i})\geq
+ 		\dlim_{n\to\infty}L_n=L$.
+
+		$f(x_0) = L = \sup f(x)<\infty$ because $f(x_0)\in\mathbb{R}$.
+
+		For the minimum, either repeat proof using $M=\inf f(x)$ 
+		or find the $\max$ of $-f(x)$.\\
+	\end{proof}
+    
+	\begin{theorem}[\textbf{Intermediate Value Theorem}]
+		Let $f: [a,b] \to \mathbb{R}$ be a continuous function.
+
+		that $f(a)<L<f(b)$ or $f(a)>L>f(b)$, then there is a point $c$, 
+			$a<c<b$ s.t. $f(c) = L$.\\
+		\end{theorem}
+
+		\begin{theorem}[\textbf{Product Rule and Quotient Rule}]
+			If $f$, $g$ are differentiable at $x_0$, then 
+			\begin{enumerate}
+				\item product rule  $(fg)'(x_0) = f(x_0)g'(x_0)+f'(x_0)g(x_0)$
+				\item quotient rule if $g(x_0) \neq 0$, 
+					$(\frac fg)'(x_0) = \frac{f'(x_0) g(x_0) -f(x_0) g'(x_0)}{g(x_0)^2}$\\
+			\end{enumerate}
+		\end{theorem}
+
+		\begin{theorem}[\textbf{Fermat}]
+			Let $f:[a,b] \to \mathbb{R}$ be a continuous function, 
+			if $f$ attains its maximum or minimum value at $x_0$,
+			then 
+			\begin{enumerate}
+				\item $x_0$ is an endpoint, $x\in\{a, b\}$, \qquad or 
+				\item $f'(x_0)$ is undefined,  \qquad \qquad  \quad or 
+				\item $f'(x_0)$ is 0\\
+			\end{enumerate}
+		\end{theorem}
+		\begin{proof}
+			By Extreme Value Theorem, $f(x)$ attains its maximum and minimum values
+			on $[a,b]$.
+			
+			Let's consider maximum first. 
+			If $f(x)$ attain its maximum on endpoints, then	we are done. 
+			Otherwise, $f(x)$ attains its maximum values on $(a,b)$.
+
+			Assume $f(x)$ attains its maximum value at $x_0$. If $f'(x_0)$
+			is undefined, then we are done. 
+
+			Otherwise, $f(x)$ is differentiable at $x_0$. 
+
+			Since $f(x_0) = \max f(x)$ for $x\in [a,b]$, therefore, 
+			$f(x_0+h)-f(x_0)\leq 0$. for all $h \in \mathbb{R}$ such that 
+			$a\leq x_0+h\leq b$. 
+
+			Therefore, the limit from the right yields
+			\[
+				f'(x_0) = \dlim_{h\to 0^+}\frac{f(x_0+h)-f(x_0)}h\leq 0
+			\]
+			and the limit from the left yields
+			\[
+				f'(x_0) = \dlim_{h\to 0^-}\frac{f(x_0+h)-f(x_0)}h\geq 0
+			\]
+			Therefore $f'(x_0) = 0$. 
+
+			For minimum, let $g(x)=-f(x)$ for $x\in[a,b]$, then $g(x)$ is continuous.
+			Hence, $g(x)$ attains its maximum with the three situations. Therefore,
+			$f(x)$ attains its minimum with the three situations. \\
+		\end{proof}
+
+		\begin{theorem}[\textbf{Rolle's Theorem}]
+			let $f:[a,b]\to\mathbb{R}$ be continuous on $[a,b]$ and differentiable
+			on $(a, b)$. 
+			Suppose that $f(a) = f(b)$, then $\exists x_0\in(a,b)$ s.t. $f'(x_0)=0$.\\ 
+		\end{theorem}
+		
+		\begin{theorem}[\textbf{Mean Value Theorem}]
+			If $f:[a,b] \to \mathbb{R}$ be continuous on $[a,b]$, differentiable 
+			on $(a,b)$, then $\exists x_0 \in (a,b)$ such that 
+			\[
+				f'(x) = \frac{f(b)-f(a)}{b-a}.
+			\]
+		\end{theorem}
+		\begin{proof}
+			Let $g(x) = f(x)-\frac{f(b)-f(a)}{b-a}\cdot x$, then 
+			\begin{align*}
+				g(a)-g(b)
+				&=f(a)-\frac{(f(b)-f(a))\cdot a}{b-a}
+				-f(b)+\frac{(f(b)-f(a))\cdot b}{b-a}\\
+				&=f(a)-f(b)-\frac{f(b)-f(a)}{b-a}\cdot(b-a)\\
+				&=0
+			\end{align*}
+			Therefore, $g(a) = g(b)$, 
+			since $f(x)$ is continuous on $[a,b]$, and differentiable on $(a,b)$, 
+			$g(x)$ is continuous on $[a,b]$ and differentiable on $(a,b)$,
+			and hence, by Rolle's Theorem, there exists a $x_0\in (a,b)$ such that
+			$g'(x_0)=0 = f'(x_0)-\frac{f(b)-f(a)}{b-a}\cdot 1$,
+
+			$\therefore$, $f'(x_0) = \frac{f(b)-f(a)}{b-a}$.
+    \end{proof}
+		
+		\begin{theorem}[\textbf{Jensen's Inequality}]
+			If $f$ is a convex function on $(a,b)$, 
+			
+			$x_1, \cdots, x_n \in (a,b)$,
+			$t_1, t_2, \cdots, t_n \in [0, 1]$ such that $\sum^n_{i=1} t_i = 1$. 
+
+			Then $f(t_1x_1+t_2x_2+\cdots+t_nx_n) \leq \sum^n_{i=1}t_if(x_i)$. 
+
+			Moreover, if $f$ is strictly convex, and $0<t_i<1$, 
+			then equality holds only when $x_1 = x_2 = x_3 = \cdots$. \\
+		\end{theorem} 
+
+		\begin{theorem}[\textbf{Cauchy's Mean Value Theorem}]
+			Suppose $f$, $g$ : $[a,b] \to\mathbb{R}$ is continuous on $[a,b]$, 
+			differentiable on $(a,b)$,
+			then $\exists x_0\in(a,b)$ s.t. 
+			\[
+				\frac{f(a)-f(b)}{g(b)-g(a)} = \frac{f'(x_0)}{g'(x_0)}\\
+			\]
+		\end{theorem}
+
+		\begin{theorem}[\textbf{L'Hopital's Rule}]
+			Let $f,g$ be differentiable functions on an interval $J$ with
+			$c$ at one endpoint (allow $\pm \infty$). 
+
+			Suppose:
+			\begin{enumerate}
+				\item $g(x)\neq 0$ and $g'(x) \neq 0$
+				\item $\dlim_{x\to c} f(x) = \dlim_{x\to c}g(x) = 0$ or 
+							$\dlim_{x\to c}\abs{g(x)} = \infty$
+				\item $\dlim_{x\to c} \frac{f'(x)}{g'(x)} = L$ exists (finite)
+			\end{enumerate}
+			Then, $\dlim_{x\to c} \frac{f(x)}{g(x)} = L$.\\
+		\end{theorem}
+
+		\begin{theorem}[\textbf{Taylor's Theorem}]
+			Suppose that $f:[a,b] \to \mathbb{R}$ has $n+1$ derivatives and 
+			let $P_{n,a}(x)$ be the Taylor polynomial of degree $n$ at $x=a$.
+
+			If $x\in(a,b)$, there is $x_0 \in (a,x)$ such that 
+			\[
+				f(x)-P_{n,a}(x) = \frac{f^{(n+1)}(x_0)\cdot (x-a)^{n+1}}{(n+1)!}
+			\]
+		\end{theorem}
+		\begin{proof}
+			$ $\\
+			Let 
+		\begin{description}
+				\item $R(x) = f(x) - P_{n,a}(x)$
+				\item $R^{(k)}(a) = f^{(k)}(a) - P^{(k)}_{n,a}(a) = 0$ 
+						for $0\leq k\leq n$
+			\end{description}
+
+			Idea: apply Cauchy MVT with $g(x) = (x-a)^{n+1}$
+			\begin{align*}
+			\frac{R(x)}{(x-a)^{n+1}} 
+				&=\frac{R(x)-R(a)}{g(x)-g(a)} \\
+				&=\frac{R'(x_1)}{g'(x_1)} \tag{$a<x_1<x$}\\
+				&=\frac{R'(x_1)}{(n+1)(x_1-a)^n}\\
+				&=\frac{R'(x-1)-R'(q)}{g'(x_1)-g'(a)}\\
+				&=\frac{R^{(2)}(x_2)}{g^{(2)}(x_2)} \tag{$a<x_2<x_1<x$}\\
+				&=\frac{R^{(2)}(x_2)}{(n+1)n(x_2-1)^{n-1}}\\
+				&=\frac{R^{(3)}(x_3)}{g^{(3)}(x)} \tag{$a<x_3<x_2<x_1<x$}
+			\end{align*}
+		\begin{description}
+			\item $g=(x-a)^{n+1}$
+			\item $g'=(n+1)(x-a)^n$
+			\item $g''= (n+1)n(x-a)^{n-1}$
+			\item $g'''=(n+1)n(n-1)(x-a)^{n-2}$
+		\end{description}
+
+		repeat $n$ times, at nth stage, 
+		\begin{align*}
+			\frac{R(x)}{(x-a)^{n+1}}
+			&=\frac{R^{(n)}(x_n)-R^{(n)}(a)}
+				{g^{(n)}(x_n)-g^{(n)}(a)} \tag{$a<x_n<\cdots<x_1<x$}\\
+			&=\frac{R^{(n+1)}(x_{n+1})}{g^{(n+1)}(x_{n+1})}\\
+			&=\frac{f^{n+1}(x_{n+1})-0}{(n+1)!}\\\\
+			\therefore R(x) &= \frac{f^{(n+1)}(x_{n+1})}{(n+1)!}(x-a)^{n+1} 
+			\tag{$a<x_{n+1}<x$}
+		\end{align*}
+	\end{proof}
+
+	
+%\iffalse
+	\section{Basics}
+	\begin{enumerate}
+			\item $\abs{a}+\abs{b}\leq \abs{a+b}+\abs{a-b}$
+			\item $\cos(2\alpha) = \cos^2 \alpha - \sin^2\alpha
+				= 2\cos^2\alpha-1=1-2\sin^2\alpha$
+			\item $\tan (2\alpha) =\frac{2\tan \alpha}{1-\tan^2\alpha}$
+	\end{enumerate}
+ 	\[
+		\tan(\alpha\pm\beta)=\frac{\tan\alpha\pm\tan\beta}{1\mp\tan\alpha\tan\beta}\\
+	\]
+		\[
+		\tan(2\alpha)=\frac{2\tan\theta}{1-\tan^2\theta}\\
+	\]
+	\[
+		\tan^2 \theta +1 = \sec^2\theta\\
+	\]
+	\[
+		\cot^2 \theta +1 = \csc^2\theta\\
+	\]
+	\[
+		\sin\frac{\theta}2=\pm\sqrt{\frac{1-\cos\theta}2}\\
+	\]
+	\[
+		\cos\frac{\theta}2=\pm\sqrt{\frac{1+\cos\theta}2}\\
+	\]
+	\[
+		\tan\frac{\theta}2 =\frac{\sin \theta}{1+\cos\theta}
+		=\frac{1-\cos\theta}{\sin\theta}\\
+	\]
+	\[
+		\sinh = \frac{e^x-e^{-x}}2\\
+	\]
+	\[
+		\cosh =\frac{e^x+e^{-x}}{2}
+	\]
+	\[
+		\cosh ^2x - \sinh^2x = 1
+	\]
+	
+	\section{Sequence}
+	\begin{lemma}[\textbf{the AGM Inequality}]
+		Let $a_1, a_2,\cdots,a_n$ be $n$ positive real numbers where $n\geq 2$, 
+		then, 
+		\[
+			(\prod_{j=1}^n a_j)^{1/n}\leq\frac1n\sum_{j=1}^n a_j
+		\]
+	\end{lemma}
+
+
+	\section{Limits}
+		\[
+			\dlim_{x\to 0}\frac{\sin x}x = 1
+		\]
+		\[
+			\dlim_{x\to 0}\frac{\cos x -1}x=0
+		\]
+		\[
+			\dlim_{x\to 0}\frac{1-\cos x}{x^2}=\frac12
+		\]
+		\[
+			\dlim_{x\to 0}\frac{\tan x}x = 1
+		\]
+		\[
+			\dlim_{x\to 0}\frac{a^x-1}x=\ln a
+		\]
+
+
+	\section{Derivative}
+		\[
+			\frac d{dx}\arctan x = \frac1{1+x^2}\\
+		\]
+		\[
+			\frac d{dx}\arcsin x = \frac1{\sqrt{1-x^2}}\\
+		\]
+		\[
+			\frac d{dx}\arccos x = \frac{-1}{\sqrt{1-x^2}}\\
+		\]
+		\[
+			\frac d{dx} \sinh x = \cosh x\\
+		\]
+		\[
+			\frac d{dx} \cosh x = \sinh x\\
+		\]
+		\[
+			\frac d{dx} a^x = a^x \ln a\\
+		\]
+		\[
+			\frac d{dx} \tan x = \sec^2 x\\
+		\]
+		\[
+			\frac d{dx} \sec x = \tan x \sec x\\
+		\]
+		\[
+			\frac d{dx} \cot x = -\csc ^ 2 x \\
+		\]
+		\[
+			\frac d{dx} \csc x = -\csc x\cot x\\
+		\]
+
+
+	\section{Taylor Polynomial}
+	\begin{enumerate}
+		\item 
+			\[
+				\frac1{1-x}=1+x+x^2+x^3+\cdots = \sum_{n=0}^{\infty}x^n
+			\]
+		\item
+			\[
+				e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots
+				=\sum_{n=0}^{\infty}\frac{x^n}{n!}
+			\]
+		\item
+			\[
+				\cos x = 1 -\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\cdots
+				=\sum_{n=0}^{\infty}(-1)^n \frac{x^{2n}}{(2n)!}
+			\]
+		\item 
+			\[
+				\sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\cdots
+				=\sum_{n=0}^{\infty}(-1)^n \frac{x^{2n+1}}{(2n+1)!}
+			\]
+		\item
+			\[
+				\tan x = x+\frac13 x^3+\frac2{15}x^5+\frac{17}{315}x^7+\cdots
+			\]
+		\item
+			\[
+				\arctan x = x-\frac{x^3}3+\frac{x^5}5-\frac{x^7}7+\cdots
+				=\sum_{n=0}^{\infty}(-1)^n\frac{x^{2n+1}}{2n+1}
+			\]
+		\item about $x=1$
+			\[
+				\ln x = (x-1)-\frac{(x-1)^2}{2}+\frac{(x-1)^3}3-\frac{(x-1)^4}4+\cdots
+				=\sum_{n=1}^{\infty}(-1)^{n+1}\frac{(x-1)^n}n
+			\]
+	\end{enumerate}
+
+	\section{Logarithm}
+	\begin{itemize}
+		\item $\dlim_{x\to \infty} \frac{\ln x}x=0$
+			\begin{align*}
+				\lim_{x\to 0^+}\frac{\ln x}x &=\lim_{y\to \infty}-\ln y\cdot y=-\infty
+			\end{align*}
+		\item $\dlim_{x\to \infty} \frac{\ln x}{x^a} = 0$
+		\item $\dlim_{x\to \infty} \frac{e^x}{x^a} = \infty$
+		\item $\dlim_{n\to \infty} (1+\frac xn)^n = e^x$
+	\end{itemize}
+
+	\section{Graphs}
+	\begin{itemize}
+		\item $\frac{\sin x}x$
+		\item $x\sin \frac1x$
+		\item $\frac{1}{x^2}\sin x$
+		\item $x^2\sin \frac1x$
+		\item $\frac x2+x^2\sin\frac1x$
+	\end{itemize}
+
+	Inverse Function and derivative
+	
+
+\end{document}
+
