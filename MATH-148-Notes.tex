@@ -978,7 +978,7 @@
 		satisfies that 
 		\begin{itemize}
 			\item $F$ is differentiable on $[a,b]$, with $F' = f$ on $[a,b]$ 
-			\item 
+			\item ?
 		\end{itemize}
 	\end{theorem}
 	\begin{proof}
@@ -1023,7 +1023,7 @@
 		\[
 			F:(a,b) \to \mR, F(x) = \begin{cases}
 				\int_c^x f, & if x \geq c\\
-				-\int_x6c f, & if x < c
+				-\int_x^c f, & if x < c
 			\end{cases}
 		\]
 		We know from FToCI, that $F'(x) = f(x)$ for $x > c$. 
@@ -1035,7 +1035,7 @@
 		\begin{align*}
 			\int_{c'}^c f = \int_{c'}^x f + \int_x^c f 
 			&\Rightarrow -\int_x^c f = \int_{c'}^x f - \int_{c'}^c f \\
-			&\Rightarrow F'(x) = \frac{d}{dx} \int_c^x f - \int_{c'}^c f =f(x)
+			&\Rightarrow F'(x) = \frac{d}{dx} \int_{c'}^x f - \int_{c'}^c f =f(x)
 		\end{align*}
 		It will be convecient, hereafter, to let $\int_c^x f = - \int_x^c f$
 		if $x <c$, and we have FToCI
@@ -1211,4 +1211,5 @@
 
 
 \end{document}
+
 
