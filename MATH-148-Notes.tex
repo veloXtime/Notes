@@ -15,8 +15,9 @@
     colorlinks=true,
     linktoc=all, 
     linkcolor=black,}
-
-
+\usepackage{enumitem}
+\usepackage{cases}
+\usepackage{mathtools}
 \usetkzobj{all}
 
 %\usepackage{stix}
@@ -55,6 +56,9 @@
 \DeclareMathOperator{\Dom}{dom}
 \DeclareMathOperator{\Img}{img}
 \DeclareMathOperator{\Par}{partition}
+\DeclareMathOperator{\Sin}{Sin}
+\DeclareMathOperator{\Cos}{Cos}
+
 
 \begin{document}
 	\begin{titlepage}
@@ -74,7 +78,7 @@
 
 \newpage
 
-\section{INTEGRATION}
+\section{INTEGRATION, SUMMATION}
 	MOTIVATION: area, let $a<b$ in $\mathbb{R}$, and 
 	let $f:[a,b]\to [0,\infty]$, let 
 	\[
@@ -125,7 +129,9 @@
 	\subsection{Partition, Upper and Lower Sum}
 	Let $a<b \in \mathbb{R}$, $f:[a,b]\in\mathbb{R}$,
 
-	\begin{definition}[\textbf{Partition}]
+	\begin{definition}[\textbf{Riemann-Darboux}]
+		$ $
+		
 		A \textbf{partition} of $[a,b]$ is any finite set of points including
 		the endpoints. 
 		\[
@@ -135,42 +141,43 @@
 	
 		A \textbf{Refinement} of $P$ is any partition $Q$ of $[a,b]$ s,t,
 		$P\subseteq Q$.\\
-	\end{definition}
 	
-	Now, fix a partition $P$ of $[a,b]$ and let $f:[a,b]\to \mathbb{R}$ be 
-	bounded on $[a,b]$, i.e. $\underset{x\in [a,b]}{sup} 
-	\abs{f(x)}\leq M<\infty$.	
-	Write $P=\{a=x_0<\cdots<x_n=b\}$. For $j = l, \cdots, n$, 
-	\begin{align*}
-		m_j &= m_j(P) = \inf \{f(x) : x\in [x_{j-1},x_j]\}\\
-		M_j &= M_j(P) = \sup \{f(x) : x\in [x_{j-1},x_j]\}
-	\end{align*}
+		Now, fix a partition $P$ of $[a,b]$ and let $f:[a,b]\to \mathbb{R}$ be 
+		bounded on $[a,b]$, i.e. $\underset{x\in [a,b]}{sup} 
+		\abs{f(x)}\leq M<\infty$.	
+		Write $P=\{a=x_0<\cdots<x_n=b\}$. For $j = l, \cdots, n$, 
+		\begin{align*}
+			m_j &= m_j(P) = \inf \{f(x) : x\in [x_{j-1},x_j]\}\\
+			M_j &= M_j(P) = \sup \{f(x) : x\in [x_{j-1},x_j]\}
+		\end{align*}
 	Notice that $-M\leq m_k\leq M_j\leq M$ for each $j$, and these "inf", "sup"
 	exist. (Using that $\mathbb{R}$ is complete.)\\
-
-	We then define after Riemann-Darboux for $P$ and $f$ as above. 
+	\end{definition}
 
 	\begin{definition}
 		$ $
 		\begin{itemize}
-			\item \textbf{Lower Sum:} $L(f, P) = \sum_{j=1}^n m_j 
+			\item \textbf{Lower Sum:}
+				$L(f, P) = \sum_{j=1}^n m_j 
 				\underbrace{(x_j-x_{j-1})}_{width\ of\ [x_{j-1},x_j]}$
-			\item \textbf{Upper Sum:} $U(f, P) = \sum_{j=1}^n M_j 
-										(x_j-x_{j-1})$
+			\item \textbf{Upper Sum:} 
+				$U(f, P) = \sum_{j=1}^n M_j (x_j-x_{j-1})$\\
 		\end{itemize}
 	\end{definition}
 
+	{\color{brown}
 	\textbf{Remark: }
 	\begin{enumerate}
-		\item if $f$ is not bounded, at least one of $L:(f,P)$ or $U(f, P)$ 
+		\item if $f$ is not bounded, then at least one of $L:(f,P)$ or $U(f, P)$ 
 			cannot be defined. 
+			
 		\item we have $L(f, P)\leq U(f,P)$, Indeed, for each $j=l,\cdots, n$,
 			$m_j\leq M_j$. (exactly from definition), 
 			\[
 				L(f, P) = \sum_{j=1}^n m_j (x_j-x_{j-1})\leq
 				\sum_{j=1}^n M_j (x_j-x_{j-1}) = U(f, P)
 			\]
-	\end{enumerate}
+	\end{enumerate}}
 
 	\begin{lemma}
 		If $P$ is a partition of $[a,b]$, $f:[a,b]\to \mathbb{R}$ is bounded,
@@ -180,7 +187,7 @@
 		\]
 	\end{lemma}
 	\begin{proof}
-		$ $\\
+		$ $
 	\begin{itemize}
 		\item Case 0: $Q = P$ obvious
 
@@ -238,8 +245,8 @@
 
 
 
-
-	\subsection{Integral and Upper and Lower Sum}
+	\newpage
+	\subsection{Upper and Lower Sum}
 
 	\begin{definition}
 		Given a bounded $f:[a,b]\to\mathbb{R}$, define 
@@ -269,9 +276,8 @@
 	\[
 		\int_a^b f = \int _a^b f(x)d(x) = \int_a^b f(t) dt
 	\]
-
-
 	
+	\vspace{0.5 in}
 	{\color{Brown}
 	\textbf{Non-Example 1: } not every bounded function is integrable. 
 		
@@ -309,7 +315,8 @@
 	so $\chi_{\mathbb{Q}}$ is not integrable on $[0,1]$.
 	}
 
-	\vspace{0,3 in}
+
+	\newpage
 	\begin{theorem}[\textbf{Cauchy Criterion For Integrability}]
 		Let $a<b \in \mathbb{R}$, $f:[a,b] \to \mathbb{R}$ be bounded, then 
 		TFAE,
@@ -380,8 +387,9 @@
 		\end{description}
 	\end{proof}
 
-
-	\subsection{Continuity and Integrability}
+	
+	
+	\subsection{Continuity and Inegrability}
 	\begin{definition}[\textbf{Continuous}]
 		$f: I \to \mathbb{R}$ is continuous if for every $x$ in $I$, for every
 		$\ep>0$, there exists $\delta >0$ s.t. for all $\abs{x-x'}<\delta$, 
@@ -415,7 +423,7 @@
 		i.e. $\dlim_{n\to\infty} \abs{f(x_n)-f(x_n')} = 0$.
 	\end{proof}
 
-	{\color{brown}
+	{\color{Brown}
 	\textbf{Example 1}
 	$f: (0,1] \to \mathbb{R}$, $f(x) = \frac 1x$. Notice that $f$ is continuous.
 	
@@ -555,7 +563,7 @@
 
 
 	\subsection{Basic Properties of Integrals}
-	{\color{brown}
+	{\color{Brown}
 	\textbf{Example 1: }
 	We will let $a>0$ and compute $\int_0^a x^p dx$ for $p = 0, 1, 2$.
 	\begin{enumerate}
@@ -714,101 +722,96 @@
 	\end{theorem}
 	\begin{proof}
 		$ $
-		\begin{itemize}
-			\item (i)$\Rightarrow$ (ii)
-				Given $\ep>0$, the Cauchy Criterion provides that $P_{\ep}$
-				so for any refinement $P$ of $P_{\ep}$, 
-				\[
-					U(f,P)-L(f,P)<\ep
-				\]
-				Write $P = \{a=x_0<x_1<\cdots<x_n=b\}$, and let for 
-				$j=1,\cdots, n$, $t_j = [x_{j-1}, x_j]$. 
-				
-				We observe that 
-				\[
-					m_j = \inf\{f(x) : x\in[x_{j-1}, x_j]\}
-					\leq \sup\{f(x) : x \in [x_{j-1}, x_j]\}=M_j
-				\]
-				and hence 
-				\[
-					\sum_{j=1}^n m_j (x_j-x_{j-1}) \leq \sum_{j=1}^n f(t_j)
-					(x_j-x_{j-1}) \leq \sum_{j=1}^n M_j (x_j-x_{j-1})
-				\]
-				i.e.
-				\[
-					L(f,P) \leq S(f,P) \leq U(f,P)    \qquad \qquad (2)
-				\]
-				Also, 
-				\[
-					L(f,P) \leq \int_a^b f \leq U(f,P) \qquad \qquad (3)
-				\]
-				 (1), (2) $\&$ (3) $\Rightarrow$ 
-				\[
-					\abs{S(f,P) - \int_a^b f} < \ep
-				\]
-				In particular, take $I_f = \int_a^b f$. 
+		
+		\textbf{(i)$\Rightarrow$(ii)}
+		Given $\ep>0$, the Cauchy Criterion provides that $P_{\ep}$
+		so for any refinement $P$ of $P_{\ep}$, 
+		\begin{equation}
+			U(f,P)-L(f,P)<\ep
+		\end{equation}
+		Write $P = \{a=x_0<x_1<\cdots<x_n=b\}$, and let for 
+		$j=1,\cdots, n$, $t_j = [x_{j-1}, x_j]$. 
+		
+		We observe that 
+		\[
+			m_j = \inf\{f(x) : x\in[x_{j-1}, x_j]\}
+			\leq \sup\{f(x) : x \in [x_{j-1}, x_j]\}=M_j
+		\]
+		and hence 
+		\[
+			\sum_{j=1}^n m_j (x_j-x_{j-1}) \leq \sum_{j=1}^n f(t_j)
+			(x_j-x_{j-1}) \leq \sum_{j=1}^n M_j (x_j-x_{j-1})
+		\]
+		i.e.
+		\begin{equation}
+			L(f,P) \leq S(f,P) \leq U(f,P
+		\end{equation}
+		Also, 
+		\begin{equation}
+			L(f,P) \leq \int_a^b f \leq U(f,P)
+		\end{equation}
+		 (1), (2) $\&$ (3) $\Rightarrow$ 
+		\[
+			\abs{S(f,P) - \int_a^b f} < \ep
+		\]
+		In particular, take $I_f = \int_a^b f$. \\
 
-			\item 
-				(ii) $\Rightarrow$ (i), we let for $\ep>0$, given $P_{\ep/4}$
-				be a partition s.t. 
-				\[
-					\abs{S(f,P) - I_f} < \frac{\ep}4
-				\]
-				For P a refinement of $P_{\ep/4}$, $S(f,P)$ a Riemann Sum.
-				We fix such $P = \{a=x_0<x_1<\cdots<x_n=b\}$. 
+		\textbf{(ii)$\Rightarrow$(i)}
+		we let for $\ep>0$, given $P_{\ep/4}$
+		be a partition s.t. 
+		\[
+			\abs{S(f,P) - I_f} < \frac{\ep}4
+		\]
+		For P a refinement of $P_{\ep/4}$, $S(f,P)$ a Riemann Sum.
+		We fix such $P = \{a=x_0<x_1<\cdots<x_n=b\}$. 
 
-				FOr $j=1,\cdots, n$, let $m_j, M_j$ be as below, we then
-				find for each $j$, 
-				\[
-					x_j^*, x_j^{**} \in [x_{j-1}, x_j] s.t. 
-					f(x_j^*) < m_j +\frac{\ep}{4(b-a)} \ and \ 
-					M_j - \frac{\ep}{4(b-a)} < f(x_j^{**})
-				\]
-				We then consider Riemann Sums
-				\[
-					S^*(f,P) = \sum_{j=1}^n f(x^*_j)(x_j-x_{j-1}), 
-					\qquad S^{**}(f,P) = \sum_{j=1}^n f(x^{**}_j) (x_j-x_{j-1})
-				\]
-				Notice that 
-				\begin{align*}
-						S^*(f,P) - L(f,P) 
-						&= \sum_{j=1}^n [f(x^*_j) - m_j](x_j-x_{j-1})\\
-						&<\sum_{j=1}^n \frac{\ep}{4(b-a)}(x_j-x_{j-1})\\
-						&= \frac{\ep}{4(b-a)} (b-a) = \frac{\ep}4
-				\end{align*}
-			\end{itemize}
-			and likewise, 
+		For $j=1,\cdots, n$, let $m_j, M_j$ be as below, we then
+		find for each $j$, 
+		\[
+		x_j^*, x_j^{**} \in [x_{j-1}, x_j] \qquad s.t. \qquad  
+		f(x_j^*) < m_j +\frac{\ep}{4(b-a)} \qquad \& \qquad
+		M_j - \frac{\ep}{4(b-a)} < f(x_j^{**})
+		\]
+		We then consider Riemann Sums
+		\[
+			S^*(f,P) = \sum_{j=1}^n f(x^*_j)(x_j-x_{j-1}), 
+			\qquad S^{**}(f,P) = \sum_{j=1}^n f(x^{**}_j) (x_j-x_{j-1})
+		\]
+		Notice that 
+		\begin{align*}
+				S^*(f,P) - L(f,P) 
+				&= \sum_{j=1}^n [f(x^*_j) - m_j](x_j-x_{j-1})\\
+				&<\sum_{j=1}^n \frac{\ep}{4(b-a)}(x_j-x_{j-1})\\
+				&= \frac{\ep}{4(b-a)} (b-a) = \frac{\ep}4
+		\end{align*}
+		and likewise, 
 			\[
 				U(f,P) -S^{**}(f,P) < \frac{\ep}4
 			\]
 			thus
 			\begin{align*}
-				U(f,P) - L(f,P) &= U(f,P) - S^{**}(f,P) + S^{**}(f,P) - I_f
+				&U(f,P) - L(f,P) \\
+				=& U(f,P) - S^{**}(f,P) + S^{**}(f,P) - I_f
 				+I_f-S^*(f,P)+S^*(f,P)-L(f,P) \\
-				&< \frac{\ep}4 + \abs{S^{**}(f,P)-I_f}+\abs{I_f-S^*(f,P)}
+				<& \frac{\ep}4 + \abs{S^{**}(f,P)-I_f}+\abs{I_f-S^*(f,P)}
 				+\frac{\ep}4<\ep
 			\end{align*}
-			hence, by Cauchy's Criterion, $f$ is integrable. 
+			hence, by Cauchy's Criterion, $f$ is integrable. \\
 	\end{proof}
 
-	Given $t_j \in [x_{j-1},x_j]$ and $f,g:[a,b] \to \mathbb{R}$, we have for
-	$\alpha,\beta \in \mathbb{R}$, 
-	\[
-		S(\alpha f + \beta g, P) = \alpha S(f,P) + \beta S(f,P)
-	\]
-
-	\textbf{Remark:} If $f:[a,b] \to \mathbb{R}$ is continuous, then $P$ a 
+	{\color{brown}
+		\textbf{Remark:} If $f:[a,b] \to \mathbb{R}$ is continuous, then $P$ a 
 	partition of $[a,b]$ then each of $L(f,P)$ and $U(f,P)$ are Riemann Sums, 
-	proof: See proof of integrability of continuous. 
-
+	proof: See proof of integrability of continuous. \\
+	}
 
 
 	\begin{proposition}[\textbf{linearity of integration}]
 		Let $f,g:[a,b] \to \mR$ each be integrable and $\alpha, \beta \in \mR$,
 		then 
 		\begin{itemize}
-			\item $\alpha f + \beta g : [a,b] \to \mR (\alpha f + \beta g)(x) 
-				= \alpha f(x) + \beta g(x)$
+			\item $\alpha f + \beta g : [a,b] \to \mR \qquad
+				(\alpha f + \beta g)(x) = \alpha f(x) + \beta g(x)$
 			\item $\int_a^b (\alpha f + \beta g) = \alpha \int_a^b f + \beta 
 				\int_a^b g$
 		\end{itemize}
@@ -879,14 +882,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\newpage
-	\subsection{Fundamental Theorem Of Calculus - Jan 17 Friday}
+	\newpage 
+	\section{ANTIDERIVATIVE}
+		\subsection{Fundamental Theorem Of Calculus I - Jan 17 Friday}
 	\begin{proposition}
 		Let $f:[a,b]\to\mR$ be integrable on $[a,b]$, define
 		\[
 			F:[a,b] \to \mR, \qquad F(x) = \int_a^x f = \int_a^x f(t)dt
 		\]
-		\underline{no $\int_a^x f(x) dx$. }
+	\underline{Note:} no $\int_a^x f(x) dx$. 
 
 		We may call this "integral accumulation function". 
 		\begin{enumerate}
@@ -910,7 +914,7 @@
 					&= \int_x^{x'} f
 				\end{align*}
 				Since $f$ is integrable, it is bounded i.e. 
-				$\overset{\sup}{x\in [a,b]} \abs{f(x)} = M < \infty$. 
+				$\underset{x\in [a,b]}{\sup} \abs{f(x)} = M < \infty$. 
 				Thus, $\abs{f(x)} \leq M$ on $[a,b]$. Hence, by order 
 				properties, 
 				\[
@@ -930,7 +934,7 @@
 					\abs{\int_a^x f -0} = \abs{\int_a^x f} \leq \int_a^b\abs f
 					\leq \int_a^x M = M(x-a)
 				\]
-				Porceed as above.
+				Porceed as above.\\
 		\end{enumerate}
 	\end{proof}
 
@@ -966,20 +970,18 @@
 		\]
 	\end{proof}
 
+	{\color{brown}
+	\textbf{Remark:}
 	$f$ is integrable $\Rightarrow$ $F(x) = \int_a^b f$ is a cts function. 
-	$f$ cts $\Rightarrow$ $F$ differentiable. (BELOW)
-
-	
+	$f$ cts $\Rightarrow$ $F$ differentiable. (BELOW) }\\
+		
 	\begin{theorem}[\textbf{Fundamental Theorem of Calculus (I)}]
 		Let $f:[a,b]\to \mR$ be \underline{continuous}, then 
 		\[
 			F:[a,b] \to \mR, \qquad F(x) = \int_a^x f
 		\]
-		satisfies that 
-		\begin{itemize}
-			\item $F$ is differentiable on $[a,b]$, with $F' = f$ on $[a,b]$ 
-			\item ?
-		\end{itemize}
+		satisfies that $F$ is differentiable on $[a,b]$, with $F' = f$ 
+		on $[a,b]$.
 	\end{theorem}
 	\begin{proof}
 		Let $x\in[a,b]$, we want to examine the quotient 
@@ -988,15 +990,16 @@
 		\]
 		\underline{$h>0$}, 
 		\[
-			\frac{F(x+h)-F(x)}h=\frac 1h \int_x^{x+h} f = 
-			\frac1h f(c_h) (x+h-x)=f(c_h) 
+			\frac{F(x+h)-F(x)}h=\frac 1h \cdot \int_x^{x+h} f = 
+			\frac1h \cdot f(c_h) (x+h-x)=f(c_h) 
 		\]
 		by M.V.T for I, where $c_h \in [x, x+h]$, 
 
 		\underline{$h<0$}, 
 		\[
 			\frac{F(x+h)-F(x)}h = \frac{F(x)-F(x+h)}{-h}
-			= \frac1{-h} \int_{x+h}^x f= \frac1{-h} f(c_h)(x-x(x_h))
+			= \frac1{-h} \cdot \int_{x+h}^x f
+			= \frac1{-h}\cdot  f(c_h)(x-x(x_h))
 			=f(c_h)
 		\]
 		hence, 
@@ -1005,42 +1008,43 @@
 			=\underbrace{\lim_{h\to 0} f(c_h)}_{continuity}	
 			=\underbrace{f(\lim_{h\to 0}c_h)}_{squeeze}= f(x)
 		\]
-		Thus, $F'(x)$ exists, and equals $f(x)$, for $x\in [a,b]$
+		Thus, $F'(x)$ exists, and equals $f(x)$, for $x\in [a,b]$. \\
 		
-		\underline{Remark:} Notice that we really found 
+		{\color{brown}
+		\textbf{Remark:} Notice that we really found 
 		\begin{itemize}
 			\item left derivative at $x=b$
 			\item right derivative at $x=a$
-		\end{itemize}
+		\end{itemize}}
 	\end{proof}
 
-	
-	\textcolor{Periwinkle}{ \textbf{Jan 20} }
-	
 	\begin{notation}
 		Let $-\infty \leq a < b \leq \infty \in \mR$, $f:[a,b] \to \mR$ be 
 		continuous, fix $c \in (a,b)$, dfeine 
 		\[
-			F:(a,b) \to \mR, F(x) = \begin{cases}
-				\int_c^x f, & if x \geq c\\
-				-\int_x^c f, & if x < c
-			\end{cases}
+			F:(a,b) \to \mR, F(x) = 
+			\begin{dcases}
+				\int_c^x f, & x \geq c\\
+				-\int_x^c f, & x < c
+			\end{dcases}
 		\]
-		We know from FToCI, that $F'(x) = f(x)$ for $x > c$. 
+		We know from FToCI, that $F'(x) = f(x)$ for $x > c$. \\
 	\end{notation}
 
 	\begin{proposition}
 		Let us compute $F'(x)$ for $x < c$, let $c'\in (a,c)$ and for $x \in 
 		(c',c)$ we have 
-		\begin{align*}
-			\int_{c'}^c f = \int_{c'}^x f + \int_x^c f 
-			&\Rightarrow -\int_x^c f = \int_{c'}^x f - \int_{c'}^c f \\
-			&\Rightarrow F'(x) = \frac{d}{dx} \int_{c'}^x f - \int_{c'}^c f =f(x)
-		\end{align*}
+		\begin{alignat*}{2}
+			& &\qquad \int_{c'}^c f &= \int_{c'}^x f + \int_x^c f \\
+			\Rightarrow& &\qquad 
+			-\int_x^c f &= \int_{c'}^x f - \int_{c'}^c f \\
+			\Rightarrow& &\qquad 
+			F'(x) &= \frac{d}{dx} \int_c^x f - \int_{c'}^c f =f(x)
+		\end{alignat*}
 		It will be convecient, hereafter, to let $\int_c^x f = - \int_x^c f$
 		if $x <c$, and we have FToCI
 		\[
-			\frac d{dx} \int_c^x f = f(x), \qquad for \ x \in (a,b).
+			\frac d{dx} \int_c^x f = f(x), \qquad x \in (a,b).
 		\]
 	\end{proposition}
 	
@@ -1048,7 +1052,6 @@
 
 	\newpage
 	\subsection{Logrithm and Exponential Functions}
-	a rigorous approach
 
 	\begin{definition}
 		For $x \in (0,\infty)$, 
@@ -1056,7 +1059,7 @@
 			L(x) = \int_1^x \frac 1t dt
 		\]
 		we shall use only integral $\&$ differentiation rates to gain theory of
-		$L$. 
+		$L$. \\
 	\end{definition}
 		
 	\begin{proposition}
@@ -1073,23 +1076,42 @@
 		\[
 			L(a) = F(1) = L(1) + C = C. 
 		\]
-		Also, $L(ab) = F(b) = L(b) + L(a)$. 
+		Also, $L(ab) = F(b) = L(b) + L(a)$. \\
 	\end{proof}
 
 	\begin{proposition}
 		For $a > 0$, $q \in \mQ$, $L(a^q) = qL(a)$, (convention: $a^0=1$).
 	\end{proposition}
 	\begin{proof}
-		First: $n \in \mN$, $L(a^n) = L(a)+L(a^{n-1}) = \cdots = 
-		\underbrace{L(a) + L(a)
-		+ \cdots + L(a)}_{n} = nL(a)$.
-
-		Second: 
-		$L(a) = L((a^{\frac1n})^n) = nL(a^{\frac1n}) \Rightarrow L(a^{\frac1n})$
+		First: $n \in \mN$, 
+		\setcounter{equation}{0}
+		\begin{equation}
+			L(a^n) = L(a)+L(a^{n-1}) = \cdots = 
+			\underbrace{L(a) + L(a)
+			+ \cdots + L(a)}_{n} = nL(a)
+		\end{equation}
 		
+		Second: 
+		\begin{equation}
+			L(a) = L((a^{\frac1n})^n) = nL(a^{\frac1n}) 
+			\Rightarrow L(a^{\frac1n})=\frac1n L(a)
+		\end{equation}
+		
+		Third: 
+		\begin{equation}
+			0 = L(1) = L(aa^{-1})=L(a)+L(a^{-1})\Rightarrow L(a^{-1})-L(a)
+		\end{equation}
+		
+		Then, (1) $\&$ (2) $\Rightarrow$ $L(a^m) = mL(a)$, for $m \in \mZ$,
+		for $q = \frac mn$, $m \in \mZ$, $n\in \mN$. 
+
+		We combine (1), (2), $\&$, (3) to get $L(a^q) = mL(a^{\frac1n})
+		=\frac mn L(a)$.\\
 	\end{proof}
 	
+	
 	\begin{proposition}
+	$ $
 		\begin{enumerate}
 			\item L is inreasing: $0<x<x'$ then $L(x) < L(x')$ 
 			\item $\lim_{x\to 0^+} L(x) = -\infty$, $\lim_{x\to\infty} L(x) 
@@ -1097,6 +1119,7 @@
 		\end{enumerate}
 	\end{proposition}
 	\begin{proof}
+		 $ $
 		\begin{enumerate}
 			\item 
 				\[
@@ -1110,7 +1133,6 @@
 				to find $(a_n)_{n=0}^{\infty} \subset (0,\infty)$ 
 				s.t. $\lim_{n\to\infty} a_n = \infty$ and $\lim_{n\to\infty}
 				L(x_n) = \infty$. 
-				
 				Consider $(2^n)_{n=0}^{\infty}$ and we have $\lim_{n\to\infty}
 				L(2^n) = \lim_{n\to\infty} nL(2) = \infty$. Likewise, 
 				$\lim_{n\to\infty} 2^{-n}=0$, and $\lim_{n\to\infty}(2^{-n})
@@ -1124,7 +1146,7 @@
 	\end{corollary}
 	\begin{proof}
 		Increasing $\Rightarrow$ one-to-one, since $\lim_{x\to 0^+} = -\infty$,
-		$\lim_{x\to\infty} L(x) = \infty$, and IVT provides that $L$ is onto.
+		$\lim_{x\to\infty} L(x) = \infty$, and IVT provides that $L$ is onto.\\
 	\end{proof}
 	
 	\begin{definition}
@@ -1132,13 +1154,13 @@
 		\[
 			E(L(x)) = x, x\in (0,\infty) \qquad and \qquad 
 			L(E(y)) = y \qquad if \ y \in \mR
-		\]
+		\]\\
 	\end{definition}
 	
 	\begin{proposition}
 		If $y \in \mR$, $L(E(y)) = y$, 
 		$\underset{\Rightarrow}{chain \ rule} \frac1{E(y)} E'(y) = 1$\\
-		$\Rightarrow E'(y) = E(y)$
+		$\Rightarrow E'(y) = E(y)$\\
 	\end{proposition}
 	
 	\begin{algorithm}[\textbf{About $E$}]
@@ -1158,6 +1180,7 @@
 			\item use (1) and (2)
 			\item $E(qc) = E(qL(a)) = E(L(a^q)) = a^q = E(c)^q$. 
 		\end{enumerate}
+		
 	\end{proof}
 
 	\textbf{What is $E(1)$?} We note that 
@@ -1199,17 +1222,462 @@
 
 
 
+	
+	\newpage
+	\subsection{Fundamental Theorem of Calculus II - Jan 22}
+	
+	\begin{theorem}[\textbf{Fundamental Theorem of Calculus II}]
+		Let $f, F : [a,b] \to \mR$ satisfy that 
+		\begin{itemize}
+			\item $f$ is integrable
+			\item $F$ is continuous on $[a,b]$ 
+			\item $F$ is differentiable on $(a,b)$, with $F' = f$ on $(a,b)$
+		\end{itemize}
+		Then, 
+		\[
+			F(b) - F(a) = \int_a^b f
+		\]
+	\end{theorem}
+	\begin{proof}
+		Let $\ep>0$, find a partition $P_{\ep}$ on $[a,b]$, so 
+		\begin{itemize}
+			\item for every refinement $P$ of $P_{\ep}$
+			\item for every Riemann Sum $S(f,P)$, we have 
+				\[
+					\abs{S(f,P) - \int_a^b f} < \ep
+				\]
+		\end{itemize}
+		Take $P$ as above, write $P=\{a = x_0 < x_1 < \cdots < x_n = b\}$. 
+
+		Now let us consider $F$ on each $[x_{j-1}, x_j]$ 
+		\begin{itemize}
+			\item $F$ is continuous on $[x_{j-1}, x_j]$
+			\item $F$ is differentiable on $[x_{j-1}, x_j]$ [can be used in 
+				closed interval, except for $j=0,n$]
+		\end{itemize}
+		Thus MVT tells us there exists $c_j\in(x_{j-1}, x_j) \subset [x_{j-1},
+		x_j]$ such that 
+		\[
+			F(x_j)-F(x_{j-1}) = F'(c_j) (x_j-x_{j-1})
+			=f(c_j) (x_j-x_{j-1}) \qquad (*)
+		\]
+		Now we consider
+		\begin{align*}
+			F(b) - F(a) 
+			=& \sum_{j=1}^n [F(x_j) - F(x_{j-1})] \tag{telescope}\\
+			=& \sum_{j=1}^n f(c_j) (x_j-x_{j-1}) \tag{by *}\\
+			=& S(f,P) \tag{a Riemann Sum} 
+		\end{align*}
+		Hence, 
+		\[
+			\abs{F(b) - F(a) - \int_a^b f} = \abs{S(f,P) - \int_a^b f} < \ep
+		\]
+		
+		Since $\ep>0$ is arbitrary, we get desired result. 
+	\end{proof}
+
+	{\color{brown}
+	\textbf{Remark:}
+	\begin{itemize}
+		\item Suppose $F, G : [a,b] \to \mR$, both satisfy $F' = f =
+	G'$, for integrable $f$, then 
+	\[
+		(F-G)' = F'-G' = f-f = 0 
+		\underset{\Rightarrow}{M.V.T} F - G = C (constant)
+	\]
+	hence, $F(x) = G(x) + C$ for any $x$ in $[a,b]$. 
+	
+	\item 
+		If $f:[a,b]\to \mR$ is continuous, then $f$ is integrable
+		(theorem from earlier) $\&$ $F(x) = \int_a^b f$ defines on 
+		antiderivative.
+
+		Moral: $f$ continuous $\to$ an antiderivative exists. \\
+	\end{itemize}
+	}
 
 
+	\begin{notation}
+		If $f$ is continuous, (on same intervals), and $F$ is an antiderivative
+		of $f$, i.e. $F' = f$ (on interval of said intervals), write 
+		$\int f(x) dx = F(x) + C$.\\
+	\end{notation}
+	
+	\textbf{Antiderivatives of Basic Functions: }
+	\begin{align*}
+		p\neq -1, \qquad \int x^p dx &= \frac{x^{p+1}}{p+1} + C & 
+		\int e^x dx &= e^x + C & & \\
+		\int \cos x dx &= \sin x + C
+			& \int \sin x dx &= -\cos x + C\\
+		\int \sec^2 x dx& = \tan x + C & \int \sec^2 x dx &= \tan x + C
+	\end{align*}
+	\begin{align*}
+		\int \frac1{x^2+1}dx 
+		= \arctan x + C
+		[Tan = \tan\rvert_{(\frac{\pi}2, \frac{-\pi}2)]
+			: (-\frac{\pi}2 , \frac{\pi}2)\to \mR}  \qquad 
+			\text{one-to-one and onto}\\
+		%
+		\int \frac1{\sqrt{1-x^2}}dx 
+		= \arcsin x + C
+		[\Sin = \sin\rvert_{(\frac{\pi}2, \frac{-\pi}2)]
+		: (-\frac{\pi}2, \frac{\pi}2)\to [-1,1]}  \qquad 
+			\text{one-to-one and onto}\\
+	\end{align*}
+	
+		\begin{theorem}[\textbf{Change of Variables/Substitution/Reverse
+		Chain Rule}]
+		Suppose 
+		\begin{itemize}
+			\item $g:[a,b] \to \mR$, differentiable with $g'$ continuous
+			\item $f$ is defined on $g([a,b])$ with $f \circ g : [a,b]
+				\to \mR$ continuous
+		\end{itemize}
+		Then 
+		\[
+			\int_a^b f(g(x)) g'(x) dx = \int_{g(a)}^{g(b)} f(u)d(u)
+		\]
+		Anti Derivative Form:
+		\[
+			\int f(g(x)) g'(x) dx = \int f(u)du \vert_{u=g(x)}
+		\]
+	\end{theorem}
+	\begin{proof}
+		Let $F$ be any antiderivative of $f[g[(a,b)]=[c,d],$ let 
+		$F(x) = \int_x^c f]$. 
+		
+		Let $H:[a,b] \to \mR$ be given by $H(x) = F(g(x))$. 
+		Then Chain Rule provides 
+		\[
+			H'(x) = F/(g(x))g'(x) = f(a(x))g'(x)
+		\]
+		and F.T. of C II provides that 
+		\[
+			H(b) - H(a) = \int_a^b f(g(x))g'(x) dx
+		\]
+		but F.T.of C provides that 
+		\[
+			\int_{g(a)}^{g(b)} f(u)d(u) = F(g(b)) - F(g(a)) = H(b) - H(a)
+		\]
+	\end{proof}
 
+	{\color{Brown}
+	\textbf{Example: }
+	\begin{enumerate}
+		\item 
+			\begin{align*}
+			\int xe^{-x^2} dx 
+			&= -\frac12 \int e^{-x^2} (-2x) dx\\
+			&= -\frac12 \int e^u du \\
+			&= -\frac12 e^u + C \\
+			&= -\frac12 e^{-x^2} + C
+			\end{align*}
+			
+		\item 
+			\begin{align*}
+				\int_1^3 x(x^2+4)^{91} dx
+				&= \frac 12 \int_5^{13} u^{91} dx\\
+				&= \frac 12 \frac{u^{92}}{92} \vert^{13}_5 \\
+				&= \frac1{184} [(13)^{92}-5^{92}]
+			\end{align*}
 
+		\item 
+			\begin{align*}
+				\int \cos^m x \sin^n x dx \tag{n \ odd}
+				&= \int \cos^m x \sin^{2k} x \sin x dx\\
+				&= \int \cos^m x(1-\cos^2 x)^k \sin x dx
+				\tag{$ u = \cos x, \  du = -\sin x dx$}\\
+				&= -\int u^m(1-u^2)^k du \vert_{u=\cos x}
+			\end{align*}
+	\end{enumerate}}
 
+	\newpage
+	\subsection{Trignometry and Antiderivatives - Jan 22 Wed, TUT}
+	\begin{definition}
+		$\pi = 2\int_{-1}^a \sqrt{a-x^2}dx$ \\
+	\end{definition}
 
+	\begin{definition}
+		Let for $-1\leq x\leq 1$, 
+		\[
+			\arccos x = x \sqrt{1-x^2} + 2\int_x^1 \sqrt{1-u^2} du
+		\]
+		Then $\frac12 \arccos x$ is the area of 
+		-----graph-----
+	\end{definition}
 
+	\textbf{Note:} $\frac12\arccos x$ is proportional to the angle $\theta$,
+	hence it is reasonable to measure. 
+	\[
+		\theta = \arccos x \qquad "radians"
+	\]
+	\begin{itemize}
+		\item $\arccos -1 = \pi$
+		\item $\arccos 0 = 2\int_0^1 \sqrt{1-u^2} du \overset{symmetry}{=}
+			\int_{-1}^1 \sqrt{1-u^2} du = \frac{\pi}2$
+		\item $\arccos 1 = 0$
+	\end{itemize}
+	
+	\textbf{Derivatives:}
+	\begin{align*}
+		\arccos ' x 
+		&= \sqrt{1-x^2} + x\frac12(1-x^2)^{-\frac 12} (-2x) - 2\sqrt{1-x^2}\\
+		&= -\frac{x^2}{\sqrt{1-x^2}}-\sqrt{1-x^2}\frac{\sqrt{1-x^2}}
+			{\sqrt{1-x^2}} = -\frac{1}{\sqrt{1-x^2}}
+	\end{align*}
+	hence, 
+	\begin{itemize}
+		\item $\arccos 'x < 0$ and by MVY, decreasing
+		\item $\lim_{x\to -1^+} \arccos 'x = -\infty = \lim_{x\to 1^-}
+			\arccos 'x$ 
+		\item $\arccos '0=-1$
+		\item $\arccos ''(x) = -\frac x{(1-x^2)^{\frac 32}}$ hence, \\
+			- $\arccos ''(x) > 0$ if $x <0  \Rightarrow $ concave up\\
+			- $\arccos ''(x) <0$ if $x > 0 \Rightarrow$ concave down\\
+	\end{itemize}
 
+	\begin{definition}
+		$ $
+		\begin{itemize}
+			\item $\Cos x = \arccos ^{-1} : [0,\pi] \to [-1,1]$
 
+			\item $\sin \theta = \sqrt{1-\cos^2 \theta}$
+		\end{itemize}
+				
+		Hence, $\sin:[0,\pi] \to [0,1]$, with 
+		\begin{itemize}
+			\item $\Sin(0) = \sqrt{1-1^2} = 0$
+			\item $\Sin(\frac{\pi}2) = \sqrt{1-0^2} = 0$
+			\item $\Sin(\pi) = \sqrt{1-(-1)^2} = 0$
+		\end{itemize}
+	\end{definition}
 
+	\textbf{Derivatives of $\cos$, $\sin$}
+	
+	$\arccos (\cos \theta) = \theta$
+	\[
+		\underset{\text{Chain Rule}} {\Rightarrow}
+		\frac{-1}{\sqrt{1-\cos^2 \theta}} \cos '\theta=1
+		\Rightarrow \cos'\theta = -\sin \theta
+	\]
+	
+	\[
+		\sin'\theta = \frac d{d\theta} \sqrt{1-\cos^2\theta} 
+		= \frac1x(1-\cos^2 \theta) ^{-\frac12} (-2\cos \theta \cos'\theta)
+		= \cos \theta
+	\]
+	Hence, $\sin'(0)=1$, $\sin'\frac{\pi}2 = 0$, $\sin'(\pi) = -1$, and 
+	$\sin"(\theta) = -\sin \theta < 0$ if $0<\theta < \pi \Rightarrow$
+	concave down
+
+	\underline{Extension to $\mR$} 
+	\begin{enumerate}[label=(\alph*)]
+		\item we define $\cos, \sin:[-\pi,\pi] \to [-1,1]$
+			\begin{itemize}
+				\item $\cos$ is even: $\cos (-\theta) = \cos \theta$,
+				$\theta \geq 0$
+				\item $\sin$ is odd: $\sin(-\theta) = -\sin \theta$, 
+					$\sin \theta = \Sin x$, if $\theta \geq 0$ 
+			\end{itemize}
+		\item we define $\cos, \sin : \mR \to [-1, 1]$
+			\[
+				\cos(\theta + 2\pi n) = \cos(\theta)
+				\qquad 
+				\sin (\theta + 2\pi n) = \sin(\theta)
+				\qquad 
+				\theta \in [-\pi, \pi], n \in \mZ
+			\]
+	\end{enumerate}
+
+	\begin{lemma}
+		Let $f: \mR \to \mR$ is twice differentiable, then 
+		\begin{itemize}
+			\item $f(0) = f'(0) = 0$ and 
+			\item $f''+f=0$
+		\end{itemize}
+		then $f=0$. 
+	\end{lemma}
+	\begin{proof}
+		Let $g=(f')^2 + f^2$ then
+		\[
+			g(0)=0 \qquad and \qquad 
+			g'= 2ff'+ 2ff'=2f[f''+f] = 0
+		\]
+		$\Rightarrow$ by MVT, $g$ constant, hence, $g=0$, 
+		then $0\leq f^2 \leq g$. 
+	\end{proof}
+
+	\begin{lemma}
+		Double Angle Fomula for Cos
+	\end{lemma}
+	\begin{proof}
+		Let $a, b \in \mR$ be fixed, defined $f : \mR \to \mR$, 
+		\[
+			f(t) = \cos(s+t) - a \sin t + b\cos t
+		\]
+		Then
+		\begin{align*}
+			f'(t) & = - \sin (s+t) + a\sin t + b \cos t\\
+			f''(t) &= -\cos (s+t) + a\cos t -b\sin t\\
+			\Rightarrow f''+f &= 0
+		\end{align*}
+		Now we wish to choose $a$, $b$ to satisfy
+		
+		$f(0)=0$, hence $0=f(0)=\cos s - a \Rightarrow a = \cos s$\\
+		$f(0)=0$, hence $0=f'(0)=-\sin s + b \Rightarrow b = \sin s$
+
+		With these choices of $a,b$, the lamma tells us that $f(t) = 0$, hence
+		\[
+			0 = \cos(s+t) - [\cos s \cos t-\sin s \sin t)
+		\]
+	\end{proof}
+
+	\textbf{Double Angle Fomula for $\cos$: }
+	Since $\cos^2 t + \sin^2 t = 1$, the angle sum fomula gives
+	\[
+		\cos 2t = \cos^2 t - \sin^2 t = 
+		\begin{cases}
+			1 - 2\sin^2 t \Rightarrow\sin^2 t = \frac12[1-\cos^2 t]\\
+			2\cos^2 t - 1 \Rightarrow \cos^2 t = \frac12 [1-\cos^2 t]
+		\end{cases}
+	\]
+	
+	\begin{lemma}
+		Double Angle Fomula for $\sin$: $\sin(s+t) = \cos s \sin t + \sin x
+		\cos t$
+	\end{lemma}
+	\begin{proof}
+		Fix $s \in \mR$, for $t$ consider
+		\[
+			\cos (s + t) = \cos s \cos t - \sin s \sin t
+		\]
+		and take $\frac d{dt}$ to both sides.
+	\end{proof}
+
+	\textbf{Double Angle Fomula for $\sin$: }
+	\[
+		\sin 2t = 2\cos t \sin t
+	\]
+
+	{\color{Brown}
+		\textbf{Example 1:}
+		\begin{enumerate}
+		\item 
+			\begin{align*}
+				\int \sin^2x dx
+				=& \frac12 \int(1-\cos 2x) dx\\
+				=& \frac12 [x-\frac12 \sin 2x] + C\\
+				=& \frac12 x - \frac 14 \sin 2x + C\\
+				=& \frac12 x - \frac12 \sin x \cos x + C
+			\end{align*}
+
+		\item
+			\begin{align*}
+				\int \cos^4 x dx 
+				=& \int[\frac12(1+\cos 2x)]^2 dx\\
+				=& \frac 14 \int (1+ 2\cos 2x + \cos^2 2x) dx\\
+				=& \frac 14 \int (1+2\cos 2x + \frac12[1+\cos4x]) dx
+			\end{align*}
+
+		\item 
+			\begin{align*}
+				&\int \sin x \cos^4 x dx \tag{$u = \cos x, du = -\sin xdx$}\\
+				=& - \int u^4 du\vert_{u=\cos x} \\
+				=& -\frac{\cos^5 x}5 + C
+			\end{align*}
+			
+		\item
+			\begin{align*}
+				\int \sin^2x \cos^4 x dx
+				=& \int \sin^2x\cos^2x\cos^2xdx\\
+				=& \int (\frac12\sin2x)^2 \frac12[1+\cos 2x]dx\\
+				=& \frac 18 \int[\sin^22x + \sin^22x\cos 2x] dx
+			\end{align*}
+		\end{enumerate}
+	}
+
+	\textbf{Change of Variables(Antiderivatives form)}
+	\[
+	\int f(g(x))g'(x)dx = \int f(u) du \vert_{u=g(x)}
+	\]
+	$f, g'$ continuous.
+
+	\textbf{Inverse Form: }Suppose we try $x = g(u)$, 
+	\[
+		\int f(x) dx = \int f(g(u))g'(u) du\vert_{x=g(u)}
+	\]
+
+	\begin{algorithm}[\textbf{Trig Substitution}]
+		$ $
+		\begin{center}
+		\begin{tabular}{c c c c}
+			Forms &  Substitution & Main Identity & $dx$ \\
+			$a^2-x^2$ & $x = a\sin \theta$ & $a^2 - x^2 = a^2 \cos ^2 \theta$
+					  & $dx = a\cos \theta d\theta$\\
+			$x^2+a^2$ & $x = a\tan \theta$ & $x^2+a^2=a^2\sec\theta$
+					  & $dx = a\sec^2\theta d\theta$
+		\end{tabular}
+		\end{center}
+	\end{algorithm}
+
+	{\color{Brown}
+	\textbf{Examples}
+	\begin{enumerate}
+		\item 
+			\begin{align*}
+				\int \frac{dx}{(9-x^2)^{3/2}}
+				=&\int \frac{3\cos \theta}{(9\cos^2\theta)^{3/2}}dx\\
+				=&\frac 19 \int \sec^2\theta d\theta 
+				= \frac 19 \tan \theta + C \\
+				=& \frac 19 \frac{\sin\theta}{\sqrt{1-\sin^2\theta}}+C\\
+				=& \frac 19 \frac{\frac13 x}{\sqrt{1-(\frac13x)^2}}+C
+				= \frac 19 \frac x{\sqrt{9-x^2}}+C
+			\end{align*}
+		\item 
+			\begin{align*}
+				\int \frac{dx}{x^2+2x+5} 
+				&= \int \frac{dx}{(x+1)^2+4} 
+				\tag{$x+1=2\tan\theta, dx=2\sec^2\theta d\theta$}\\
+				&= \int \frac{2\sec^2\theta}{2^2\sec^2\theta}d\theta\\
+				&= \frac12 \int d\theta = \frac12 \theta+C\\
+				&= \frac12 \arctan \frac{x+1}2 + C
+			\end{align*}
+
+		\item 
+			\begin{align*}
+				\int \sqrt{1-x^2}dx
+				=& \int \cos^2\theta d\theta\\
+				=& \frac 12 \int [1+\cos 2\theta]d\theta\\
+				=& \frac12[\theta + \frac12 \sin 2\theta] + C\\
+				=& \frac12[\arcsin x + \sin \theta \cos \theta] + C\\
+				=& \frac 12[\arcsin x]+ x\sqrt{1-x^2} + C\\
+				\Rightarrow &\arcsin (x) = 2\int\sqrt{1-x^2}dx -x\sqrt{1-x^2}
+				+ C'\\
+				[\arcsin x &= \frac{\pi}2 -\arccos x] \checkmark
+			\end{align*}
+
+		\item 
+			\begin{align*}
+				\int \frac{dx}{\sqrt{x^2+1}}\tag{$x = \tan \theta, 
+				dx = \sec^2 \theta d\theta$}
+				=& \int \frac{\sec^2 \theta d\theta}{\sec \theta}\\
+				=& \int \sec \theta d\theta\\
+				=& \int \sec\theta \frac{\sec \theta \tan \theta}
+				{\sec\theta + \tan \theta} d\theta\\
+				=& \int \frac{\sec^2\theta +\tan \theta \sec \theta}
+				{\sec \theta + \tan \theta} d\theta\\
+				=& \log \abs{\sec\theta + \tan \theta} + C\\
+				=& \log (\sqrt{x^2+1}+x)+C
+			\end{align*}
+
+		\item 
+			\begin{align*}
+				\int \frac{dx}{\sqrt{x^2+1}}\tag{$x = \tan \theta, 
+				=& \int \frac{\cosh t}{\cosh t} dt
+			\end{align*}
+	\end{enumerate}
+
+	}
 
 \end{document}
-
 
