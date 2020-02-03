@@ -40,6 +40,7 @@
 %      Blackboard bold letters
 %\newcommand {⟨cmd⟩} [⟨num⟩] [⟨default⟩] {⟨definition⟩}
 \newcommand{\abs}[1]{\left| #1 \right|}
+
 \newcommand{\mC}{{\mathbb{C}}}
 \newcommand{\mN}{{\mathbb{N}}}
 \newcommand{\mQ}{{\mathbb{Q}}}
@@ -75,7 +76,6 @@
 
 \tableofcontents\label{toc}
 
-
 \newpage
 
 \section{INTEGRATION, SUMMATION}
@@ -85,11 +85,11 @@
 		S_f = \{(x,y): 0\leq y\leq f(x), x\in [a,b]\} ("subgraph")
 	\]
 	IDEA: area of rectangel = height * width
-
+	
 	\begin{enumerate}
 		\item 
 			$ $
-		 \begin{figure}[htbp]
+		\begin{figure}[htbp]
     	\centering
     	\caption{The area under the function $\frac1x$ is $\log x$}
     	\begin{tikzpicture}[scale=0.5]
@@ -103,9 +103,6 @@
 					-- cycle;
 			\end{tikzpicture}
 		\end{figure}
-
-
-			
 	
 		\item approximate $S_f$ by rectangle from below 13:43 JAN 6, 
 			
@@ -162,6 +159,7 @@
 				\underbrace{(x_j-x_{j-1})}_{width\ of\ [x_{j-1},x_j]}$
 			\item \textbf{Upper Sum:} 
 				$U(f, P) = \sum_{j=1}^n M_j (x_j-x_{j-1})$\\
+
 		\end{itemize}
 	\end{definition}
 
@@ -697,9 +695,10 @@
 		\]
 		Trapezoid Sum
 		\begin{align*}
-			T(f,P) = \frac 12 [S_l(f)+S_r(f)]
-			= \sum_{j=1}^n \frac{f(x_j)+f(x_j)}2 (x_j-x_{j-1})\\
-			= \frac 12 f(a)(x_1-a) +\sum_{j=1}^{n-1} f(x_j)(x_j-x_{j-1})\\
+			T(f,P) 
+			=& \frac 12 [S_l(f)+S_r(f)]\\
+			=& \sum_{j=1}^n \frac{f(x_j)+f(x_j)}2 (x_j-x_{j-1})\\
+			=& \frac 12 f(a)(x_1-a) +\sum_{j=1}^{n-1} f(x_j)(x_j-x_{j-1})
 			+\frac 12 f(b) (b-x_{n-1})
 		\end{align*}
 	\end{definition}
@@ -1390,9 +1389,16 @@
 				&= -\int u^m(1-u^2)^k du \vert_{u=\cos x}
 			\end{align*}
 	\end{enumerate}}
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
 
 	\newpage
-	\subsection{Trignometry and Antiderivatives - Jan 22 Wed, TUT}
+	\subsection{Integration and Trignometry - Jan 22 Wed, TUT}
 	\begin{definition}
 		$\pi = 2\int_{-1}^a \sqrt{a-x^2}dx$ \\
 	\end{definition}
@@ -1672,12 +1678,330 @@
 
 		\item 
 			\begin{align*}
-				\int \frac{dx}{\sqrt{x^2+1}}\tag{$x = \tan \theta, 
+				\int \frac{dx}{\sqrt{x^2+1}}\tag{$x = \tan \theta, $}
 				=& \int \frac{\cosh t}{\cosh t} dt
 			\end{align*}
 	\end{enumerate}
 
 	}
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+
+	\newpage
+	\subsection{Integration by Partial Fraction - Jan 27}
+
+	\textbf{Warm Up: }
+	
+	\begin{align*}
+		\int \sec\theta d\theta 
+		=& \int \frac1{\cos\theta} d\theta\\
+		=& \int \frac{\sin^2\theta + \cos^2\theta}{\cos \theta} d\theta\\
+		=& \int\frac{\sin^2\theta}{\cos\theta} d\theta+\int\cos\theta d\theta\\
+		=& \int \frac{\sin^2\theta}{1-\sin^2\theta}\cos\theta d\theta 
+		+ \int \cos\theta d\theta \\
+	\end{align*}
+
+	\begin{theorem}
+		$ $
+		\begin{enumerate}
+		\item 
+		Let $q\neq 0$ be a polynomial with $\mR$-coefficients, then 
+		we may write 
+		\[
+			q(x) = a(x-r_1)^{m_1} \cdots (x-r_m)^{m_m}\cdot
+			(x^2+b_1x+c_a)^{n_1} \cdots (x^2 + b_Nx + C_N)^{n_N}
+		\]
+		where $a\neq 0$, $r_1, \cdots, r_M$ are the distinct $\mR$-roots
+		 of $q$, and $b_1, \cdots, b_N, \cdots, c_N \in \mR$.. 
+
+		 $b_j^2 - 4c_j < 0$ for $j=1, \cdots, N$. Also, $m_1, \cdots, m_N,
+		 n_1, \cdots, n_N \in \mN$. 
+		 
+		\item 
+		Let $p$ be $\mR-$polynomial with 
+		\[
+			\deg p < \deg q
+		\]
+		Then there are unique $\mR-$numbers $A_1, \cdots, B_N, C_N$. 
+		so 
+		\[
+		\frac{p(x)}{q(x)} = \sum_{j=1}^M \sum_{k=1}^M \frac{A_j,k}{(x-{r_j})^k}
+		= + \sum_{j=1}^N\sum_{k=1}^{n_j} \frac{B_{j,k}x + C_{j,k}}
+		{x^2+b_jx+c_j}^k
+	\]
+		\end{enumerate}
+	\end{theorem}
+	
+	{\color{Brown}
+	\textbf{Example}
+	\[
+		\frac{x^2 + 4x+3}{(x-1)^2(x^2+3x+4)} 
+	\]
+	}
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+
+	\newpage
+	\subsection{Integration by parts - Jan 29}
+	\begin{theorem}[\textbf{Integration by Parts/"Reverse Product Rule"}]
+		Let $f, g F:[a,b] \to \mR$ satisfy
+		\begin{itemize}
+			\item $f$ is integrable on $[a,b]$
+			\item $F' = f$ on $[a,b]$
+			\item $g'$ is integrable on $[a,b]$
+		\end{itemize}
+		Then 
+		\[
+			\int_a^b f(x)g(x)dx = F(b)g(b) - F(a)g(a) - \int_a^b F(x)g'(x)dx
+		\]
+		\textbf{Antiderivative Form: }
+		\begin{align*}
+			\int f(x)g(x)dx &= F(x)g(x) - \int F(x)g'(x)dx, \qquad 
+				F(x) = \int f(x)dx \qquad \text{Can choose $c=0$}\\
+			\int f'g &= fg-\int fg'
+		\end{align*}
+	\end{theorem}
+	\begin{proof}
+		Product Rule: 
+		\[
+			\frac{d}{dx} [F(x)g(x)] = F'(x)g(x) + F(x)g'(x)
+			=f'(x)g(x) + F(x)g'(x)
+		\]
+		FToCII:
+		\begin{align*}
+			F(b)g(b) - F(a)g(a)
+			=& \int_a^b [f(x)g(x) + F(x)g'(x)] dx\\
+			\Rightarrow F(b)g(b) - F(a)g(a) - \int_a^b F(x)g'(x)dx
+			=&\int_a^b f(x)g(x)dx
+		\end{align*}
+	\end{proof}
+
+	{\color{Brown}
+	\textbf{Example 1} 
+	\begin{align*}
+		\int \arctan(x)dx 
+		=& \int 1\cdot \arctan(x)dx\\
+		=& x\arctan(x) - \int x \frac1{1+x^2}dx\\
+		=& x\arctan(x) - \frac12 \log(1+x^2) + C\\
+	\end{align*}
+
+	\textbf{Example 2} 
+	\begin{align*}
+		\int x^2e^xdx 
+		=& x^2e^x - \int 2x\cdot e^x dx \\
+		=& x^2e^x - 2[xe^x-\int e^xdx] \\
+		=& x^2e^x -2xe^x + 2e^x + C
+	\end{align*}
+
+	\textbf{Example 3} 
+	\begin{align*}
+		\int \cos^{2n}(x)dx \qquad n\geq 1 \tag{$I_n$} 
+		=& \int \cos x \cos^{2n-1} x dx\\
+		=& \sin x \cos^{2n-1} dx - \int \sin x (2n-1) \cos^{2n-2}(-\sin x)dx\\
+		=& \sin x \cos ^{2n-1} x + (2n-1)\int (1-\cos^2 x)\cos^{2n-2}xdx\\
+		=& \sin x \cos^{2n-1} x + (2n-1)[\int\cos^{2n-2}xdx-\int \cos^{2n}xdx]\\
+		=& \sin x \cos^{2n-1} x + (2n-1) [I_{n-1}(x) - I_n(x)]\\
+		\Rightarrow 
+		2n I_n(x) =& \sin x \cos^{2n-1}x + (2n-1)I_{n-1}(x)\\
+		I_n(x) =& \frac1{2n} \sin x \cos^{2n-1}x +\frac{2n-1}{2n}I_{n-1}(x)
+		\tag{"Reduction Fomula"}
+	\end{align*}
+	Specific Example: $n=0$, $I_0(x) = \int\cos^0 x dx = \int 1dx = x+C$
+	Hence 
+	\begin{align*}
+		\int \cos^2 x dx = I_1 (x) 
+		=& \frac12\sin x\cos x + \frac12[x+C]\\
+		=&\frac12\sin x\cos x + \frac 12 x + C'\\\\
+	%
+		\int \cos^2 x dx = &\frac12 \int [1+\cos 2x]dx\\
+		= &\frac 12 x + \frac 14 \sin 2x + C\\\\
+	%
+		\int \cos^4 x dx 
+		=& I_2(x) 
+		=\frac 14 \sin x\cos^3 x +
+		\frac 34 [\frac 12 \sin x \cos x + \frac 12 x] + C\\
+		=& \frac 14 \sin x \cos^3 x + \frac 38\sin x \cos x + \frac 38 x + C
+	\end{align*}
+
+	\textbf{Exmaple 3'} 
+	\begin{align*}
+		\int \frac{dt}{(t^2+1)^3}
+		=& \int \frac{\sec^2 \theta}{(\sec^2\theta)^3}d\theta\\
+		=& \int \cos^4\theta d\theta\\
+		=& \frac 14 \sin \theta\cos^3\theta + \frac 38 \sin \theta \cos \theta
+		+\frac 38 \theta + C\\
+		=& \frac 14 \frac t{(1+t^2)^2} + \frac 38 \frac t{1+t^2}
+		+\frac 38 \arctan (t) + C
+	\end{align*}
+
+	}
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+	\newpage
+	\subsection{Improper Integral - Jan 29}
+	\textbf{Recall: }Integration involves upper and lower sums and hence
+	requires 
+	\begin{itemize}
+		\item bounded functions and 
+		\item bounded intervals
+	\end{itemize}
+
+	\begin{definition}
+		let $a<b$ and $f:(a,b]\to \mR$
+		\begin{itemize}
+			\item $f$ is integrable on $[x,b]$ fro each $x\in (a,b]$. 
+		\end{itemize}
+		Then we define the \textbf{improper integral} by 
+		\[
+			\int_a^b f = \lim_{x\to a^+} f, \qquad \text{provided that
+			limit exists}
+		\]
+	\end{definition}
+
+	{\color{Brown}
+
+		\textbf{Example 1:}
+
+		$f(t) = \frac1{\sqrt t}$ on $(0,2]$, notice that
+		$f$ is continuous, hence integrable on $[x,2]$, $0 < x < 2$. 
+
+		Compute 
+		\[
+			\int_x^2 \frac{dt}{\sqrt t} = \int_x^2 t^{-1/2}dt = 2t^{1/2}
+			\bigg\vert_x^2 = 2\sqrt 2-2\sqrt x
+		\]
+		Then 
+		\[
+			\int_0^2 \frac{dt}{\sqrt t} = \lim_{x\to 0^+} \int_x^2\frac{dt}
+			{\sqrt t} = 2\sqrt 2 - 2\sqrt 0 = 2\sqrt 2\\
+		\]
+		
+		\textbf{Example 2: } 
+
+		$g(t) = \frac 1{t^2}$ on $[0,2]$. g is cts, so 
+		integrable on each $[x,2]$, $0 < x < 2$. 
+		\[
+			\int_x^2\frac{dt}{t^2} = -\frac 1t\bigg\vert_x62 = \frac1x-\frac12
+		\]
+		\[
+			\lim_{x\to 0^+} \int_x62 \frac{dt}{t^2} = \lim_{x\to 0^+}
+			[\frac1x-\frac12] = \infty
+		\]
+		We write $\int_0^2 \frac{dt}{t^2}=\infty$ or $\int_0^2 \frac{dt}{t^2}$
+		D.N.E.. \\
+	
+		\textbf{Example 3: } 
+
+		$h(t) - \frac{\abs{\sin\frac1t}}{\sqrt t}$, 
+		$t\in (0,2]$, $h$ is continuous on each $[x, 2]$, $0 < x < 2$. 
+
+		How can we show if this is improperly integrable? 
+
+		\textbf{Comparison method}
+		\begin{alignat*}{2}
+			& \qquad & 0\leq& \abs{\sin \frac1t} \leq 1\\
+			\Rightarrow & \qquad & 0 \leq& \frac{\abs{\sin \frac 1t}}{\sqrt t}
+			\leq \frac1{\sqrt t} \\
+			\Rightarrow & \qquad & 0\leq& \int _x^2 \frac{\abs{\sin \frac1t}}
+			{\sqrt t} dt \leq \int_x^2 \frac{dt}{\sqrt t} = 2\sqrt 2 - 2\sqrt x
+			\leq 2\sqrt 2
+		\end{alignat*}
+		
+		$H(x) = \int_x^2 \frac{\abs{\sin \frac1t}}{\sqrt t}dt$ is nonincreasing.
+
+		If $0<x'<x<2$, $H(x') - H(x) = \int_{x'}^2 h - \int_x^2 h =
+		\int_{x'}^x h + \int_x^2 h - \int_x^2 h = \int_{x'}^x h \geq 0$ 
+	}
+
+	\subsection{Jan 31}
+
+	\begin{enumerate}
+		\item $\lim_{x\to a} F(x) = L \Leftrightarrow$ for every sequence 
+			$(a_n)^{\infty}_{n=1}$ s.t. $\lim_{n\to\infty} a_n=a$, provides 
+			that $\lim_{n\to\infty} F(a_n) = L$. 
+		\item Let $(a_n)_{n=1}^{\infty}$ be a sequence in $\mR$, then 
+			$\lim_{n\to\infty} a_n$ exists $\Leftrightarrow$ for any $\ep>0$, 
+			there exists $n_\ep \in N$ s.t. 
+			$\abs{a_m-a_n} <\ep$ whenever $m,n \geq n_{\ep}$. \\
+	\end{enumerate}
+
+	Cauchy criterion[Deep Fact: Bolzano Weierstrass Theorem]\\
+
+	\begin{theorem}[\textbf{Cauchy Criterion for limit of function}]
+		Let $F:(a,b]\to \mR$, then 
+		$\lim_{x\to a^+} F(x) \Leftrightarrow$ exists
+		for any $\ep>0$, there is $\delta > 0$ s.t. $\abs{F(u)-F(v)}<\ep$
+		whenever $\abs{u-a}<\delta$ and $\abs{v-a}<\delta$ for $u,v \in (a,b]$.
+	\end{theorem}
+	
+
+	\textbf{Last Time: } 
+	\[
+		\int_0^2 \frac{\abs{\sin (\frac 1t)}}{\sqrt t} dt =\lim_{x\to 0^+}
+		\underbrace{\int_x^2 \frac{\abs{\sin (\frac 1t)}}{\sqrt t} dt}_{H(x)}
+	\]
+	$H$ is monotone and bounded $\Rightarrow$ $\lim_{x\to a^+} H(x)$ exists. \\
+
+
+	{\color{Brown}
+	\textbf{Example: }
+
+	Consider 
+	\begin{align*}
+		&\int_0^1 \frac{\sin (\frac 1t)}{\sqrt t} dt = \lim_{x\to 0^+} 
+		\int_x^1 \frac{\sin(\frac 1t)}{\sqrt t} dt\\ 
+		&-1 \leq \sin (\frac 1t) \leq 1 \\
+		\Rightarrow & -\frac1{\sqrt y} \leq \frac{\sin(\frac 1t)}{\sqrt t}
+		\leq \frac1{\sqrt t} 
+		\overset{order\ properties}{\Rightarrow} -\int_x^1 \frac{dt}{\sqrt t}
+		\leq \int_x^1 \frac{\sin(\frac 1t)}{\sqrt t} dt
+		\leq \int_x^1 \frac{dt}{\sqrt t}
+	\end{align*}
+	Now we consider $0< u< v < 1$, again order properties give:
+	\[
+		-\int_u^v \frac{dt}{\sqrt t} 
+		\leq \int_u^v \frac{\sin(\frac 1t)}{\sqrt t} dt
+		\leq \int_u^v \frac{dt}{\sqrt t}
+	\]
+	\[
+		-2(\sqrt v- \sqrt u) \leq F(v) - F(u) \leq 2 (\sqrt v - \sqrt u)
+	\]
+	\[	
+		\abs{F(v) - F(u)} \leq 2 (\sqrt v - \sqrt u) \leq 2\sqrt v
+	\]
+	If $\delta = \frac{\ep^2}{4}$ and if $0<u<v<\delta$
+	\[
+		\abs{F(v) - F(u)} < 2\sqrt{\delta} = \ep
+	\]
+	hence, $\lim_{x\to 0 ^+}F(x)=\int_0^1 \frac{\sin(\frac 1t)}{\sqrt t}dt$
+	exists. 
+	}
+
+	
+	\subsection{Feb 3}
+
+	\textbf{notes on comparison}
+	
+
+
+
 
 \end{document}
 
