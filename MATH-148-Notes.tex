@@ -41,6 +41,9 @@
 %      Blackboard bold letters
 %\newcommand {⟨cmd⟩} [⟨num⟩] [⟨default⟩] {⟨definition⟩}
 \newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
 
 \newcommand{\mC}{{\mathbb{C}}}
 \newcommand{\mN}{{\mathbb{N}}}
@@ -252,14 +255,13 @@
 	\begin{definition}
 		Given a bounded $f:[a,b]\to\mathbb{R}$, define 
 		\begin{itemize}
-			\item \underline{lower integral} : 
-				$\underline{\int} 
-				a^b f = \sup \{L(f,P): P \ is\ a\ partition \ of \ [a,b]\}$
-			\item \underline{Upper Integral:}
-				$\bar{\int}_a^b f = \inf \{U(f,Q): Q\ is \ a \ partition
-				\ of \ [a,b]\}$
+			\item \textbf{Lower Integral} : 
+				$\underline{\int}_a^b f
+				= \sup \{L(f,P): P $ is a partition of $[a,b]\}$
+			\item \textbf{Upper Integral:}
+				$\bar{\int}_a^b f 
+				= \inf \{U(f,Q): Q$ is a partition of $[a,b]\}$
 		\end{itemize}
-		\textbf{Note}:
 		$\underline{\int}_a^b f
 		=\sup \{L(f,P): P \ is\ a\ partition \ of \ [a,b]\}
 		\leq \inf \{U(f,Q): Q\ is \ a \ partition \ of \ [a,b]\} 
@@ -324,11 +326,10 @@
 		\begin{enumerate}
 			\item $f$ is integrable on $[a,b]$
 			\item given $\ep > 0$, there exists a partition $P_{\ep}$
-				of $[a,b]$ s,t, 
+				of $[a,b]$ s.t.  
 				\[
 					U(f,P_{\ep}) - L(f,P_{\ep}) < \ep
 				\]
-				and
 			\item given $\ep>0$, there exists a partition $P_{\ep}$ of $[a,b]$
 				so for every refinement $P$ of $P_{\ep}$ 
 				\[
@@ -351,9 +352,8 @@
 				\]
 				and by the third equality, there is a partition $P_2$ s.t.
 				\[
-					U(f,P_2) < \bar{\int}_a^b f+\frac{\ep}2
+					\bar{\int}_a^b f < U(f,P_2) - \frac{\ep}2 
 				\]
-
 				Let $P_{\ep}=P_1\cup P_2$, a refinement of $P_1$ and $P_2$,
 				then since $\underline{\int}_a^b f = \bar{\int}_a^b=
 				\int_a^b f$ we find   
@@ -381,10 +381,18 @@
 				$[a,b]$, so $U(f,P_{\ep})-L(f,P_{\ep})<\ep$.
 				We have 
 				\[
-					L(f,P_{\ep})\leq \underline{\int}_a^b \leq \bar{\int}
-					_a^b f \leq U(f,P_{\ep}) \Rightarrow 
+					L(f,P_{\ep})
+					\leq \underline{\int}_a^b f
+					\leq \bar{\int}_a^b f
+					\leq U(f,P_{\ep}) 
+					\qquad \Rightarrow \qquad 
+					\underline{\int}_a^b f- \bar{\int}_a^b f < \ep
 				\]
-
+				\[
+					\underline{\int}_a^b f
+					= \bar{\int}_a^b f
+					\qquad \Rightarrow \qquad f \ \text{is integrable}
+				\]
 		\end{description}
 	\end{proof}
 
@@ -398,13 +406,13 @@
 		\[ 
 			\abs{f(x) -f(x')} < \ep 
 		\]
-		this definition is local. first we choose $x, \ep$, then $\delta$
+		this definition is local. first we choose $x, \ep$, then $\delta$.\\
 	\end{definition}
 
 	\begin{definition}[\textbf{uniform Continuity}]
 		$f: I \to \mathbb{R}$ is uniformly continuous if for every $\ep > 0$,
 		there is $\delta > 0$ so $\abs{f(x)-f(x')}<\ep$ whenever 
-		$\abs{x-x'}<\delta$ for $x, x' \in I$. 
+		$\abs{x-x'}<\delta$ for $x, x' \in I$. \\
 	\end{definition}
 
 	\begin{proposition}[\textbf{Sequential Test of Continuity}]
@@ -421,7 +429,7 @@
 		so for $n\geq N$, we have $\abs{x_n-x_n'}<\delta$. 
 
 		But then, for $n\geq N$, we also have that $\abs{f(x_n)-f(x_n')}<\ep$.
-		i.e. $\dlim_{n\to\infty} \abs{f(x_n)-f(x_n')} = 0$.
+		i.e. $\dlim_{n\to\infty} \abs{f(x_n)-f(x_n')} = 0$.\\
 	\end{proof}
 
 	{\color{Brown}
@@ -433,7 +441,7 @@
 	\[
 		\abs{f(x_n)-f(x_n')} = \abs{n-2n} = n
 	\]
-	Hence, not uniformly continuous. 
+	Hence, not uniformly continuous. \\
 
 	\textbf{Example 2:} $g:(0,1]\to\mathbb{R}$, $g(x) = \sin \frac 1x$, then
 	$g$ is continuous. 
@@ -444,7 +452,7 @@
 		\abs{g(x_n)-g(x_n')} = \abs{\sin(n\pi)-\sin(\frac{2n+1}2\pi)} = 1
 	\]
 
-	For $\ep = 1$, uniform continuity fails. 
+	For $\ep = 1$, uniform continuity fails. \\
 	}
 
 	\begin{theorem}
@@ -482,7 +490,7 @@
 			\lim_{k\to\infty} \abs{f(x_{n_k})-f(x_{n_k}')}=0
 		\]
 		This contradicts that each $\abs{f(x_{n_k})-f(x_{n_k}')}\geq \ep$. 
-		Thus by contradiction argument, $f'$ must be uniformly continuous. 
+		Thus by contradiction argument, $f'$ must be uniformly continuous. \\
 	\end{proof}
 	
 	\begin{theorem}[\textbf{Continuous on a Closed Bounded Interval and 
@@ -493,7 +501,7 @@
 		Let $\ep>0$, then by uniform continuity of $f$, there exists a $\delta$
 		such that whenever $\abs{x-x'}<\delta$, for $x, x'\in[a,b]$, 
 		\[
-			\abs{f(x)-f(x')}>\ep
+			\abs{f(x)-f(x')} < \frac{\ep}{b-a}
 		\]
 		Thus, we let $P=\{a=x_0<\cdots<x_n = b\}$ be any partition with length
 		$l(P) = \underset{j=1,\cdots, n}{\max} (x_{j}-x_{j-1})<\delta$.  
@@ -508,21 +516,21 @@
 			f(x^*_j)=\inf\{f(x):x\in [x_{j-1},x_j]\} = m_j\\
 			%
 			x^{**}_j &\in [x_{j-1}, x_j] \ s.t. \ 
-			f(x^{**}_j)=\sup\{f(x):x\in [x_{j-1},x_j]\} = m_j\\
+			f(x^{**}_j)=\sup\{f(x):x\in [x_{j-1},x_j]\} = M_j
 		\end{align*}
 		Then 
 		\begin{align*}
-			L(f,P) &= \sum_{j=1}^n m_j (x_j-x_{j-1}) = \sum_{j=1}^n f(x_j^*)
-			(x_j-x_{j-1})\\
-			%
-			U(f,P) &= \sum_{j=1}^n f(x_j^{**})(x_j-x_{j-1})
+			L(f,P) = \sum_{j=1}^n f(x_j^*)
+			(x_j-x_{j-1})
+			\qquad \qquad 
+			U(f,P) = \sum_{j=1}^n f(x_j^{**})(x_j-x_{j-1})
 		\end{align*}
 		\begin{align*}
 			U(f,P)-L(f,P)
 			&= \sum_{j=1}^n (f(x^{**}_j)-f(x_j^*))(x_j-x_{j-1})\\
 			&=\sum_{j=1}^n \abs{f(x_j^{**})-f(x^*_j)}(x_j-x_{j-1})
 				<\sum_{j=1}^n \frac{\ep}{b-a}(x_j-x_{j-1}) \\
-			&=\frac{\ep}{b-a}=\ep
+			&=\frac{\ep}{b-a} \cdot (b-a) =\ep
 		\end{align*}
 		Hence, we have satisfied the Cauchy Criterion for integrability. 
 	\end{proof}
@@ -562,7 +570,15 @@
 
 
 
-
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+	\newpage
 	\subsection{Basic Properties of Integrals}
 	{\color{Brown}
 	\textbf{Example 1: }
@@ -635,11 +651,11 @@
 		\]
 		Then
 		\[
-			U(f,P)=L(f,P) \leq U(f,P_1) - L(f,P_1) +U(f,P_2) - L(f,P_2)
+			U(f,P)-L(f,P) \leq U(f,P_1) - L(f,P_1) +U(f,P_2) - L(f,P_2)
 			<\frac{\ep}2+\frac{\ep}2 = \ep
 		\]
-		hence, $f$ is integrable on $[a,b]$. \\\\
-
+		hence, $f$ is integrable on $[a,c]$. \\
+		
 		Let $P$ as above, be written $P = \{a = x_0 < \cdots < x_n = c\}$.
 		
 		Let $Q_1 = \{a=x_0<\cdots<x_m = b\}$, $Q_2 = \{b = x_m <\cdots<x_n=c\}$.
@@ -676,7 +692,7 @@
 	\newpage
 	\subsection{Riemann Sum - Jan 13 Mon, Jan 15 Wed}
 	\begin{definition}[\textbf{Riemann Sums}]
-		Let $f:[a,b]\to \mathbb{R}$, $P=\{a=x_0<\cdots=x_n=b\}$.
+		Let $f:[a,b]\to \mathbb{R}$, $P=\{a=x_0<\cdots<x_n=b\}$.
 
 		A \textbf{Riemann Sum} is any sum of the following form: 
 		\[
@@ -821,13 +837,13 @@
 	\begin{proof}
 		Let $\ep>0$, then find partitions of $[a,b]$. 
 		\begin{itemize}
-		\item $P_1$ s.t. for any refinement $P$ of $P_1$, and any Riemann Sum
-			$S(f,P)$
+		\item $P_1$ s.t. for any refinement $P_p$ of $P_1$, and any Riemann Sum
+			$S(f,P_p)$
 			\[
-				\abs{S(f,P) - \int_a^b f} < \frac{\ep}{2\abs{\alpha} + 1}
+				\abs{S(f,P_p) - \int_a^b f} < \frac{\ep}{2\abs{\alpha} + 1}
 			\]
-		\item $P_2$ s.t. for any refinement of $\mQ$ of $P_2$, 
-			and any Riemann Sum $S(g,P)$, 
+		\item $P_2$ s.t. for any refinement of $Q$ of $P_2$, 
+			and any Riemann Sum $S(g,Q)$, 
 			\[
 				\abs{S(g,Q) - \int_a^b g} < \frac{\ep}{2\abs{\beta}+1}
 			\]
@@ -839,16 +855,17 @@
 			S(\alpha f +\beta g, P) 
 			&= \sum_{j=1}^n (\alpha f(t_j)+\beta g(t_j)) (x_j-x_{j-1}) \\
 			&=\alpha\sum_{j=1}^n f(t_j)(x_j-x_{j-1}) + 
-			\beta \sum_{j=1}^n f(t_j) (x_j-x_{j-1}) +\beta\sum_{j=1}^n 
-			g(t_j)(x_j-x_{j-1})
+			\beta\sum_{j=1}^n g(t_j)(x_j-x_{j-1})\\
+			&= \alpha S(f,P) + \beta S(g,P)
 		\end{align*}
 		Then we have, 
 		\begin{align*}
-			\abs{S(\alpha f+\beta g, P)-[\alpha\int_a^b f+\beta\int_a^b g]}
-			&\leq \abs{\alpha} \abs{S(f,P) - \int_a^b f} + \abs{\beta} \\
-			\abs{S(g,P) - \int_a^b g}
-			&< \abs{\alpha} \frac{\ep}{2\abs{\alpha}=1} + \abs{\beta}+\frac{\ep}
-			{2\abs{\beta}+1}
+			\abs{S(\alpha f+\beta g, P)
+				-\left[\alpha\int_a^b f+\beta\int_a^b g\right]}
+			&\leq \abs{\alpha} \abs{S(f,P) - \int_a^b f} + \abs{\beta} 
+			\abs{S(g,P) - \int_a^b g}\\
+			&< \abs{\alpha} \frac{\ep}{2\abs{\alpha}+1} 
+			+ \abs{\beta}\cdot\frac{\ep}{2\abs{\beta}+1} < \ep
 		\end{align*}
 	\end{proof}
 
@@ -993,22 +1010,24 @@
 		\underline{$h>0$}, 
 		\[
 			\frac{F(x+h)-F(x)}h=\frac 1h \cdot \int_x^{x+h} f = 
-			\frac1h \cdot f(c_h) (x+h-x)=f(c_h) 
+			\frac1h \cdot f(c_h^*) (x+h-x)=f(c_h^*) 
 		\]
-		by M.V.T for I, where $c_h \in [x, x+h]$, 
+		by M.V.T for I, where $c_h^* \in [x, x+h]$, 
 
 		\underline{$h<0$}, 
 		\[
 			\frac{F(x+h)-F(x)}h = \frac{F(x)-F(x+h)}{-h}
 			= \frac1{-h} \cdot \int_{x+h}^x f
-			= \frac1{-h}\cdot  f(c_h)(x-x(x_h))
-			=f(c_h)
+			= \frac1{-h}\cdot  f(c_h^{**})(x-(x+h))
+			=f(c_h^{**})
 		\]
+		by M.V.T for I, where $c_h^{**} \in [x + h, x]$. 
+			
 		hence, 
 		\[
 			\lim_{h\to 0} \frac{F(x+h)-F(x)}h 
-			=\underbrace{\lim_{h\to 0} f(c_h)}_{continuity}	
-			=\underbrace{f(\lim_{h\to 0}c_h)}_{squeeze}= f(x)
+			=\underbrace{\lim_{h\to 0} f(c_h^*)}_{continuity}	
+			=\underbrace{\lim_{h\to 0} f(c_h^{**})}_{squeeze}= f(x)
 		\]
 		Thus, $F'(x)$ exists, and equals $f(x)$, for $x\in [a,b]$. \\
 		
@@ -1867,7 +1886,7 @@ requires
 \begin{definition}
 	let $a<b$ and $f:(a,b]\to \mR$
 	\begin{itemize}
-		\item $f$ is integrable on $[x,b]$ fro each $x\in (a,b]$. 
+		\item $f$ is integrable on $[x,b]$ for each $x\in (a,b]$. 
 	\end{itemize}
 	Then we define the \textbf{improper integral} by 
 	\[
@@ -2300,7 +2319,7 @@ sample points $t_j \in [x_{j-1}, x_j]$.
 	f_{ave} 
 	\approx& \frac{f(t_1)(x_1-x_{0}) + f(t_2)(x_2-x_1) + 
 	\cdots + f(t_n)(t_n-t_{n-1})}{(x_1-x_0)+(x_2-x_1)+\cdots+(x_n-x_{n-1})}\\
-	=& \frac{\sum_{j=1}^n f(t_j) (x_j-x_{j-1})}{b-a} 
+	=& \frac{\sum_{j=1}^n f(t_j) (x_j-x_{j-1})}{b-a}\\ 
 	=& \frac1{b-a} S(f,P)
 \end{align*}
 
@@ -2310,7 +2329,7 @@ $t_j \in [x_{j-1}, x_j], j = 1, \cdots, n$.
 
 $x$-center: $\bar x_s$, 
 \[
-	s_j = \{(x,y) \in S : x_{j-1} \leq x \leq x_j\}
+	S_j = \{(x,y) \in S : x_{j-1} \leq x \leq x_j\}
 \]
 \[
 	\bar x_S \approx \frac{\sum_{j=1}^n t_j area(S_j) }{\sum_{j=1}^n area(S_j)}
@@ -2397,48 +2416,48 @@ Circle, in polar coordinates, $r = a$. \\
 \end{itemize}
 
 \newpage
-
-\textbf{Example 3:}
-\begin{figure}[!htbp]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick,->] (-2,0)--(2,0) node[above] {$x$};
-	\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
-	\draw[domain=0:3*pi,scale=2.0,samples=500] 
-		plot ({deg(\x)}:{abs(sin(\x r))});
-	\end{tikzpicture}
-\end{figure}
-
-\textbf{Example 4: }
-\begin{figure}[!htbp]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
-	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
-	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
-		plot ({deg(\x)}:{abs(cos(2*\x r))});
-	\end{tikzpicture}
-\end{figure}
-
-%		\begin{figure}[htbp]
-%		\centering
-%		\begin{tikzpicture}
-%		\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
-%		\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
-%		\draw[domain=0:2*pi,scale=2.0,samples=500] 
-%			plot ({deg(\x)}:{cos(2*\x r)});
-%		\end{tikzpicture}
-%	\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-	\begin{tikzpicture}
-	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
-	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
-	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
-		plot ({deg(\x)}:{abs(sin(2*\x r))});
-	\end{tikzpicture}
-\end{figure}
+%
+%\textbf{Example 3:}
+%\begin{figure}[!htbp]
+%	\centering
+%	\begin{tikzpicture}
+%	\draw[thick,->] (-2,0)--(2,0) node[above] {$x$};
+%	\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
+%	\draw[domain=0:3*pi,scale=2.0,samples=500] 
+%		plot ({deg(\x)}:{abs(sin(\x r))});
+%	\end{tikzpicture}
+%\end{figure}
+%
+%\textbf{Example 4: }
+%\begin{figure}[!htbp]
+%	\centering
+%	\begin{tikzpicture}
+%	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+%	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
+%	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
+%		plot ({deg(\x)}:{abs(cos(2*\x r))});
+%	\end{tikzpicture}
+%\end{figure}
+%
+%%		\begin{figure}[htbp]
+%%		\centering
+%%		\begin{tikzpicture}
+%%		\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+%%		\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
+%%		\draw[domain=0:2*pi,scale=2.0,samples=500] 
+%%			plot ({deg(\x)}:{cos(2*\x r)});
+%%		\end{tikzpicture}
+%%	\end{figure}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\begin{tikzpicture}
+%	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+%	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
+%	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
+%		plot ({deg(\x)}:{abs(sin(2*\x r))});
+%	\end{tikzpicture}
+%\end{figure}
 
 %
 %		\begin{figure}[htbp]
@@ -2717,8 +2736,24 @@ assumption,
 \newpage
 	\subsection{Application of Antiderivatives: }
 
-	\textbf{}
 
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\section{DIFFERENTIAL EQUATIONS}
 	\subsection{Differential Equations}
 	1st order D.E., standard form: 
 	\[
@@ -2755,8 +2790,1200 @@ assumption,
 	As the object falls, it experiences wind resistance proportional to
 	velocity. 
 
+	
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+
+	\newpage
+	\subsection{DE - Feb 24}
+
+	\subsubsection{First Order Linear Equation}
+	\begin{definition}[\textbf{First Order Linear D.E.}]
+		\[
+			y' = p(x)y + q(x)  \qquad p, q \ \text{cts functions on some domain}
+		\]
+		\textbf{Facts:} Any I.V.P. with such a D.E. (i.e. $y(x_0) = y_0$)
+		always admits a unique solution, assuming that $p, q$ are continuous in
+		the neighborhood of $x_0$.	\\
+	\end{definition}
+	\begin{algorithm}
+	$ $
+	\begin{enumerate}
+	\item \textbf{Homogeneous Case: }
+	$y'=p(x)y$, i.e. $q(x) = 0$, 
+	\begin{align*}
+		\frac {y'}{y} =& p(x) \\
+		\Rightarrow \log\abs{y} =& P(x) + C, P(X) = \int p(x) dx\\
+		\Rightarrow y =& ke^{P(x)}, k = e^C > 0
+	\end{align*}
+	
+	\item \textbf{Non Homogeneous Case: }
+	Let $P(x) = \int p(x)dx$, as above,
+	$y' = p(x) y + \underbrace{q(x)}_{forcing \ term}$ 
+
+	\textbf{"Trick": }
+	\begin{align*}
+		(d^{-P(x)} y)' 
+		=& e^{-P(x)}y' + e^{-P(x)} \cdot (-p(x))\\
+		=& e^{-P(x)} (y' - p(x) y) = e^{-P(x)}q(x)\\
+		\Rightarrow
+		e^{-P(x)} y = &\int e^{-P(x)} q(x)dx \\
+		\Rightarrow y =& e^{P(x)} \int e^{-P(x)} q(x)dx
+	\end{align*}
+	Dont forget the integration constant. 
+
+	$e^{-P(x)} = e^{-\int p(x)dx}$ "integrating factor"	\\
+	\end{enumerate}
+	\end{algorithm}
+
+	
+	{\color{Brown}
+	\textbf{Example: }
+	Solve $xy' - ey = x^6$, $y' = \frac 3x y + x^5$ 
+	\begin{align*}
+		p(x) =& \frac 3x \tag{not defined at $x = 0$}\\
+		P(x) =& \int \frac 3x dx = 3\log \abs x 
+		=\log (\abs x ^3)     \qquad \tag{did not worry about C}\\
+	%
+		e^{-P(x)} =& \frac1{\abs x^3}\\
+		e^{P(x)} =& \abs x^3 \\
+		y =& \abs x^3 \int \frac{x^5}{\abs x^3}dx = 
+		\begin{cases}
+			x^3 [\frac 13 x^3 + C], & x>0\\
+			-x^3 [\int \frac{x^5}{-x^3} dx], & x < 0
+		\end{cases}
+		=
+		\begin{cases}
+			\frac 13 x^6 + Cx^3, & x>0\\
+			\frac 13 x^6 - Cx^3, & x<0
+		\end{cases}
+	\end{align*}
+	Note: equation does not allow $x =0$ in domain, we have for either $x>0$
+	or $x<0$. 
+	}
+	
+	\subsubsection{Second Order Linear Equation}
+
+	\begin{definition}[\textbf{Second Order Linear D.E.}]
+		\[
+			y'' + p(x)y' + q(x) y = r(x) 
+		\]
+		\textbf{Facts:} 
+		\begin{enumerate}
+		\item 
+		if $p,q,r$ are continuous on an open interval, then a 
+		"general solution" exist: $\varphi_1 y_1 + \varphi_2 y_2$, 
+		$y_1, y_2$ linearly independent, $\phi_1, \phi_2$ differentible 
+		functions, or constants
+		\item
+			I.V.P $y(x_0) = y_0$, $y'(x_0) = y_0 \Rightarrow$ solution unique.\\
+		\end{enumerate}
+	\end{definition}
+	
+	\begin{algorithm}[\textbf{Methods to Solve}]
+	$ $
+	\begin{enumerate}
+		\item \textbf{Homogeneous Case: }
+		\[
+			y'' + p(x)y' + q(x)y = 0
+		\]
+		\begin{itemize}
+			\item can be very difficult to compute solution unless $p, q,$ are
+				constant (A4)
+			\item general solution always exists: of form 
+				\[
+					c_1y_1 + c_2y_2
+				\]
+				$y_1, y_2$ linearly independent solutions $c_1, c_2$ constants. 
+			
+				In I.V.P. situation, use initial data to learn $c_1, c_2$.
+		\end{itemize}
+		
+	\item \textbf{Variation of Parameters - L. Euler:}
+		
+		\[
+			y'' + p(x)'y + q(x) y = r(x)  \qquad \heartsuit
+		\]
+
+		Idea: replace $c_1, c_2$ from homogeneous case, with functions. 
+
+		We assume: we have $\varphi_1, \varphi_2$ differentiable with continuous
+		$\varphi_1', \varphi_2'$, and we consider 
+		\[
+			y = \varphi_1' y_1 + \varphi_2' y_2 \qquad (f) 
+		\]
+		$y_1, y_2$ are linearly independent solutions to homogeneous case, and
+		\[
+			\varphi_1' y_1 + \phi_2'y_2 = 0  \qquad (*)
+		\]
+		Let's consider for $y$ in (f). 
+		\begin{align*}
+			y' 
+			=& (\varphi_1y_1+\varphi_2y_2) \\
+			=& \varphi_1' y_1 + \varphi_2' y_2 + \varphi_1 y_1' +
+			\varphi_2 y_2'\\
+			=& \varphi_1 y_1' + \varphi_2 y_2' \tag{by (*)} \\
+			then \qquad \qquad &\\
+			y'' + py' + qy =& \varphi_1'y_1' + \varphi_2'y_2' + \varphi_1y_1''
+			+\varphi_2 y_2'' + p(\varphi_1y_1' + \varphi_2 y_2') 
+			+ q(\varphi_1y_1 + \varphi_2y_2)\\
+			=& \varphi_1'y_1' + \varphi_2'y_2' + \varphi_1(y_1'' + py_1' + qy_1)
+			+ \varphi_2(y_2'' + py_2' + qy_2)\\
+			=& \varphi_1' y_1' + \varphi_2' y_2' \tag{**}
+		\end{align*}
+		If we wish to solve $\heartsuit$, then we have 
+		\[
+			\begin{cases}
+				\varphi_1' y_1' + \varphi_2' y_2' = r, \qquad
+				by \,\, \heartsuit \,\,  and \,\, **
+				\qquad 
+				\varphi_1' y_1 + \varphi_2' y_2 = 0 \qquad by \ assumption *
+			\end{cases}
+		\]
+		\[
+			\begin{bmatrix}
+				y_1 & y_2 \\
+				y_1' & y_2'
+			\end{bmatrix}
+			\begin{bmatrix}
+				\varphi_1'\\
+				\varphi_2'
+			\end{bmatrix}
+			=
+			\begin{bmatrix}
+				0\\
+				r
+			\end{bmatrix}
+			\Rightarrow 
+			\begin{matrix}
+				\varphi_1' \\
+				\varphi_0'
+			\end{matrix}
+			=\frac1{y_1y_0' - y_1'y_2} 
+			\begin{bmatrix}
+				y_2' & -y_2\\
+				-y_1' & y_1
+			\end{bmatrix}
+			\begin{bmatrix}
+				0\\
+				r
+			\end{bmatrix}
+		\]
+		\[
+			W = y_1y_2' - y_1'y_2    \qquad Wronskian
+			\qquad \Rightarrow 
+			\varphi'_1 = -\frac{y_2r}{W}
+			\quad \varphi'_2 = \frac{y_1r}{W}
+		\]
+		
+		\begin{align*}
+			\varphi_1(x) = -\int\frac{y_2(x)r(x)}{W(x)}dx\\
+			\varphi_2(x) = \int\frac{y_1(x)r(x)}{W(x)}dx 
+		\end{align*}
+		dont forget integraiton constant
+		General Solution: 
+		\[
+			y(x) = \varphi_1(x) y_1(x) + \varphi_2(x)y_2(x)
+		\]
+
+		
+	\end{enumerate}
+	\end{algorithm}
+
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Feb 26}
+\begin{theorem}[\textbf{Taylor's Theorem}]
+	Let $I \subseteq \mR$ be an open interval, $f:I\to \mR$, be $(n+1)$-times
+	differentiable, then for $a \in \mR$, we have 
+	\[
+		f(x) 
+		= \underbrace{f(a) + f'(a) (x-a) + \frac{f''(x)}2 (x-a)^2 + \cdots + 
+		\frac{f^{(n)}(a)}{n!} (x-a)^n}_{P_n(x)} 
+		+ \frac{f^{(n+1)}(c)}{(n+1)!} (x-a)^{(n+1)}
+	\]
+	for all $x \in I$, $c = c_x$ is between $a$ and $x$. 
+	\[
+		R_n(x) = \frac{f^{(n+1)}(c_x)}{(n+1)!} (x-a)^{n+1}
+	\]
+	Lagrange Remainder Theorem. 
+\end{theorem}
+\begin{proof}
+	Let $C \in \mR$ satisfy that $f(x) - P_n(x) = C(x-a)^{n+1}$, fix $x$, then
+	for $t$ between $a$ and $x$ 
+	\[
+		\varphi(t) = f(x) - [f(t) + f'(t) (x-t) + \cdots +
+		\frac{f^{(n)}(t)}{n!}(x-t)^n + C(x-t)^{n+1}]
+	\]
+	$\varphi(x) = 0 =\varphi(a)$. Rolle's Theorem $\Rightarrow \varphi'(c) = 0$
+	for some $c$ between $a$ and $x$. 
+
+	Calculate: 
+	\[
+		\varphi'(T) = - \frac{f^{(n+1)}(t)}{n!}(x-t)^n + (n+1)C(x-t)^n
+	\]
+	Solve to get $C = \dfrac{f^{(n+1)}(c_x)}{(n+1)!}$.\\
+\end{proof}
+
+\begin{theorem}[\textbf{Taylor's Theorem version 2}]
+	Let $I \subseteq \mR$ be an open interval, $f:I\to \mR$, be $(n+1)$-times
+	differentiable with $f^{(n+1)}$ continuous, then for $a \in I$, we have 
+	\[
+		f(x) = \underbrace{\sum_{k=0}^n \frac{f^{(k)}(a)}{k!} (x-a)^k}_{P_n(x)}
+		+ \underbrace{\int_a^x \frac{f^{(n+1)}(t)}{n!} (t-a)^n dt}
+		_{R_n(x), \text{Cauchy Form of Remainder for } x\in I }
+	\]
+\end{theorem}
+\begin{proof}
+	We have 
+	\begin{align*}
+		f(x) 
+		=& f(a) + \int_a^x f'(t) dt \tag{F.T. of C}\\
+		=& f(a) + \int_a^x f'(t)(x-t)^0 dt\\
+		=& f(a) - f'(t)(x-t)\bigg\vert_{a=t}^{x=t} + \int_a^x f''(t)(x-t)dt
+		\tag{Integration by Parts}\\
+		=& f(a) + f'(a)(x-a) + \int_a^x f''(t)(x-t)dt \tag{*}
+	\end{align*}
+	Inductive Step: 
+	\begin{align*}
+		\int_a^x f^{(m)}(t) (x-t)^{m-1}dt
+		=& -\frac 1m f^{(m)}(t) (x-t)^m \bigg\vert_{t=a}^{t=x}
+		+ \frac 1m \int_a^x f^{(m+1)}(t)(x-t)^m dt\\
+		=& \frac 1m f^{(m)}(a)(x-a)^m + \frac 1m \int_a^x f^{(m+1)}(t)(t-a)^mdt
+	\end{align*}
+
+	\begin{align*}
+		* 
+		=& f(a) + f'(a)(x-a) + \frac{f''(a)}2 (x-a)^2 + \frac 12 \int_a^x 
+		f^{(3)}(t) (x-t)^2 dt\\
+		=& f(a) + f'(a)(x-a) + \frac{f''(a)}2(x-a)^2 + \frac 12 [\frac 13 
+		f^{(3)}(a)(x-a)^3 + \frac 13 \int_a^x f^{(4)}(a)(x-t)^3 dt] \\
+		\vdots &\\
+		=& \sum_{k=0}^n \frac{f^{(k)}(a)}{k!} (x-a)^k + \frac 1{n!} \int_a^x
+		f^{(n+1)}(t)(x-t)^n dt\\
+	\end{align*}
+\end{proof}
+
+\textbf{Remark: } we assumed $f^{(n+1)}$ is continuous, the $M/AVT$ for
+integrals provides $c = c_x$ between $a$ and $x$ s.t. 
+\[
+	\frac1{n!} \int_a^x f^{(n+1)}(t)(x-t)^n dt = \frac{f^{(n+1)}(c)}{n!}
+	(x-c)^n (x-a) 
+\]
+above is the second version of Cauchy form of $R_n(x)$.
+
+\textbf{Compare:} lagrange form
+\[
+	\frac{f^{(n+1)}(c_x)}{(n+1)!} (x-a)^{n+1} = R_n(x) 
+	= \frac{f^{(n+1)}(c_x^*)}{n!} (x-c_x^*)^n(x-a) 
+\]
+$c_x \neq c_x^*$ in general. \\
+
+\begin{proposition}
+Given $f:I\to \mR$, $a$ as above, $P_n(x) = \sum_{k=0}^n
+\frac{f^{(k)}(a)}{k!} (x-a)^k$, we have that 
+\begin{itemize}
+	\item $P_n$ is the unique polynomial with $\deg P_n \leq n$ s.t. 
+		\[
+			\lim_{x\to a} \frac{f(x) - P_n(x)}{(x-a)^n} = 0
+		\]
+\end{itemize}
+\end{proposition}
+\begin{proof}
+	Suppose $Q$ is polynomial, $\deg Q \leq n$ with 
+	\[
+		\lim_{x\to a} \frac{f(x)-Q(x)}{(x-a)^n} = 0
+	\]
+	Then, 
+	\[
+		Q(x) + [f(x) - Q(x)] = f(x) = P_n(x) + R_n(x) 
+		\Rightarrow Q(x) - P_n(x) = R_n(x) - [f(x) - Q(x)]
+	\]
+	\begin{align*}
+		x\neq a \qquad 
+		\frac{Q(x) - P_n(x)}{(x-a)^n} 
+		=& \frac{R_n(x)}{(x-a)^n} -\frac{f(x)-Q(x)}{(x-a)^n} \\
+		=& \frac{\frac{f^{(n+1)}(c_x)}{n!} (x-c_x)^n (x-a)}{(x-a)^n} 
+		-\frac{f(x)- Q(x)}{(x-a)^n}\\
+		=& \bigg[ \frac{f^{(n+1)}(c_x)}{n!} \cdot \frac{(x-c_x)^n}{(x-a)^n}
+		(x-a)\bigg]\\
+		=& 0 
+	\end{align*}
+	and $\deg(Q- P_n)\leq n$, little effort $\Rightarrow Q= P_n$.
+\end{proof}
+
+{\color{Brown}
+\textbf{Example: }
+\[
+	e^x = \sum_{k=0}^n \frac1{k!} x^k + \frac{e^c}{(n+1)!} x^{n+1}
+\]
+$f(x) = e^x$, $f'(x) = e^x$ centered at $a = 0$. 
+
+Wish to examine $e^{-x^2}$. 
+\begin{align*}
+	e^{-x^2} 
+	=& \sum_{k=0}^n \frac1{k!} (-x^2)^k + \frac{e^c}{(n+1)!} (-x^2)^{n+1}\\
+	=& \underbrace{\sum_{k=0}^n \frac{(-1)^k}{k!} x^{2k} }_{degree \ 2n}
+	+ \frac{e^c\cdot (-1)^{n+1}}{(n+1)!}x^{2n+2} \\
+\end{align*}
+\textbf{Conclusion:}
+\begin{align*}
+	\frac{e^{-x^2} - \sum_{k=0}^N \frac{(-1)^k}{k!}x^{2k}}{x^{2n+1}}
+	=& \frac{\frac{(-1)^{n+1}e^{c^k}}{(n+1)!}x^{2n+2}}{x^{2n+1}} \\
+	\lim_{x \to 0}  \frac{\frac{(-1)^{n+1}e^{c^k}}{(n+1)!}x^{2n+2}}{x^{2n+1}} 
+	=& 0\\
+\end{align*}
+We know that $P_{2n}(x) = \sum_{k=0}^n \frac{(-1)^n}{k!}x^{2k}$, for 
+$f(t)=e^{-t^2}$  around $a = 0$. 
+
+We can learn $f^{(k)}(0)$ just from polynomial, for $k = 0, \cdots, n$.
+}
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Error Estimation - Feb 28} 
+
+{\color{Brown}
+\textbf{Example: } Integral Functions: 
+\[
+	E(x) = \int_0^x e^{-t^2}dt 
+\]
+Wish to estimate $E(1)$ with a polynomial in $1$. 
+
+Wish to estimate $E(x)$ with a polynomial in $x$, $x \in [0, 1)$. 
+
+$a = 0$, 
+\[
+	e^x = \sum_{k=0}^n \frac{x^k}{k!} + \frac{e^c}{(n+1)!} x^{n+1}
+\]
+
+\[
+	e^{-t^2} = \sum_{k=0}^n \frac{(-1)^k t^{2k}}{k!} + \frac{(-1)^{n+1}e^c}{(n+1)!}
+	t^{2n+2}
+\]
+\begin{align*}
+	E(x) 
+	=& \int_0^x e^{-t^2}dt = \sum_{k=0}^n \frac{(-1)^k}{k!} \int_0^x t^{2k}dt
+	+ \frac{(-1)^{n+1}}{(n+1)!}\int_0^x e^ct^{2n+2} dt	\\\\
+	%
+	\Rightarrow \qquad \qquad 
+	&\abs{E(x) - \sum_{k=0}^n \frac{(-1)^k \cdot x^{2k+1}}{k! \cdot (2k+1)}}\\
+	%
+	=& \abs{\frac{(-1)^{n+1}}{(n+1)!}\int_0^x e^ct^{2n+2} dt}	\\
+	%
+	\leq & \frac 1{(n+1)!} \int_0^x \abs{e^ct^{2n+2}} dt\\
+	%
+	\leq & \frac1{(n+1)!} \int_0^x t^{2n+2} dt, \quad 0 \leq e^c \leq 1,
+	\quad c \in [-1, 0]\\
+	%
+	=& \frac{x^{2n+3}}{(2n+3)(n+1)!} \leq \frac	1{(2n+3)(n+1)!}, 
+	\text{as} \ x \in [0, 1]
+\end{align*}
+\textbf{"Uniform Estimate":} Estimate holds for any $x \in [0, 1]$. 
+}
+
+\textbf{Rate of Decay of Estimate:}
+
+Ratio of Estimates: 
+\[
+	\frac{\frac1{(2(n+1)+3)((n+1)+1)!}}{\frac1{(2n+3)(n+1)!}}
+	 = \frac{(2n+3)}{(2n+5)(n+2)} 
+\]
+Better than exponential decay. 
+
+$e_n$ error in $n$ $e_n \sim r^n$ $(0 < r < 1)$, $\frac{e_{n+1}}{e_n} = r$
+(fixed) 
+
+
+
+%---------------------------------------S--------------------------------------
+%---------------------------------------E--------------------------------------
+%---------------------------------------C--------------------------------------
+%---------------------------------------T--------------------------------------
+%---------------------------------------I--------------------------------------
+%---------------------------------------O--------------------------------------
+%---------------------------------------N--------------------------------------
+%------------------------------------------------------------------------------
+%---------------------------------------B--------------------------------------
+%---------------------------------------R--------------------------------------
+%---------------------------------------E--------------------------------------
+%---------------------------------------A--------------------------------------
+%---------------------------------------K--------------------------------------
+\newpage
+\section{SERIES }
+\subsection{Introduction to Series - Feb 28}
+\begin{definition}
+	Let $(a_k)_{k=1}^{\infty} \subset \mR$ be a sequence. We define the series
+	\[
+		\sum_{k=1}^{\infty} a_k := \lim_{n\to\infty} \sum_{k=0}^n a_k
+	\]
+	provided the limit exists. 
+
+	\textbf{Series = Improper Sum}. 
+\end{definition}
+
+\textbf{Terminology:} We say $\sum_{k=1}^{\infty} a_k$ converges provide
+$(\sum_{k=1}^n a_k)_{n=1}^{\infty}$ converges.\\
+
+{\color{Brown}
+\textbf{Essential Example: Geometric series}
+
+Let $a \in \mR$, when does $\sum_{k=0}^{\infty} a^k$ converges? 
+
+Let $S_n = \sum_{k=0}^n a^k = 1 + a + a^2 + \ldots + a^n$, 
+
+$S_n(1-a) = 1+ + \ldots + a^n - [a+a^2 + \ldots + a^n + a^{n+1}] 
+= 1-a^{n+1}$, 
+\[
+	S_n = 
+	\begin{cases}
+		\frac{1-a^{n+1}}{1-a}, & if \ a\neq 1\\
+		n+1, & if \ a = 1\\
+	\end{cases}
+\]
+\textbf{Fact:} 
+\[
+	\lim_{n\to\infty} a^{n+1} 
+	= 
+	\begin{cases}
+	0, & \abs{a}<1\\
+	D.N.E., & \abs{a} \geq 1, a \neq 1\\
+	1, & a = 1
+	\end{cases}
+\]
+Hence, $\sum_{k=0}^{\infty} a^k = \frac1{1-a}$ if $\abs a < 1$. \\
+
+\textbf{Example: } (Sometimes we get lucky)
+
+Consider $\sum_{k=1}^{\infty} \frac1{k(k+1)}$, 
+\[
+	S_n = \sum_{k=1}^n \frac1{k(k+1)} = \sum_{k=1}^n [\frac 1j - \frac1{k+1}]
+	= 1 - \frac 12 + \frac 12 - \ldots + \frac 1n - \frac1{n+1}
+\]
+
+\[
+	\sum_{k=1}^{\infty} \frac1{k(k+1)} 
+	=\lim_{n\to\infty} \sum_{k=1}^n \frac1{k(k+1)} 
+	= \lim_{n\to\infty} [1-\frac1{n+1}] = 1
+\]
+Series converges to 1. 
+
+}
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Series Convergence Test I - March 2}
+
+\textbf{Recall: }
+\[
+	\sum_{k=1}^{\infty} a_k := \lim_{n\to\infty} \sum_{k=1}^n a_k
+	\quad \text{if limit eixsts. }
+\]
+
+\textbf{Fundmanetal Question of Series: Given $\sum_{k=1}^{\infty} a_k$, does 
+it converge? }
+
+\textbf{Tests For Convergence: }
+
+\begin{proposition}[\textbf{Test \#1: nth term test - weakest necessity result}]
+	\[
+		\sum_{k=1}^{\infty} a_j \quad \text{converges}
+		\Rightarrow \lim_{k\to\infty} a_k=0
+	\]
+\end{proposition}
+\begin{proof}
+	Let $S_n = \sum_{k=1}^N a_k$. Then $a_n = S_n - S_{n-1}$. We assume 
+	$\sum_{k=1}^{\infty} a_k= \lim_{n\to\infty} S_n$ exists. 
+
+	Hence $\lim_{n\to\infty} S_{n-1} = \lim_{n\to\infty} S_n$ exists. Hence by
+	taking differences of limits of sequences, we get
+	\[
+		 0 = \lim_{n\to\infty} S_n - \lim_{n\to\infty} S_{n-1}
+		 = \lim_{n\to\infty} [S_n - S_{n-1}]
+		 = \lim_{n\to\infty} a_n
+	\]
+\end{proof}
+
+{\color{Brown}
+\textbf{Example:} $\abs a \geq 1\Rightarrow \sum_{k=0}^{\infty} a^k$ D.N.E. 
+Indeed, $\lim_{k\to\infty} a^k \neq 0$. (or does not exist). }\\
+
+\begin{theorem}[\textbf{Cauchy Criterion for Series Convergence}]
+	$\sum_{k=1}^{\infty} a_k \quad \text{converges} \Leftrightarrow$
+	given $\ep>0$, there is a $n_{\ep}$ in $\mN$ s.t.
+	$\abs{\sum_{k=m}^n a_k} < \ep$. whenever $n > m \geq n_{\ep}$. da
+\end{theorem}
+\begin{proof}
+	let $S_n = \sum_{k=1}^n a_k$. then 
+	$\sum_{k=1}^{\infty} a_k$ converges $\Leftrightarrow \lim_{n\to\infty} S_n$
+	exists, $\Leftrightarrow$ given $\ep>0$, there is $n_{\ep}$ in $\mN$ so 
+	$\abs{S_n - S_{m-1}} < \ep$ whenever $n > ,m \geq n_{\ep}$. 
+
+	Note that $S_n-S_{m-1} = \sum_{k=1}^n a_k - \sum_{k=1}^{n-1} a_k = 
+	\sum_{k=m}^n a_k$. \\
+\end{proof}
+
+\textbf{Example: }For $\ep = \frac 12 $, then Cauchy Criterion fails for 
+$\sum_{k=1}^{\infty} \frac 1k$. \\
+
+\begin{proposition}[\textbf{Linearity of Converging series}]
+	Suppose $\sum_{k=1}^{\infty} a_k$ and $\sum_{k=1}^{\infty} b_k$ converges,
+	then for $\alpha, \beta \in \mR$, 
+	\[
+		\sum_{k=1}^{\infty} (\alpha a_1 + \beta b_k) \quad \text{converges}
+	\]
+	with 
+	\[
+		\sum_{k=1}^{\infty}(\alpha a_K +\beta b_k)
+		= \alpha \sum_{k=1}^{\infty} a_k + \beta \sum_{k=1}^{\infty} b_k
+	\]
+\end{proposition}
+\begin{proof}
+	We use linearity of sums and of limits(when they exist). 
+	\begin{align*}
+		\sum_{k=1}^{\infty} (\alpha a_k + \beta b_k) 
+		=& \lim_{n\to\infty} \sum_{k=1}^n (\alpha a_k + \beta b_k)\\
+		=& \lim_{n\to\infty} (\alpha \sum_{k=1}^n a_k
+		+ \beta \sum_{k=1}^n b_k)\\
+		=& \alpha \lim_{n\to\infty} \sum_{k=1}^n a_k
+		+ \beta \lim_{n\to\infty} \sum_{k=1}^n b_k \tag{some limit exist}\\
+		=& \alpha \sum_{k=1}^{\infty} a_k + \beta \sum_{k=1}^{\infty} b_k\\
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[\textbf{Comparison Test}]
+	Suppose $0\leq a_k \leq b_k$, $k \geq \mN$, for some $N\in \mN$, 
+	then 
+	\begin{enumerate}
+		\item If $\sum_{k=1}^{\infty} b_k$ converges $\Rightarrow 
+			\sum_{k=1}^{\infty} a_k$ converges. 
+		\item If $\sum_{k=1}^{\infty} a_k$ diverges $\Rightarrow 
+			\sum_{k=1}^{\infty} b_k$ diverges.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	1. Assume $\sum_{k=1}^{\infty} b_k$ converges, then for $n\geq N$, 
+	\begin{align*}
+		\sum_{k=1}^n a_k 
+		=& \sum_{k=1}^{N-1} a_k + \sum_{k=N}^n a_k		\\
+		\leq& \sum_{k=1}^n a_k + \sum_{k=N}^{\infty} b_k	\\
+		\leq& \sum_{k=1}^n a_k +\underbrace{\lim_{n\to\infty} \sum_{k=1}^n b_k}
+		_{nondecreasing \ in\ n} \\
+		\leq& \underbrace{\sum_{k=1}^{N+1} a_k}_{finite}
+		+ \underbrace{\sum_{k=1}^{\infty} b_k }_{<\infty}
+		\tag{added in $\sum_{k=1}^{\infty} b_k \geq 0$} 
+	\end{align*}
+
+	Also $S_{n+1} - S_n = \sum_{k=1}^{n+1} a_k - \sum_{k=1}^n a_k = a_n \geq 0$.
+	$\Rightarrow (S_n)_{n=1}^{\infty}$ is non-decreasing. 
+
+	By monotone convergence theorem $\Rightarrow \sum_{k=1}^{\infty} a_n =
+	\lim_{n\to\infty} S_n$ exists. 
+
+	2. Assume $\sum_{k=1}^{\infty}a_k$ diverges, since 
+	$S_n = \sum_{k=1}^{\infty} a_k$ is non-decreasing, we must have that 
+	$\sum_{k=1}^{\infty} a_k = \infty$. Now for $n\geq N$, we have
+	\begin{align*}
+		\sum_{k=1}^n b_k 
+		=& \sum_{k=1}^{N-1}b_k + \sum_{k=N}^n b_k	\\
+		\geq& \sum_{k=1}^{N-1} b_k + \sum_{k=N}^n a_k	\\
+		=& \underbrace{\sum_{k=1}^{N-1} b_k}_{independent\ of\ n}
+		- \underbrace{\sum_{k=1}^{N-1}a_k}_{S_n} + \sum_{k=1}^n a_k 
+	\end{align*}
+	$\lim_{n\to\infty} \to \infty \Rightarrow \sum_{k=1}^{\infty}b_k = \infty$.
+\end{proof}
+
+{\color{Brown}
+	\textbf{Example: }
+	\[
+		\sum_{k=2}^{\infty} \frac 1{(\log k)^k} 
+	\]
+	\[
+		\log k \geq 2 \Leftrightarrow k \geq e^2, i.e. k = \lfloor e^2 \rfloor+1
+	\]
+	\[
+		\frac1{\log k}^k \leq \frac1{2^k}
+	\]
+	By geometric series of $\frac 12$, the series converges. 
+
+}
+
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Series Convergence Test II - March 4}
+
+
+\textbf{Remark:}
+Let $a_k \geq 0$, and $S_n = \sum_{k=1}^n a_k$ 
+\[
+	S_{n+1} - S_n = a_n \geq 0 \Rightarrow (S_n)_{n=1}^{\infty} is 
+	monotone increasing
+\]
+
+$\sum_{k=1}^{\infty} S_n$ converges $\Leftrightarrow S_n$ is bounded. 
+
+\begin{corollary}[\textbf{Limit Comparison Test}]
+	If $a_k \geq 0$ and $b_k > 0$, and $0 \leq \lim_{k\to \infty} 
+	\frac{a_k}{b_k} = L$ exists, then, 
+	\begin{enumerate}
+		\item If $L > 0$, $\sum_{k=1}^{\infty} b_k$ converges $\Leftrightarrow
+			\sum_{k=1}^{\infty} a_k$ converges. 
+		\item If $L = 0$, $\sum_{k=1}^{\infty} b_k$ converges $\Rightarrow
+			\sum_{k=1}^{\infty} a_k$ converges. 
+		\item If $L = 0$, $\sum_{k=1}^{\infty} a_k$ diverges $\Rightarrow
+			\sum_{k=1}^{\infty} b_k$ diverges. (Contrapositive of ii). 
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	1) We suppose $L > 0$, thus there is $N \in \mN$ such that
+	\begin{alignat*}{3}
+		& & 
+		\abs{\frac{a_k}{b_k} - L } <& \frac L2 \qquad \text{if} \quad k \geq N\\
+		\Leftrightarrow & \qquad &
+		-\frac L2 <& \frac{a_k}{b_k} - L < \frac L2 
+		\qquad&  \text{if} &\quad k \geq N\\
+		\Leftrightarrow & \qquad & 
+		\frac L2 <& \frac{a_k}{b_k} < \frac{3L}2
+		\qquad&  \text{if}& \quad k \geq N\\
+		\Leftrightarrow & \qquad & 
+		\frac{L}2 b_k <& a_k < -\frac{3L}2 b_k 
+		\qquad& \text{if} & \quad k \geq N 
+	\end{alignat*}
+	We have $\sum_{k=1}^{\infty} b_k$  converges
+	$\Leftrightarrow \sum_{k=1}^{\infty} \frac L2b_k$ converges, and 
+	$\sum_{k=1}^{\infty} \frac{3L}2 b_k$ converges.  
+	
+	We apply comparison test, twice. \\
+\end{proof}
+
+{\color{Brown}
+\textbf{Example: }
+Let us consider $\sum_{k=1}^{\infty} \frac1{k^p}$, $p \geq 2$, recall that
+$\sum_{k=1}^{\infty} \frac1{k(k+1)}$ converges (*). 
+\[
+	\frac{\frac 1{k^p}}{\frac{1}{k(k+1)}} 
+	=\frac{k^2+k}{k^p} 
+	=\frac{1+\frac 1k}{k^{p-2}} \overset{k\to\infty}{\rightarrow}
+	\begin{cases}
+		1,	& p = 2	\\
+		0,	& p > 2
+	\end{cases}
+\]
+}
+\textbf{Remark: }The limit comparison test is typically easier to compute than
+comparison test, and hence useful (you should remember this)\\
+
+
+\begin{corollary}[\textbf{Ratio Comparison Test}]
+	If $a_k > 0$ and $b_k > 0$, and 
+	\begin{itemize}
+		\item $\frac{a_{k+1}}{a_k} \leq \frac{b_{k+1}}{b_k}$ for 
+			$k \geq N$, $N \in \mN$. 
+	\end{itemize}
+	Then $\sum_{k=1}^{\infty}b_k$ converges $\Rightarrow \sum_{k=1}^{\infty}
+	a_k$ converges. 
+\end{corollary}
+\textbf{Remark:} This is more difficult in practice than either comparison
+test or limit comparison test, we will see that it has strong theoretical value.
+\begin{proof}
+	For $k \geq N$, 
+	\begin{alignat*}{2}
+		& & \frac{a_{k+1}}{a_k} \leq& \frac{b_{k+1}}{b_k}		\\
+		\Rightarrow & \qquad & \frac{a_{k+1}}{b_{k+1}} \leq&\frac{a_k}{b_k}	\\
+		\Rightarrow & \qquad & \frac{a_k}{b_k} \leq &\frac{a_N}{b_N} = M
+		\qquad for \ k \geq N	\\
+		\Rightarrow & \qquad & a_k \geq& Mb_k, \quad for\ k \geq N
+	\end{alignat*}
+	Then $\sum_{k=1}^{\infty} b_k$ converges 
+	$\Rightarrow \sum_{k=1}^{\infty} Mb_k$ converges $\Rightarrow$ 
+	comparison test $\sum_{k=1}^{\infty} a_k$ converges.	\\
+\end{proof}
+
+\textbf{Main Application of Ratio Comparison Test: }
+\begin{theorem}[\textbf{Ratio test}]
+	Suppose $a_k > 0$ and that 
+	\[
+		\lim_{k\to\infty} a_k = r \qquad \text{exists}
+	\]
+	Then $r \geq 0$, and 
+	\begin{enumerate}
+		\item If $r < 1 \Rightarrow \sum_{k=1}^{\infty} a_k$ converges,
+		\item If $r > 1 \Rightarrow \sum_{k=1}^{\infty} a_k$ diverges.  
+	\end{enumerate}
+	\textbf{Remark:}
+	\begin{itemize}
+		\item test is easy to use, as no reference series are required
+		\item \textcolor{Orchid}{case $r=1$ is ambiguous
+			e.g. $\sum_{k=1}^{\infty} \frac1{k}$ diverges and 
+		$\sum_{k=1}^{\infty} \frac1{k(k+1)}$ converges.} 
+	\end{itemize}
+\end{theorem}
+
+\begin{proof}
+	$ $
+	\begin{enumerate}
+	\item
+	Say $r < 1$, pick any $s$ so $r < s < 1$, then there is N in $\mN$, so
+	for $k \geq N$, 
+	\[
+		\frac{a_{k+1}}{a_k} < r-(r-s) = s = \frac{s^{k+1}}{s^k} 
+	\]
+	We have that $\sum_{k=1}^{\infty} s_k$ converges ($0 < s < 1$), and hence
+	by R.L.T. $\sum_{k=1}^{\infty} a_k$ converges too. 
+
+	\item
+	Say $r > 1$, pick any $s$ so $1 < s < r$, then there is N in $\mN$, so
+	for all $k \geq N$, 
+	\[
+		\frac{a_{k+1}}{a_k} > r-(r-s) = s = \frac{s^{k+1}}{s^k} 
+	\]
+	However $\sum_{k=1}^{\infty} s_k$ diverges, If we have that 
+	$\sum_{k=1}^{\infty} a_k$ converges, then R.L.T. would imply 
+	$\sum_{k=1}^{\infty} S^k$ converges, contradiction.  
+	\end{enumerate}
+\end{proof}
+
+{\color{Brown}
+	\textbf{Example: }
+	Consider $\sum_{k=0}^{\infty} \frac{(1000)^k}{\sqrt{k!}}$
+
+	\textbf{Ratio Test: }
+
+
+}
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\subsection{Series Convergence Test III - March 6}
+
+\begin{theorem}[\textbf{Integral Test}]
+	Let $a_k > 0$, $k \in \mN$, suppose there is a function $f:[1,\infty) \to
+	\mR$ s.t. 
+	\begin{itemize}
+		\item $f(k) = a_k$ for $k \in \mN$, and
+		\item $f$ is non-increasing
+	\end{itemize}
+	then 
+	\[
+		\sum_{k=1}^{\infty} a_k \quad \text{converges} \Leftrightarrow
+		\int_1^{infty} f(t)dt \quad \text{converges}
+	\]
+	\textbf{Remark:} $f$ nonincreasing $\Rightarrow$ $f$ is integrable on 
+	each $[1,x]$, $x \geq 1$, $A_1$ 
+\end{theorem}
+\begin{proof}
+	$f$ non-increasing, if $t \in [1,\infty]$, find $k \in \mN$, so $t\leq k$,
+	then $f(t) \geq f(k) = a_k > 0$, hence, $f(t) > 0$ for $t \in [1,\infty)$.
+
+	If $t\in [k,k+1]$, then 
+	\[
+		a_k = f(k) \geq f(t) \geq f(k+1) = a_{k+1}
+	\]
+	and hence, 
+	\[
+		a_k \geq \int_k^{k+1}f(t)dt \geq a_{k+1} \qquad \text{since}\quad 
+		k+1-k=1
+	\]
+	\begin{align*}
+		\sum_{k=1}^{n+1}a_k \geq \int_1^{n+1} f(t)dt 
+		= \sum_{k=1}^n \int_k^{k+1}f(t)dt
+		\geq \sum_{k=1}^n a_{k+1} = \sum_{k=2}^{n+1}a_k	\tag{*}\\
+	\end{align*}
+	If $\sum_{k=1}^{\infty} a_k = \lim_{n\to\infty} \sum_{k=1}^{n+1} a_k$
+	converges, then, for $x > 1$, 
+	\[
+		0 \leq \int_1^x f(t)dt \leq \int_0^{\ceil{x}} f(t)dt
+		\leq \sum_{k=1}^{\ceil{x}}a_k \overset{x\to\infty}{\longrightarrow}
+		\sum_{k=1}^{\infty} a_k < \infty
+	\]
+	hence $F(x) = \int_1^x f(t)dt$ is increasing, as $F'(x) = f(x) > 0$, and
+	$F$ is bounded. 
+
+	Thus $\int_1^{\infty}f(t)dt = \lim_{x\to \infty} F(x)$ converges. 
+
+	Conversely, if $\int_1^{\infty}f(t)dt$ converges, Then for $n \in \mN$,
+	\[
+		0\leq \sum_{k=1}^{n+1} a_k = a_1 + \sum_{k=2}^{n+1}a_k 
+		\leq a_1 + \int_1^{n+1} f(t)dt
+		 \overset{x\to\infty}{\longrightarrow}
+		 a_1 + \int_1^{\infty} f(t)dt
+	\]
+	and thus $S_{n+1} = \sum_{k=1}^{n+1}a_k$ is a bounded and non-decreasing 
+	sequence, hence, $\sum_{k=1}^{\infty} a_k = \lim_{n\to\infty} S_{n+1}$
+	converges. \\
+\end{proof}
+
+\textbf{Remark:} Variant: we may mildly weaken assumptions on $f$, above,
+If there is $M > 1$, so $f:[M,\infty] \to \mR$ is nondecreasing, 
+\begin{itemize}
+	\item $f(k) = a_k$, for $k \in \mN$, $k \geq M$, 
+\end{itemize}
+then $\sum_{k=1}^{\infty} a_k$ converges $\Leftrightarrow$ $\int_1^{\infty} 
+f(t)dt$ converges. [exercise]
+
+
+
+\begin{corollary}
+	If $p > 0$, $\sum_{k=1}^{\infty} \frac1{k^p}$ converges $\Leftrightarrow$
+	$p > 1$.
+\end{corollary}
+\begin{proof}
+	$f(t) = \frac1{t^p}$ which is decreasing on $[1,\infty)$.
+	
+	$f(t) = \frac1{k^p}$, Integral Test: $\sum_{k=1}^{\infty} \frac1{k^p}$
+	converges $\Leftrightarrow$ $\int_1^{\infty} \frac{dt}{t^p}$ converges. 
+
+	\[
+		\int_1^x \frac{dt}{t^p} = \int_1^x t^{-p}dt
+		= 
+		\begin{cases}
+			\frac 1{1-p} (x^{1-p}-1), & p \neq 1	\\
+			\log x, & p = 1
+		\end{cases}
+		\qquad \overset{x\to\infty}{\longrightarrow} \qquad 
+		\begin{cases}
+			 \infty, & p\leq 1	\\
+			 \frac1{p-1}, & p>1	\\
+		\end{cases}
+	\]
+\end{proof}
+{\color{Orchid}
+\textbf{Remark:}Indecisive part of ratio test: 
+\[
+	\frac{\frac{1}{(k+1)^p}}{\frac 1{k^p}}
+	=\frac{k^p}{(1+k)^p} = \frac1{(\frac 1k+1)^p}  
+	\overset{k\to\infty}{\longrightarrow} 1
+\]
+}
+
+{\color{Brown}
+	\textbf{Example 1:}
+	$\sum_{k=1}^{\infty} \frac{k^3+1}{k^5+3k^3+1}$ converges? 
+	Use limit comparison test with $\sum_{k=1}^{\infty} \frac1{k^2}$.
+	* ratio test fails. 
+	
+	\textbf{Example 2:}
+	Does $\sum_{k=1}^{\infty} ke^{-k^2}$ converge? 
+	\begin{enumerate}
+		\item integral test
+			\[
+				\int_1^{\infty} te^{-t^2} = \frac 1{2e} \Rightarrow
+				\sum_{k=1}^{\infty} ke^{-k^2} \quad \text{converges}
+			\]
+		\item ratio test
+			\[
+				\frac{(k+1)e^{-(k+1)^2}}{ke^{-k^2}} 
+				= \frac{k+1}k e^{-2k-1} \overset{k\to\infty}{\longrightarrow}0
+				\Rightarrow \quad \text{series converges} 
+			\]
+		\item limit comparison test
+			\[
+				\sum_{k=1}^{\infty} e^{-k} \text{converges by geometric series}
+			\]
+			Know that 
+	\end{enumerate}
+}
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Series Convergence Test IV - March 9}
+{\color{Brown}
+\textbf{Example:} Euler's Constant
+
+$\gamma = \lim_{n\to\infty} [\sum_{k=1}^n \frac 1k - \log n]$ exists.
+
+\textit{Recall:} \\
+$\floor{x} = \max \{k \in \mZ : k \leq x\}$	\\
+$\floor(t) \leq t \leq \floor{t} + 1; t \geq 1$\\
+$\frac 1{\floor{t}} \geq \frac 1t \geq \frac 1{\floor{t} + 1}$	\\
+$\Rightarrow \qquad \frac 1{\floor{t}} - \frac 1t = 0$
+
+Consider 
+\begin{align*}
+	A_n 
+	=& \int_1^n (\frac1{\floor t - \frac 1t} dt)	\\
+	=& \int_1^n \frac1{\floor t} dt	\\
+	=& \sum_{k=1}^{n-1} \int_k^{k+1} \frac1{\floor t}dt - \log n	\\
+	=& \sum{k=1}^{n-1} \frac 1k - \log n	\\\\
+\end{align*}
+$(A_n = \sum_{k=1}^{n-1} \frac 1k - \log n = 
+[\sum_{k=1}^n \frac 1k - \log n] - \frac 1n 
+\overset{n\to\infty}{\longrightarrow} \lim_{n\to\infty} 
+[\sum_{n=1}^{\infty} \frac 1k - \log n])$
+
+When $a_k > 0$, $\lim_{n\to\infty} \frac{a_{k+1}}{a_k} = 1$. 
+(Indeterminate Case of Ratio Test)	\\
+}
+
+\begin{proposition}[\textbf{Raabe's Test}]
+	Suppose $\lim_{n\to\infty} k (1-\frac{a_{k+1}}{a_k}) = p \in \mR$,
+	then 
+	\begin{enumerate}
+		\item If $p > 1 \Rightarrow \sum_{k=1}^{\infty} a_k$ converges
+		\item If $p < 1 \Rightarrow \sum_{k=1}^{\infty} a_k$ diverges
+		\item If $p = 1$ and $\abs{k(1-\frac{a_{k+1}}{a_k})-1}\leq \frac mk$ 
+			for some $M>0$, then $\sum_{k=1}^{\infty} a_k$ converges
+	\end{enumerate}
+	\textit{Remark:} the case $p = \infty$ also gives convergence, the proof is
+	similar to $p > 1$ case. 
+\end{proposition}
+\begin{proof}
+	$ $
+\begin{enumerate}
+\item 
+	Let $q>0 \in \mR$, 
+	\[
+		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} = 1-\frac 1k + \frac{B_k}{k^2}
+	\]
+	where $0 \leq B_k \leq (q+1)1$ (i.e. is bounded).
+
+	Indeed, 
+	\[
+		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} = 
+		\frac{(k+1)^q}{k^q}
+		= \frac1{(1+\frac1k)^q}
+		= (1+\frac 1k)^{-q}
+	\]
+	Let $f = (1+x)^{-q}$, $f(x) = -q(1+x)^{-q-1}$, $f''(x) = q(q+1)(1+x)^{-q-2}$.
+
+	Taylor's Theorem about $a = 0$: $f(x) = 1-qx \frac{q(q+1)}{(1+cx)^{q+2}}x^2$,
+	$cx$ between $0$ and $x$.
+	\[
+		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} 
+		= (1+\frac 1k)^{-q}
+		= 1- \frac qk + 
+		\underbrace{\frac{(q+1)q}{(q+c_k)^{q+2}}}_{B_k, 0\leq B_k \leq q(q+1)}
+		\frac 1{k^2} 
+	\]
+
+\item
+	We write 
+	\begin{align*}
+		\frac{a_{k+1}}{a_k} 
+		=& 1-\frac pk + \frac pk - 1 + \frac{a_{k+1}}{a_k}	\\
+	=& 1- \frac pk \frac 1k \underbrace{p-k(1-\frac {a_{k+1}}{a_k}))}_{:=A_k}\\
+	=& 1- \frac pk + \frac{A_k}k
+	\end{align*}
+\[
+	\lim_{k\to\infty} A_k = \lim_{k\to\infty} [p-k(1-\frac{a_{k+1}}{a_k})]
+	= p - \lim_{k\to\infty} (1-\frac{a_{k+1}}{a_k}) = 0 
+	\qquad (By \ Assumption)
+\]
+
+\item Let we assume $p > 1$, find $q$ with $p > q > 1$, then 
+	$\sum_{k=1}^{\infty} \frac1{k^q}$ converges, and (1, 2) shows that 
+	\[
+		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} - \frac{a_{k+1}}{a_k}
+		 = (1-\frac qk + \frac{B_k}{k^2}) - (1-\frac pk + \frac{A_k}k)
+		 = \frac{p-q+\frac{B_k}k - A_k}k
+	\]
+	where $lim_{k\to\infty}(\frac{B_k}k - A_k)=0$.
+	
+	Hence, $\exists N \in \mN$ s.t. 
+	$-\frac{p-q}2 < \frac{B_k}k - A_k < \frac{p-q}2$, so for $k\geq N$.
+
+	\[
+		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} - \frac{a_{k+1}}{a_k}
+		> \frac{p-q}{2k} \Rightarrow 
+		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} > \frac{a_{k+1}}{a_k}
+	\]
+	Thus by ratio comparison test, $\frac{a_{k+1}}{a_k}$ converges.
+
+\item 
+	If $p<1$, and find $g$ so $p < g < 1$, thus 
+	$\sum_{k=1}^{\infty} \frac{1}{k^q}$ diverges. As in II. 
+	\[
+		\frac{a_{k+1}}{a_k} - \frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} =
+		 = \frac{q-p + A_k - \frac{B_k}k}{k}
+	\]
+	and as $\lim_{k\to\infty} (A_k - \frac{B_k}k) = 0$, $\exists N \in \mN$, 
+	so for $k\geq N$, $\frac{q-p}2 < A_k - \frac{B_k}k < \frac{q-p}2$, so
+	\[
+		\frac{a_{k+1}}{a_k} - \frac{k^q}{(k+1)^q} > 0 \Rightarrow
+		\frac{a_{k+1}}{a_k} > \frac{\frac1{(k+1)^q}}{\frac1{k^q}} 
+		\Rightarrow \sum_{k=1}^{\infty} a_k 
+		\quad \text{diverges}
+	\]
+
+\item 
+	proof of $3$, We suppose $p = 1$, then 
+	\[
+		\abs{f(1-\frac{a_{k+1}}{a_k}) - 1} \leq \frac Mk, M >0	
+	\]
+	\[
+		\frac{a_{k+1}}{a_k} = 1-\frac1k + \frac1k(1- k(1-\frac{a_{k+1}}{a_k}))
+		\geq 1- \frac 1k - \frac{M}{k^2}
+	\]
+	Now $\sum_{k = \floor{M} + 2} \frac1{k-M+1}$ diverges. 
+\end{enumerate}
+
+\end{proof}
+
+{\color{Brown}
+\textbf{Example for Raabe's Test}
+Find $a,b \geq 0$, s.t. 
+$\sum_{k=1}^{\infty} \frac{(a+1)(a+2)\cdots(a+k)}{(b+1)(b+2)\cdots(b+k)}$ 
+converges. 
+
+\[
+	\frac{a_{k+1}}{a_k} 
+	= \sum_{k=1}^{\infty} 
+	\frac{\prod_{i=1}^{k+1} \frac{a+i}{b+i}}{\prod_{i=1}^k \frac{a+i}{b+i}} 
+	= \frac{a+k+1}{a+k} \overset{k\to\infty}{\longrightarrow} 1
+\]
+
+By Raabe's Test: 
+\[
+	k(1-\frac{a_{k+1}}{a_k}) = k(1-\frac{a+k+1}{b+k+1})
+	= k(\frac{b-a}{b+k+1})
+	\overset{k\to\infty}{\longrightarrow}
+	b - a
+\]
+$b-a > 1 \Rightarrow$ converges, and $b-a < 1 \Rightarrow$ diverges.
+
+If $b-a = 1$, 
+\[
+	k(1-\frac{a_{k+1}}{a_k})-1 = \frac{k(b-a)}{b+k+1} 
+	= \frac{(b-a)k - (b+k+1)}{b+k+1}
+	= -\frac{b+1}{k+b+1}
+\]
+\[
+	\abs{k(1-\frac{a_{k+1}}{a_k})-1} 
+	= \frac{b+1}{k+b+1} = \frac 1k [\frac{b+1}{1+\frac{b+1}k}]
+	< \frac{b+1}k
+\]
+$b-a=1 \Rightarrow$ converges.
+}	\\
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Serires Convergence Test V - March 11}
+
+\subsubsection{Leibnitz Alternating Series Test}
+\begin{theorem}[\textbf{leibnitz Alternating Series Test}]
+	Suppose 
+	\begin{itemize}
+		\item $a_1 \geq a_2 \geq \cdots \geq 0$
+		\item $\lim_{k\to\infty} a_k = 0$
+	\end{itemize}
+	then, $\sum_{k=1}^{\infty} (-1)^{k+1} a_k$ converges.
+	
+	Furthermore, $\abs{\sum_{k=1}^{\infty} (-1)^{k+1} a_k}\leq a_1$. 
+\end{theorem}
+\begin{proof}
+	We let $S_n = \sum_{k=1}^n (-1)^{k+1}a_k$, then 
+	\begin{align*}
+		S_{2n} \leq& S_{2n} + a_{2n+1} - a_{2n+2}	\\
+		=& S_{2n+2}	\\
+		=& a_1 - a_2 + a_3 - a_4 + \cdots - a_{2n} + a_{2n+1} - a_{2n+2}	\\
+		=& a_1 - (a_2-a_3) - (a_4-a_5) -\cdots -(a_{2n} -a_{2n+1})-a_{2n+2}	\\
+		\leq & a_1
+	\end{align*}
+
+	Hence, $0 \leq S_2 \leq S_{2n+2} \leq a_1$, i.e. $(S_{2n})_{n=1}^{\infty}$
+	is non-negative, non-decreasing, and bounded. 
+
+	Monotone Convergence $\Rightarrow \alpha = \lim_{n\to\infty} S_{2n}
+	\leq a_1$ exists. 
+	\[
+		\abs {\alpha - S_{2k}} < \frac{\ep}2, \quad a_{2k+1}< \frac{\ep}2,
+		\qquad \text{whenver} \ k \geq N. 
+	\]
+	If $n\geq 2N+1$, and with $k = \floor{\frac n2} \geq N$, we have
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{proof}
+
+
+
+
 
 
 \end{document}
-
-
