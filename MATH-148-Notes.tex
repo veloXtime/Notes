@@ -19,7 +19,8 @@
 \usepackage{cases}
 \usepackage{mathtools}
 \usetkzobj{all}
-
+\usepackage{graphicx}
+\graphicspath{{~/Desktop/UW/MATH\ 146/}}
 %\usepackage{stix}
 
 \theoremstyle{plain}
@@ -44,6 +45,7 @@
 \newcommand{\mC}{{\mathbb{C}}}
 \newcommand{\mN}{{\mathbb{N}}}
 \newcommand{\mQ}{{\mathbb{Q}}}
+\newcommand{\mI}{{\mathbb{I}}}
 \newcommand{\mR}{{\mathbb{R}}}
 \newcommand{\mZ}{{\mathbb{Z}}}
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
@@ -59,7 +61,8 @@
 \DeclareMathOperator{\Par}{partition}
 \DeclareMathOperator{\Sin}{Sin}
 \DeclareMathOperator{\Cos}{Cos}
-
+\DeclareMathOperator{\Length}{length}
+\DeclareMathOperator{\Vol}{vol}
 
 \begin{document}
 	\begin{titlepage}
@@ -147,7 +150,7 @@
 			m_j &= m_j(P) = \inf \{f(x) : x\in [x_{j-1},x_j]\}\\
 			M_j &= M_j(P) = \sup \{f(x) : x\in [x_{j-1},x_j]\}
 		\end{align*}
-	Notice that $-M\leq m_k\leq M_j\leq M$ for each $j$, and these "inf", "sup"
+	Notice that $-M\leq m_j\leq M_j\leq M$ for each $j$, and these "inf", "sup"
 	exist. (Using that $\mathbb{R}$ is complete.)\\
 	\end{definition}
 
@@ -250,8 +253,7 @@
 		Given a bounded $f:[a,b]\to\mathbb{R}$, define 
 		\begin{itemize}
 			\item \underline{lower integral} : 
-				$\underline{\int} 
-				a^b f = \sup \{L(f,P): P \ is\ a\ partition \ of \ [a,b]\}$
+				$\underline{\int}_a^b f = \sup \{L(f,P): P \ is\ a\ partition \ of \ [a,b]\}$
 			\item \underline{Upper Integral:}
 				$\bar{\int}_a^b f = \inf \{U(f,Q): Q\ is \ a \ partition
 				\ of \ [a,b]\}$
@@ -413,7 +415,7 @@
 		[Fact $\Leftarrow$ also true]
 	\end{proposition}
 	\begin{proof}
-		Given $\ep > 0$, let $\delta$ be as in def'n of uniform continuity.
+		Given $\ep > 0$, let $\delta$ be as in definition of uniform continuity.
 		Since $\dlim_{n\to\infty} \abs{x_n-x_n'} =0$, there is $N\in\mathbb{N}$,
 		so for $n\geq N$, we have $\abs{x_n-x_n'}<\delta$. 
 
@@ -426,7 +428,7 @@
 	$f: (0,1] \to \mathbb{R}$, $f(x) = \frac 1x$. Notice that $f$ is continuous.
 	
 	Let $x_n=\frac 1n$, $x_n'=\frac1{2n}$, 
-	$\abs{x_n-x_n'}=\frac1{2n} \overset{\to}{n\to\infty} 0$.
+	$\abs{x_n-x_n'}=\frac1{2n} \overset{n\to\infty}{\longrightarrow} 0$.
 	\[
 		\abs{f(x_n)-f(x_n')} = \abs{n-2n} = n
 	\]
@@ -458,7 +460,7 @@
 		Let us consider $\delta = \frac 1n$, so there are $x_n, x_n'$ in $[a,b]$
 		such that 
 		\[
-			\abs{f(x_n)-f(x'_n)}\geq \ep \ while \ \abs{x-x'} < \frac 1n
+			\abs{f(x_n)-f(x'_n)}\geq \ep \ while \ \abs{x_n-x'_n} < \frac 1n
 		\]
 		By Bolzano Weierstrass Theorem, there is a subsequence
 		$(x_{n_k})_{k=1}^{\infty}$ of $(x_n)_{n=1}^{\infty}$, such that 
@@ -490,7 +492,7 @@
 		Let $\ep>0$, then by uniform continuity of $f$, there exists a $\delta$
 		such that whenever $\abs{x-x'}<\delta$, for $x, x'\in[a,b]$, 
 		\[
-			\abs{f(x)-f(x')}>\ep
+			\abs{f(x)-f(x')}<\frac{\ep}{b-a}
 		\]
 		Thus, we let $P=\{a=x_0<\cdots<x_n = b\}$ be any partition with length
 		$l(P) = \underset{j=1,\cdots, n}{\max} (x_{j}-x_{j-1})<\delta$.  
@@ -532,7 +534,7 @@
 		\]
 	\end{corollary}
 	\begin{proof}
-		We have $a+j\frac{b-a}n \in [a+\frac{b-a}n (j-1),a+\frac{b-a}n(j-1)]$,
+		We have $a+j\frac{b-a}n \in [a+\frac{b-a}n (j-1),a+\frac{b-a}nj]$,
 		$j=1,\cdots, n$. 
 		
 		So, 
@@ -550,7 +552,7 @@
 		where $P_n = \{a<a+\frac{b-a}n <a+2\frac{b-a}n <\cdots<b\}$, 
 		then proof of theorem shows that $\lim_{n\to\infty} L(f,P_a)
 		=\int^b_a f = \lim_{n\to\infty} U(f,P_n)$ as $\lim_{n\to\infty}
-		l(P_n) = \lim_{n\to\infty} \frac{b-a}n = 0$. 
+		\ell(P_n) = \lim_{n\to\infty} \frac{b-a}n = 0$. 
  
 		and hence Cauchy Criterion is satisfied, hence
 		$\int_a^b f$ exists and is $\lim_{n\to\infty} L(f,P_n)$, 
@@ -632,7 +634,7 @@
 		\]
 		Then
 		\[
-			U(f,P)=L(f,P) \leq U(f,P_1) - L(f,P_1) +U(f,P_2) - L(f,P_2)
+			U(f,P)-L(f,P) \leq U(f,P_1) - L(f,P_1) +U(f,P_2) - L(f,P_2)
 			<\frac{\ep}2+\frac{\ep}2 = \ep
 		\]
 		hence, $f$ is integrable on $[a,b]$. \\\\
@@ -743,7 +745,7 @@
 		\]
 		i.e.
 		\begin{equation}
-			L(f,P) \leq S(f,P) \leq U(f,P
+			L(f,P) \leq S(f,P) \leq U(f,P)
 		\end{equation}
 		Also, 
 		\begin{equation}
@@ -759,7 +761,7 @@
 		we let for $\ep>0$, given $P_{\ep/4}$
 		be a partition s.t. 
 		\[
-			\abs{S(f,P) - I_f} < \frac{\ep}4
+			\abs{S(f,P_{\ep/4}) - I_f} < \frac{\ep}4
 		\]
 		For P a refinement of $P_{\ep/4}$, $S(f,P)$ a Riemann Sum.
 		We fix such $P = \{a=x_0<x_1<\cdots<x_n=b\}$. 
@@ -835,16 +837,15 @@
 		\begin{align*}
 			S(\alpha f +\beta g, P) 
 			&= \sum_{j=1}^n (\alpha f(t_j)+\beta g(t_j)) (x_j-x_{j-1}) \\
-			&=\alpha\sum_{j=1}^n f(t_j)(x_j-x_{j-1}) + 
-			\beta \sum_{j=1}^n f(t_j) (x_j-x_{j-1}) +\beta\sum_{j=1}^n 
-			g(t_j)(x_j-x_{j-1})
+			&=\alpha\sum_{j=1}^n f(t_j)(x_j-x_{j-1}) 
+			+\beta\sum_{j=1}^n g(t_j)(x_j-x_{j-1})
 		\end{align*}
 		Then we have, 
 		\begin{align*}
 			\abs{S(\alpha f+\beta g, P)-[\alpha\int_a^b f+\beta\int_a^b g]}
 			&\leq \abs{\alpha} \abs{S(f,P) - \int_a^b f} + \abs{\beta} \\
 			\abs{S(g,P) - \int_a^b g}
-			&< \abs{\alpha} \frac{\ep}{2\abs{\alpha}=1} + \abs{\beta}+\frac{\ep}
+			&< \abs{\alpha} \frac{\ep}{2\abs{\alpha}+1} + \abs{\beta}+\frac{\ep}
 			{2\abs{\beta}+1}
 		\end{align*}
 	\end{proof}
@@ -853,7 +854,7 @@
 		Let $f, g:[a,b]\to \mR$ each be integrable, then 
 		\begin{enumerate}
 			\item $f \geq 0$ $\Rightarrow$ $f \geq 0$
-			\item $f \geq g \Rightarrow \int_a^b f \geq 0$
+			\item $f \geq g \Rightarrow \int_a^b f-g \geq 0$
 			\item $f \geq g$ on $[a,b] \Rightarrow \int_a^b f \geq \int_a^b g$
 			\item $\abs{f} : [a,b] \to \mR (\abs{f}(x)= \abs{f(x)})$ 
 				is integrable, with $\abs{\int_a^b f} \leq \int_a^b \abs f$
@@ -1038,7 +1039,7 @@
 			\Rightarrow& &\qquad 
 			-\int_x^c f &= \int_{c'}^x f - \int_{c'}^c f \\
 			\Rightarrow& &\qquad 
-			F'(x) &= \frac{d}{dx} \int_c^x f - \int_{c'}^c f =f(x)
+			F'(x) &= \frac{d}{dx} \int_{c'}^x f - \int_{c'}^c f =f(x)
 		\end{alignat*}
 		It will be convecient, hereafter, to let $\int_c^x f = - \int_x^c f$
 		if $x <c$, and we have FToCI
@@ -1062,7 +1063,7 @@
 	\end{definition}
 		
 	\begin{proposition}
-		If $a,b > 0$, gthen $L(ab) = L(a)+L(b)$.
+		If $a,b > 0$, then $L(ab) = L(a)+L(b)$.
 	\end{proposition}
 	\begin{proof}
 		Let $F(x) = L(ax)$, then chain rule provides 
@@ -1348,7 +1349,7 @@
 		Let $H:[a,b] \to \mR$ be given by $H(x) = F(g(x))$. 
 		Then Chain Rule provides 
 		\[
-			H'(x) = F/(g(x))g'(x) = f(a(x))g'(x)
+			H'(x) = F'(g(x))g'(x) = f(a(x))g'(x)
 		\]
 		and F.T. of C II provides that 
 		\[
@@ -1397,611 +1398,1363 @@
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
 
-	\newpage
-	\subsection{Integration and Trignometry - Jan 22 Wed, TUT}
-	\begin{definition}
-		$\pi = 2\int_{-1}^a \sqrt{a-x^2}dx$ \\
-	\end{definition}
+\newpage
+\subsection{Integration and Trignometry - Jan 22 Wed, TUT}
+\begin{definition}
+	$\pi = 2\int_{-1}^a \sqrt{a-x^2}dx$ \\
+\end{definition}
 
-	\begin{definition}
-		Let for $-1\leq x\leq 1$, 
-		\[
-			\arccos x = x \sqrt{1-x^2} + 2\int_x^1 \sqrt{1-u^2} du
-		\]
-		Then $\frac12 \arccos x$ is the area of 
-		-----graph-----
-	\end{definition}
-
-	\textbf{Note:} $\frac12\arccos x$ is proportional to the angle $\theta$,
-	hence it is reasonable to measure. 
+\begin{definition}
+	Let for $-1\leq x\leq 1$, 
 	\[
-		\theta = \arccos x \qquad "radians"
+		\arccos x = x \sqrt{1-x^2} + 2\int_x^1 \sqrt{1-u^2} du
 	\]
+	Then $\frac12 \arccos x$ is the area of 
+	-----graph-----
+\end{definition}
+
+\textbf{Note:} $\frac12\arccos x$ is proportional to the angle $\theta$,
+hence it is reasonable to measure. 
+\[
+	\theta = \arccos x \qquad "radians"
+\]
+\begin{itemize}
+	\item $\arccos -1 = \pi$
+	\item $\arccos 0 = 2\int_0^1 \sqrt{1-u^2} du \overset{symmetry}{=}
+		\int_{-1}^1 \sqrt{1-u^2} du = \frac{\pi}2$
+	\item $\arccos 1 = 0$
+\end{itemize}
+
+\textbf{Derivatives:}
+\begin{align*}
+	\arccos ' x 
+	&= \sqrt{1-x^2} + x\frac12(1-x^2)^{-\frac 12} (-2x) - 2\sqrt{1-x^2}\\
+	&= -\frac{x^2}{\sqrt{1-x^2}}-\sqrt{1-x^2}\frac{\sqrt{1-x^2}}
+		{\sqrt{1-x^2}} = -\frac{1}{\sqrt{1-x^2}}
+\end{align*}
+hence, 
+\begin{itemize}
+	\item $\arccos 'x < 0$ and by MVY, decreasing
+	\item $\lim_{x\to -1^+} \arccos 'x = -\infty = \lim_{x\to 1^-}
+		\arccos 'x$ 
+	\item $\arccos '0=-1$
+	\item $\arccos ''(x) = -\frac x{(1-x^2)^{\frac 32}}$ hence, \\
+		- $\arccos ''(x) > 0$ if $x <0  \Rightarrow $ concave up\\
+		- $\arccos ''(x) <0$ if $x > 0 \Rightarrow$ concave down\\
+\end{itemize}
+
+\begin{definition}
+	$ $
 	\begin{itemize}
-		\item $\arccos -1 = \pi$
-		\item $\arccos 0 = 2\int_0^1 \sqrt{1-u^2} du \overset{symmetry}{=}
-			\int_{-1}^1 \sqrt{1-u^2} du = \frac{\pi}2$
-		\item $\arccos 1 = 0$
+		\item $\Cos x = \arccos ^{-1} : [0,\pi] \to [-1,1]$
+
+		\item $\sin \theta = \sqrt{1-\cos^2 \theta}$
 	\end{itemize}
-	
-	\textbf{Derivatives:}
-	\begin{align*}
-		\arccos ' x 
-		&= \sqrt{1-x^2} + x\frac12(1-x^2)^{-\frac 12} (-2x) - 2\sqrt{1-x^2}\\
-		&= -\frac{x^2}{\sqrt{1-x^2}}-\sqrt{1-x^2}\frac{\sqrt{1-x^2}}
-			{\sqrt{1-x^2}} = -\frac{1}{\sqrt{1-x^2}}
-	\end{align*}
-	hence, 
-	\begin{itemize}
-		\item $\arccos 'x < 0$ and by MVY, decreasing
-		\item $\lim_{x\to -1^+} \arccos 'x = -\infty = \lim_{x\to 1^-}
-			\arccos 'x$ 
-		\item $\arccos '0=-1$
-		\item $\arccos ''(x) = -\frac x{(1-x^2)^{\frac 32}}$ hence, \\
-			- $\arccos ''(x) > 0$ if $x <0  \Rightarrow $ concave up\\
-			- $\arccos ''(x) <0$ if $x > 0 \Rightarrow$ concave down\\
-	\end{itemize}
-
-	\begin{definition}
-		$ $
-		\begin{itemize}
-			\item $\Cos x = \arccos ^{-1} : [0,\pi] \to [-1,1]$
-
-			\item $\sin \theta = \sqrt{1-\cos^2 \theta}$
-		\end{itemize}
-				
-		Hence, $\sin:[0,\pi] \to [0,1]$, with 
-		\begin{itemize}
-			\item $\Sin(0) = \sqrt{1-1^2} = 0$
-			\item $\Sin(\frac{\pi}2) = \sqrt{1-0^2} = 0$
-			\item $\Sin(\pi) = \sqrt{1-(-1)^2} = 0$
-		\end{itemize}
-	\end{definition}
-
-	\textbf{Derivatives of $\cos$, $\sin$}
-	
-	$\arccos (\cos \theta) = \theta$
-	\[
-		\underset{\text{Chain Rule}} {\Rightarrow}
-		\frac{-1}{\sqrt{1-\cos^2 \theta}} \cos '\theta=1
-		\Rightarrow \cos'\theta = -\sin \theta
-	\]
-	
-	\[
-		\sin'\theta = \frac d{d\theta} \sqrt{1-\cos^2\theta} 
-		= \frac1x(1-\cos^2 \theta) ^{-\frac12} (-2\cos \theta \cos'\theta)
-		= \cos \theta
-	\]
-	Hence, $\sin'(0)=1$, $\sin'\frac{\pi}2 = 0$, $\sin'(\pi) = -1$, and 
-	$\sin"(\theta) = -\sin \theta < 0$ if $0<\theta < \pi \Rightarrow$
-	concave down
-
-	\underline{Extension to $\mR$} 
-	\begin{enumerate}[label=(\alph*)]
-		\item we define $\cos, \sin:[-\pi,\pi] \to [-1,1]$
-			\begin{itemize}
-				\item $\cos$ is even: $\cos (-\theta) = \cos \theta$,
-				$\theta \geq 0$
-				\item $\sin$ is odd: $\sin(-\theta) = -\sin \theta$, 
-					$\sin \theta = \Sin x$, if $\theta \geq 0$ 
-			\end{itemize}
-		\item we define $\cos, \sin : \mR \to [-1, 1]$
-			\[
-				\cos(\theta + 2\pi n) = \cos(\theta)
-				\qquad 
-				\sin (\theta + 2\pi n) = \sin(\theta)
-				\qquad 
-				\theta \in [-\pi, \pi], n \in \mZ
-			\]
-	\end{enumerate}
-
-	\begin{lemma}
-		Let $f: \mR \to \mR$ is twice differentiable, then 
-		\begin{itemize}
-			\item $f(0) = f'(0) = 0$ and 
-			\item $f''+f=0$
-		\end{itemize}
-		then $f=0$. 
-	\end{lemma}
-	\begin{proof}
-		Let $g=(f')^2 + f^2$ then
-		\[
-			g(0)=0 \qquad and \qquad 
-			g'= 2ff'+ 2ff'=2f[f''+f] = 0
-		\]
-		$\Rightarrow$ by MVT, $g$ constant, hence, $g=0$, 
-		then $0\leq f^2 \leq g$. 
-	\end{proof}
-
-	\begin{lemma}
-		Double Angle Fomula for Cos
-	\end{lemma}
-	\begin{proof}
-		Let $a, b \in \mR$ be fixed, defined $f : \mR \to \mR$, 
-		\[
-			f(t) = \cos(s+t) - a \sin t + b\cos t
-		\]
-		Then
-		\begin{align*}
-			f'(t) & = - \sin (s+t) + a\sin t + b \cos t\\
-			f''(t) &= -\cos (s+t) + a\cos t -b\sin t\\
-			\Rightarrow f''+f &= 0
-		\end{align*}
-		Now we wish to choose $a$, $b$ to satisfy
-		
-		$f(0)=0$, hence $0=f(0)=\cos s - a \Rightarrow a = \cos s$\\
-		$f(0)=0$, hence $0=f'(0)=-\sin s + b \Rightarrow b = \sin s$
-
-		With these choices of $a,b$, the lamma tells us that $f(t) = 0$, hence
-		\[
-			0 = \cos(s+t) - [\cos s \cos t-\sin s \sin t)
-		\]
-	\end{proof}
-
-	\textbf{Double Angle Fomula for $\cos$: }
-	Since $\cos^2 t + \sin^2 t = 1$, the angle sum fomula gives
-	\[
-		\cos 2t = \cos^2 t - \sin^2 t = 
-		\begin{cases}
-			1 - 2\sin^2 t \Rightarrow\sin^2 t = \frac12[1-\cos^2 t]\\
-			2\cos^2 t - 1 \Rightarrow \cos^2 t = \frac12 [1-\cos^2 t]
-		\end{cases}
-	\]
-	
-	\begin{lemma}
-		Double Angle Fomula for $\sin$: $\sin(s+t) = \cos s \sin t + \sin x
-		\cos t$
-	\end{lemma}
-	\begin{proof}
-		Fix $s \in \mR$, for $t$ consider
-		\[
-			\cos (s + t) = \cos s \cos t - \sin s \sin t
-		\]
-		and take $\frac d{dt}$ to both sides.
-	\end{proof}
-
-	\textbf{Double Angle Fomula for $\sin$: }
-	\[
-		\sin 2t = 2\cos t \sin t
-	\]
-
-	{\color{Brown}
-		\textbf{Example 1:}
-		\begin{enumerate}
-		\item 
-			\begin{align*}
-				\int \sin^2x dx
-				=& \frac12 \int(1-\cos 2x) dx\\
-				=& \frac12 [x-\frac12 \sin 2x] + C\\
-				=& \frac12 x - \frac 14 \sin 2x + C\\
-				=& \frac12 x - \frac12 \sin x \cos x + C
-			\end{align*}
-
-		\item
-			\begin{align*}
-				\int \cos^4 x dx 
-				=& \int[\frac12(1+\cos 2x)]^2 dx\\
-				=& \frac 14 \int (1+ 2\cos 2x + \cos^2 2x) dx\\
-				=& \frac 14 \int (1+2\cos 2x + \frac12[1+\cos4x]) dx
-			\end{align*}
-
-		\item 
-			\begin{align*}
-				&\int \sin x \cos^4 x dx \tag{$u = \cos x, du = -\sin xdx$}\\
-				=& - \int u^4 du\vert_{u=\cos x} \\
-				=& -\frac{\cos^5 x}5 + C
-			\end{align*}
 			
-		\item
-			\begin{align*}
-				\int \sin^2x \cos^4 x dx
-				=& \int \sin^2x\cos^2x\cos^2xdx\\
-				=& \int (\frac12\sin2x)^2 \frac12[1+\cos 2x]dx\\
-				=& \frac 18 \int[\sin^22x + \sin^22x\cos 2x] dx
-			\end{align*}
-		\end{enumerate}
-	}
-
-	\textbf{Change of Variables(Antiderivatives form)}
-	\[
-	\int f(g(x))g'(x)dx = \int f(u) du \vert_{u=g(x)}
-	\]
-	$f, g'$ continuous.
-
-	\textbf{Inverse Form: }Suppose we try $x = g(u)$, 
-	\[
-		\int f(x) dx = \int f(g(u))g'(u) du\vert_{x=g(u)}
-	\]
-
-	\begin{algorithm}[\textbf{Trig Substitution}]
-		$ $
-		\begin{center}
-		\begin{tabular}{c c c c}
-			Forms &  Substitution & Main Identity & $dx$ \\
-			$a^2-x^2$ & $x = a\sin \theta$ & $a^2 - x^2 = a^2 \cos ^2 \theta$
-					  & $dx = a\cos \theta d\theta$\\
-			$x^2+a^2$ & $x = a\tan \theta$ & $x^2+a^2=a^2\sec\theta$
-					  & $dx = a\sec^2\theta d\theta$
-		\end{tabular}
-		\end{center}
-	\end{algorithm}
-
-	{\color{Brown}
-	\textbf{Examples}
-	\begin{enumerate}
-		\item 
-			\begin{align*}
-				\int \frac{dx}{(9-x^2)^{3/2}}
-				=&\int \frac{3\cos \theta}{(9\cos^2\theta)^{3/2}}dx\\
-				=&\frac 19 \int \sec^2\theta d\theta 
-				= \frac 19 \tan \theta + C \\
-				=& \frac 19 \frac{\sin\theta}{\sqrt{1-\sin^2\theta}}+C\\
-				=& \frac 19 \frac{\frac13 x}{\sqrt{1-(\frac13x)^2}}+C
-				= \frac 19 \frac x{\sqrt{9-x^2}}+C
-			\end{align*}
-		\item 
-			\begin{align*}
-				\int \frac{dx}{x^2+2x+5} 
-				&= \int \frac{dx}{(x+1)^2+4} 
-				\tag{$x+1=2\tan\theta, dx=2\sec^2\theta d\theta$}\\
-				&= \int \frac{2\sec^2\theta}{2^2\sec^2\theta}d\theta\\
-				&= \frac12 \int d\theta = \frac12 \theta+C\\
-				&= \frac12 \arctan \frac{x+1}2 + C
-			\end{align*}
-
-		\item 
-			\begin{align*}
-				\int \sqrt{1-x^2}dx
-				=& \int \cos^2\theta d\theta\\
-				=& \frac 12 \int [1+\cos 2\theta]d\theta\\
-				=& \frac12[\theta + \frac12 \sin 2\theta] + C\\
-				=& \frac12[\arcsin x + \sin \theta \cos \theta] + C\\
-				=& \frac 12[\arcsin x]+ x\sqrt{1-x^2} + C\\
-				\Rightarrow &\arcsin (x) = 2\int\sqrt{1-x^2}dx -x\sqrt{1-x^2}
-				+ C'\\
-				[\arcsin x &= \frac{\pi}2 -\arccos x] \checkmark
-			\end{align*}
-
-		\item 
-			\begin{align*}
-				\int \frac{dx}{\sqrt{x^2+1}}\tag{$x = \tan \theta, 
-				dx = \sec^2 \theta d\theta$}
-				=& \int \frac{\sec^2 \theta d\theta}{\sec \theta}\\
-				=& \int \sec \theta d\theta\\
-				=& \int \sec\theta \frac{\sec \theta \tan \theta}
-				{\sec\theta + \tan \theta} d\theta\\
-				=& \int \frac{\sec^2\theta +\tan \theta \sec \theta}
-				{\sec \theta + \tan \theta} d\theta\\
-				=& \log \abs{\sec\theta + \tan \theta} + C\\
-				=& \log (\sqrt{x^2+1}+x)+C
-			\end{align*}
-
-		\item 
-			\begin{align*}
-				\int \frac{dx}{\sqrt{x^2+1}}\tag{$x = \tan \theta, $}
-				=& \int \frac{\cosh t}{\cosh t} dt
-			\end{align*}
-	\end{enumerate}
-
-	}
-
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-
-	\newpage
-	\subsection{Integration by Partial Fraction - Jan 27}
-
-	\textbf{Warm Up: }
-	
-	\begin{align*}
-		\int \sec\theta d\theta 
-		=& \int \frac1{\cos\theta} d\theta\\
-		=& \int \frac{\sin^2\theta + \cos^2\theta}{\cos \theta} d\theta\\
-		=& \int\frac{\sin^2\theta}{\cos\theta} d\theta+\int\cos\theta d\theta\\
-		=& \int \frac{\sin^2\theta}{1-\sin^2\theta}\cos\theta d\theta 
-		+ \int \cos\theta d\theta \\
-	\end{align*}
-
-	\begin{theorem}
-		$ $
-		\begin{enumerate}
-		\item 
-		Let $q\neq 0$ be a polynomial with $\mR$-coefficients, then 
-		we may write 
-		\[
-			q(x) = a(x-r_1)^{m_1} \cdots (x-r_m)^{m_m}\cdot
-			(x^2+b_1x+c_a)^{n_1} \cdots (x^2 + b_Nx + C_N)^{n_N}
-		\]
-		where $a\neq 0$, $r_1, \cdots, r_M$ are the distinct $\mR$-roots
-		 of $q$, and $b_1, \cdots, b_N, \cdots, c_N \in \mR$.. 
-
-		 $b_j^2 - 4c_j < 0$ for $j=1, \cdots, N$. Also, $m_1, \cdots, m_N,
-		 n_1, \cdots, n_N \in \mN$. 
-		 
-		\item 
-		Let $p$ be $\mR-$polynomial with 
-		\[
-			\deg p < \deg q
-		\]
-		Then there are unique $\mR-$numbers $A_1, \cdots, B_N, C_N$. 
-		so 
-		\[
-		\frac{p(x)}{q(x)} = \sum_{j=1}^M \sum_{k=1}^M \frac{A_j,k}{(x-{r_j})^k}
-		= + \sum_{j=1}^N\sum_{k=1}^{n_j} \frac{B_{j,k}x + C_{j,k}}
-		{x^2+b_jx+c_j}^k
-	\]
-		\end{enumerate}
-	\end{theorem}
-	
-	{\color{Brown}
-	\textbf{Example}
-	\[
-		\frac{x^2 + 4x+3}{(x-1)^2(x^2+3x+4)} 
-	\]
-	}
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-
-	\newpage
-	\subsection{Integration by parts - Jan 29}
-	\begin{theorem}[\textbf{Integration by Parts/"Reverse Product Rule"}]
-		Let $f, g F:[a,b] \to \mR$ satisfy
-		\begin{itemize}
-			\item $f$ is integrable on $[a,b]$
-			\item $F' = f$ on $[a,b]$
-			\item $g'$ is integrable on $[a,b]$
-		\end{itemize}
-		Then 
-		\[
-			\int_a^b f(x)g(x)dx = F(b)g(b) - F(a)g(a) - \int_a^b F(x)g'(x)dx
-		\]
-		\textbf{Antiderivative Form: }
-		\begin{align*}
-			\int f(x)g(x)dx &= F(x)g(x) - \int F(x)g'(x)dx, \qquad 
-				F(x) = \int f(x)dx \qquad \text{Can choose $c=0$}\\
-			\int f'g &= fg-\int fg'
-		\end{align*}
-	\end{theorem}
-	\begin{proof}
-		Product Rule: 
-		\[
-			\frac{d}{dx} [F(x)g(x)] = F'(x)g(x) + F(x)g'(x)
-			=f'(x)g(x) + F(x)g'(x)
-		\]
-		FToCII:
-		\begin{align*}
-			F(b)g(b) - F(a)g(a)
-			=& \int_a^b [f(x)g(x) + F(x)g'(x)] dx\\
-			\Rightarrow F(b)g(b) - F(a)g(a) - \int_a^b F(x)g'(x)dx
-			=&\int_a^b f(x)g(x)dx
-		\end{align*}
-	\end{proof}
-
-	{\color{Brown}
-	\textbf{Example 1} 
-	\begin{align*}
-		\int \arctan(x)dx 
-		=& \int 1\cdot \arctan(x)dx\\
-		=& x\arctan(x) - \int x \frac1{1+x^2}dx\\
-		=& x\arctan(x) - \frac12 \log(1+x^2) + C\\
-	\end{align*}
-
-	\textbf{Example 2} 
-	\begin{align*}
-		\int x^2e^xdx 
-		=& x^2e^x - \int 2x\cdot e^x dx \\
-		=& x^2e^x - 2[xe^x-\int e^xdx] \\
-		=& x^2e^x -2xe^x + 2e^x + C
-	\end{align*}
-
-	\textbf{Example 3} 
-	\begin{align*}
-		\int \cos^{2n}(x)dx \qquad n\geq 1 \tag{$I_n$} 
-		=& \int \cos x \cos^{2n-1} x dx\\
-		=& \sin x \cos^{2n-1} dx - \int \sin x (2n-1) \cos^{2n-2}(-\sin x)dx\\
-		=& \sin x \cos ^{2n-1} x + (2n-1)\int (1-\cos^2 x)\cos^{2n-2}xdx\\
-		=& \sin x \cos^{2n-1} x + (2n-1)[\int\cos^{2n-2}xdx-\int \cos^{2n}xdx]\\
-		=& \sin x \cos^{2n-1} x + (2n-1) [I_{n-1}(x) - I_n(x)]\\
-		\Rightarrow 
-		2n I_n(x) =& \sin x \cos^{2n-1}x + (2n-1)I_{n-1}(x)\\
-		I_n(x) =& \frac1{2n} \sin x \cos^{2n-1}x +\frac{2n-1}{2n}I_{n-1}(x)
-		\tag{"Reduction Fomula"}
-	\end{align*}
-	Specific Example: $n=0$, $I_0(x) = \int\cos^0 x dx = \int 1dx = x+C$
-	Hence 
-	\begin{align*}
-		\int \cos^2 x dx = I_1 (x) 
-		=& \frac12\sin x\cos x + \frac12[x+C]\\
-		=&\frac12\sin x\cos x + \frac 12 x + C'\\\\
-	%
-		\int \cos^2 x dx = &\frac12 \int [1+\cos 2x]dx\\
-		= &\frac 12 x + \frac 14 \sin 2x + C\\\\
-	%
-		\int \cos^4 x dx 
-		=& I_2(x) 
-		=\frac 14 \sin x\cos^3 x +
-		\frac 34 [\frac 12 \sin x \cos x + \frac 12 x] + C\\
-		=& \frac 14 \sin x \cos^3 x + \frac 38\sin x \cos x + \frac 38 x + C
-	\end{align*}
-
-	\textbf{Exmaple 3'} 
-	\begin{align*}
-		\int \frac{dt}{(t^2+1)^3}
-		=& \int \frac{\sec^2 \theta}{(\sec^2\theta)^3}d\theta\\
-		=& \int \cos^4\theta d\theta\\
-		=& \frac 14 \sin \theta\cos^3\theta + \frac 38 \sin \theta \cos \theta
-		+\frac 38 \theta + C\\
-		=& \frac 14 \frac t{(1+t^2)^2} + \frac 38 \frac t{1+t^2}
-		+\frac 38 \arctan (t) + C
-	\end{align*}
-
-	}
-
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-%------------------------------------------------------------------------------
-	\newpage
-	\subsection{Improper Integral - Jan 29}
-	\textbf{Recall: }Integration involves upper and lower sums and hence
-	requires 
+	Hence, $\sin:[0,\pi] \to [0,1]$, with 
 	\begin{itemize}
-		\item bounded functions and 
-		\item bounded intervals
+		\item $\Sin(0) = \sqrt{1-1^2} = 0$
+		\item $\Sin(\frac{\pi}2) = \sqrt{1-0^2} = 0$
+		\item $\Sin(\pi) = \sqrt{1-(-1)^2} = 0$
 	\end{itemize}
+\end{definition}
 
-	\begin{definition}
-		let $a<b$ and $f:(a,b]\to \mR$
+\textbf{Derivatives of $\cos$, $\sin$}
+
+$\arccos (\cos \theta) = \theta$
+\[
+	\underset{\text{Chain Rule}} {\Rightarrow}
+	\frac{-1}{\sqrt{1-\cos^2 \theta}} \cos '\theta=1
+	\Rightarrow \cos'\theta = -\sin \theta
+\]
+
+\[
+	\sin'\theta = \frac d{d\theta} \sqrt{1-\cos^2\theta} 
+	= \frac1x(1-\cos^2 \theta) ^{-\frac12} (-2\cos \theta \cos'\theta)
+	= \cos \theta
+\]
+Hence, $\sin'(0)=1$, $\sin'\frac{\pi}2 = 0$, $\sin'(\pi) = -1$, and 
+$\sin"(\theta) = -\sin \theta < 0$ if $0<\theta < \pi \Rightarrow$
+concave down
+
+\underline{Extension to $\mR$} 
+\begin{enumerate}[label=(\alph*)]
+	\item we define $\cos, \sin:[-\pi,\pi] \to [-1,1]$
 		\begin{itemize}
-			\item $f$ is integrable on $[x,b]$ fro each $x\in (a,b]$. 
+			\item $\cos$ is even: $\cos (-\theta) = \cos \theta$,
+			$\theta \geq 0$
+			\item $\sin$ is odd: $\sin(-\theta) = -\sin \theta$, 
+				$\sin \theta = \Sin x$, if $\theta \geq 0$ 
 		\end{itemize}
-		Then we define the \textbf{improper integral} by 
+	\item we define $\cos, \sin : \mR \to [-1, 1]$
 		\[
-			\int_a^b f = \lim_{x\to a^+} f, \qquad \text{provided that
-			limit exists}
+			\cos(\theta + 2\pi n) = \cos(\theta)
+			\qquad 
+			\sin (\theta + 2\pi n) = \sin(\theta)
+			\qquad 
+			\theta \in [-\pi, \pi], n \in \mZ
 		\]
-	\end{definition}
+\end{enumerate}
 
-	{\color{Brown}
-
-		\textbf{Example 1:}
-
-		$f(t) = \frac1{\sqrt t}$ on $(0,2]$, notice that
-		$f$ is continuous, hence integrable on $[x,2]$, $0 < x < 2$. 
-
-		Compute 
-		\[
-			\int_x^2 \frac{dt}{\sqrt t} = \int_x^2 t^{-1/2}dt = 2t^{1/2}
-			\bigg\vert_x^2 = 2\sqrt 2-2\sqrt x
-		\]
-		Then 
-		\[
-			\int_0^2 \frac{dt}{\sqrt t} = \lim_{x\to 0^+} \int_x^2\frac{dt}
-			{\sqrt t} = 2\sqrt 2 - 2\sqrt 0 = 2\sqrt 2\\
-		\]
-		
-		\textbf{Example 2: } 
-
-		$g(t) = \frac 1{t^2}$ on $[0,2]$. g is cts, so 
-		integrable on each $[x,2]$, $0 < x < 2$. 
-		\[
-			\int_x^2\frac{dt}{t^2} = -\frac 1t\bigg\vert_x62 = \frac1x-\frac12
-		\]
-		\[
-			\lim_{x\to 0^+} \int_x62 \frac{dt}{t^2} = \lim_{x\to 0^+}
-			[\frac1x-\frac12] = \infty
-		\]
-		We write $\int_0^2 \frac{dt}{t^2}=\infty$ or $\int_0^2 \frac{dt}{t^2}$
-		D.N.E.. \\
-	
-		\textbf{Example 3: } 
-
-		$h(t) - \frac{\abs{\sin\frac1t}}{\sqrt t}$, 
-		$t\in (0,2]$, $h$ is continuous on each $[x, 2]$, $0 < x < 2$. 
-
-		How can we show if this is improperly integrable? 
-
-		\textbf{Comparison method}
-		\begin{alignat*}{2}
-			& \qquad & 0\leq& \abs{\sin \frac1t} \leq 1\\
-			\Rightarrow & \qquad & 0 \leq& \frac{\abs{\sin \frac 1t}}{\sqrt t}
-			\leq \frac1{\sqrt t} \\
-			\Rightarrow & \qquad & 0\leq& \int _x^2 \frac{\abs{\sin \frac1t}}
-			{\sqrt t} dt \leq \int_x^2 \frac{dt}{\sqrt t} = 2\sqrt 2 - 2\sqrt x
-			\leq 2\sqrt 2
-		\end{alignat*}
-		
-		$H(x) = \int_x^2 \frac{\abs{\sin \frac1t}}{\sqrt t}dt$ is nonincreasing.
-
-		If $0<x'<x<2$, $H(x') - H(x) = \int_{x'}^2 h - \int_x^2 h =
-		\int_{x'}^x h + \int_x^2 h - \int_x^2 h = \int_{x'}^x h \geq 0$ 
-	}
-
-	\subsection{Jan 31}
-
-	\begin{enumerate}
-		\item $\lim_{x\to a} F(x) = L \Leftrightarrow$ for every sequence 
-			$(a_n)^{\infty}_{n=1}$ s.t. $\lim_{n\to\infty} a_n=a$, provides 
-			that $\lim_{n\to\infty} F(a_n) = L$. 
-		\item Let $(a_n)_{n=1}^{\infty}$ be a sequence in $\mR$, then 
-			$\lim_{n\to\infty} a_n$ exists $\Leftrightarrow$ for any $\ep>0$, 
-			there exists $n_\ep \in N$ s.t. 
-			$\abs{a_m-a_n} <\ep$ whenever $m,n \geq n_{\ep}$. \\
-	\end{enumerate}
-
-	Cauchy criterion[Deep Fact: Bolzano Weierstrass Theorem]\\
-
-	\begin{theorem}[\textbf{Cauchy Criterion for limit of function}]
-		Let $F:(a,b]\to \mR$, then 
-		$\lim_{x\to a^+} F(x) \Leftrightarrow$ exists
-		for any $\ep>0$, there is $\delta > 0$ s.t. $\abs{F(u)-F(v)}<\ep$
-		whenever $\abs{u-a}<\delta$ and $\abs{v-a}<\delta$ for $u,v \in (a,b]$.
-	\end{theorem}
-	
-
-	\textbf{Last Time: } 
+\begin{lemma}
+	Let $f: \mR \to \mR$ is twice differentiable, then 
+	\begin{itemize}
+		\item $f(0) = f'(0) = 0$ and 
+		\item $f''+f=0$
+	\end{itemize}
+	then $f=0$. 
+\end{lemma}
+\begin{proof}
+	Let $g=(f')^2 + f^2$ then
 	\[
-		\int_0^2 \frac{\abs{\sin (\frac 1t)}}{\sqrt t} dt =\lim_{x\to 0^+}
-		\underbrace{\int_x^2 \frac{\abs{\sin (\frac 1t)}}{\sqrt t} dt}_{H(x)}
+		g(0)=0 \qquad and \qquad 
+		g'= 2ff'+ 2ff'=2f[f''+f] = 0
 	\]
-	$H$ is monotone and bounded $\Rightarrow$ $\lim_{x\to a^+} H(x)$ exists. \\
+	$\Rightarrow$ by MVT, $g$ constant, hence, $g=0$, 
+	then $0\leq f^2 \leq g$. 
+\end{proof}
 
+\begin{lemma}
+	Double Angle Fomula for Cos
+\end{lemma}
+\begin{proof}
+	Let $a, b \in \mR$ be fixed, defined $f : \mR \to \mR$, 
+	\[
+		f(t) = \cos(s+t) - a \sin t + b\cos t
+	\]
+	Then
+	\begin{align*}
+		f'(t) & = - \sin (s+t) + a\sin t + b \cos t\\
+		f''(t) &= -\cos (s+t) + a\cos t -b\sin t\\
+		\Rightarrow f''+f &= 0
+	\end{align*}
+	Now we wish to choose $a$, $b$ to satisfy
+	
+	$f(0)=0$, hence $0=f(0)=\cos s - a \Rightarrow a = \cos s$\\
+	$f(0)=0$, hence $0=f'(0)=-\sin s + b \Rightarrow b = \sin s$
+
+	With these choices of $a,b$, the lamma tells us that $f(t) = 0$, hence
+	\[
+		0 = \cos(s+t) - [\cos s \cos t-\sin s \sin t)
+	\]
+\end{proof}
+
+\textbf{Double Angle Fomula for $\cos$: }
+Since $\cos^2 t + \sin^2 t = 1$, the angle sum fomula gives
+\[
+	\cos 2t = \cos^2 t - \sin^2 t = 
+	\begin{cases}
+		1 - 2\sin^2 t \Rightarrow\sin^2 t = \frac12[1-\cos^2 t]\\
+		2\cos^2 t - 1 \Rightarrow \cos^2 t = \frac12 [1-\cos^2 t]
+	\end{cases}
+\]
+
+\begin{lemma}
+	Double Angle Fomula for $\sin$: $\sin(s+t) = \cos s \sin t + \sin x
+	\cos t$
+\end{lemma}
+\begin{proof}
+	Fix $s \in \mR$, for $t$ consider
+	\[
+		\cos (s + t) = \cos s \cos t - \sin s \sin t
+	\]
+	and take $\frac d{dt}$ to both sides.
+\end{proof}
+
+\textbf{Double Angle Fomula for $\sin$: }
+\[
+	\sin 2t = 2\cos t \sin t
+\]
+
+{\color{Brown}
+	\textbf{Example 1:}
+	\begin{enumerate}
+	\item 
+		\begin{align*}
+			\int \sin^2x dx
+			=& \frac12 \int(1-\cos 2x) dx\\
+			=& \frac12 [x-\frac12 \sin 2x] + C\\
+			=& \frac12 x - \frac 14 \sin 2x + C\\
+			=& \frac12 x - \frac12 \sin x \cos x + C
+		\end{align*}
+
+	\item
+		\begin{align*}
+			\int \cos^4 x dx 
+			=& \int[\frac12(1+\cos 2x)]^2 dx\\
+			=& \frac 14 \int (1+ 2\cos 2x + \cos^2 2x) dx\\
+			=& \frac 14 \int (1+2\cos 2x + \frac12[1+\cos4x]) dx
+		\end{align*}
+
+	\item 
+		\begin{align*}
+			&\int \sin x \cos^4 x dx \tag{$u = \cos x, du = -\sin xdx$}\\
+			=& - \int u^4 du\vert_{u=\cos x} \\
+			=& -\frac{\cos^5 x}5 + C
+		\end{align*}
+		
+	\item
+		\begin{align*}
+			\int \sin^2x \cos^4 x dx
+			=& \int \sin^2x\cos^2x\cos^2xdx\\
+			=& \int (\frac12\sin2x)^2 \frac12[1+\cos 2x]dx\\
+			=& \frac 18 \int[\sin^22x + \sin^22x\cos 2x] dx
+		\end{align*}
+	\end{enumerate}
+}
+
+\textbf{Change of Variables(Antiderivatives form)}
+\[
+\int f(g(x))g'(x)dx = \int f(u) du \vert_{u=g(x)}
+\]
+$f, g'$ continuous.
+
+\textbf{Inverse Form: }Suppose we try $x = g(u)$, 
+\[
+	\int f(x) dx = \int f(g(u))g'(u) du\vert_{x=g(u)}
+\]
+
+\begin{algorithm}[\textbf{Trig Substitution}]
+	$ $
+	\begin{center}
+	\begin{tabular}{c c c c}
+		Forms &  Substitution & Main Identity & $dx$ \\
+		$a^2-x^2$ & $x = a\sin \theta$ & $a^2 - x^2 = a^2 \cos ^2 \theta$
+				  & $dx = a\cos \theta d\theta$\\
+		$x^2+a^2$ & $x = a\tan \theta$ & $x^2+a^2=a^2\sec\theta$
+				  & $dx = a\sec^2\theta d\theta$
+	\end{tabular}
+	\end{center}
+\end{algorithm}
+
+{\color{Brown}
+\textbf{Examples}
+\begin{enumerate}
+	\item 
+		\begin{align*}
+			\int \frac{dx}{(9-x^2)^{3/2}}
+			=&\int \frac{3\cos \theta}{(9\cos^2\theta)^{3/2}}dx\\
+			=&\frac 19 \int \sec^2\theta d\theta 
+			= \frac 19 \tan \theta + C \\
+			=& \frac 19 \frac{\sin\theta}{\sqrt{1-\sin^2\theta}}+C\\
+			=& \frac 19 \frac{\frac13 x}{\sqrt{1-(\frac13x)^2}}+C
+			= \frac 19 \frac x{\sqrt{9-x^2}}+C
+		\end{align*}
+	\item 
+		\begin{align*}
+			\int \frac{dx}{x^2+2x+5} 
+			&= \int \frac{dx}{(x+1)^2+4} 
+			\tag{$x+1=2\tan\theta, dx=2\sec^2\theta d\theta$}\\
+			&= \int \frac{2\sec^2\theta}{2^2\sec^2\theta}d\theta\\
+			&= \frac12 \int d\theta = \frac12 \theta+C\\
+			&= \frac12 \arctan \frac{x+1}2 + C
+		\end{align*}
+
+	\item 
+		\begin{align*}
+			\int \sqrt{1-x^2}dx
+			=& \int \cos^2\theta d\theta\\
+			=& \frac 12 \int [1+\cos 2\theta]d\theta\\
+			=& \frac12[\theta + \frac12 \sin 2\theta] + C\\
+			=& \frac12[\arcsin x + \sin \theta \cos \theta] + C\\
+			=& \frac 12[\arcsin x]+ x\sqrt{1-x^2} + C\\
+			\Rightarrow &\arcsin (x) = 2\int\sqrt{1-x^2}dx -x\sqrt{1-x^2}
+			+ C'\\
+			[\arcsin x &= \frac{\pi}2 -\arccos x] \checkmark
+		\end{align*}
+
+	\item 
+		\begin{align*}
+			\int \frac{dx}{\sqrt{x^2+1}}\tag{$x = \tan \theta, 
+			dx = \sec^2 \theta d\theta$}
+			=& \int \frac{\sec^2 \theta d\theta}{\sec \theta}\\
+			=& \int \sec \theta d\theta\\
+			=& \int \sec\theta \frac{\sec \theta \tan \theta}
+			{\sec\theta + \tan \theta} d\theta\\
+			=& \int \frac{\sec^2\theta +\tan \theta \sec \theta}
+			{\sec \theta + \tan \theta} d\theta\\
+			=& \log \abs{\sec\theta + \tan \theta} + C\\
+			=& \log (\sqrt{x^2+1}+x)+C
+		\end{align*}
+
+	\item 
+		\begin{align*}
+			\int \frac{dx}{\sqrt{x^2+1}}\tag{$x = \tan \theta, $}
+			=& \int \frac{\cosh t}{\cosh t} dt
+		\end{align*}
+\end{enumerate}
+
+}
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+
+\newpage
+\subsection{Integration by Partial Fraction - Jan 27}
+
+\textbf{Warm Up: }
+
+\begin{align*}
+	\int \sec\theta d\theta 
+	=& \int \frac1{\cos\theta} d\theta\\
+	=& \int \frac{\sin^2\theta + \cos^2\theta}{\cos \theta} d\theta\\
+	=& \int\frac{\sin^2\theta}{\cos\theta} d\theta+\int\cos\theta d\theta\\
+	=& \int \frac{\sin^2\theta}{1-\sin^2\theta}\cos\theta d\theta 
+	+ \int \cos\theta d\theta \\
+\end{align*}
+
+\begin{theorem}
+	$ $
+	\begin{enumerate}
+	\item 
+	Let $q\neq 0$ be a polynomial with $\mR$-coefficients, then 
+	we may write 
+	\[
+		q(x) = a(x-r_1)^{m_1} \cdots (x-r_m)^{m_m}\cdot
+		(x^2+b_1x+c_a)^{n_1} \cdots (x^2 + b_Nx + C_N)^{n_N}
+	\]
+	where $a\neq 0$, $r_1, \cdots, r_M$ are the distinct $\mR$-roots
+	 of $q$, and $b_1, \cdots, b_N, \cdots, c_N \in \mR$.. 
+
+	 $b_j^2 - 4c_j < 0$ for $j=1, \cdots, N$. Also, $m_1, \cdots, m_N,
+	 n_1, \cdots, n_N \in \mN$. 
+	 
+	\item 
+	Let $p$ be $\mR-$polynomial with 
+	\[
+		\deg p < \deg q
+	\]
+	Then there are unique $\mR-$numbers $A_1, \cdots, B_N, C_N$. 
+	so 
+	\[
+	\frac{p(x)}{q(x)} = \sum_{j=1}^M \sum_{k=1}^M \frac{A_j,k}{(x-{r_j})^k}
+	= + \sum_{j=1}^N\sum_{k=1}^{n_j} \frac{B_{j,k}x + C_{j,k}}
+	{x^2+b_jx+c_j}^k
+\]
+	\end{enumerate}
+\end{theorem}
+
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+
+\newpage
+\subsection{Integration by parts - Jan 29}
+\begin{theorem}[\textbf{Integration by Parts/"Reverse Product Rule"}]
+	Let $f, g F:[a,b] \to \mR$ satisfy
+	\begin{itemize}
+		\item $f$ is integrable on $[a,b]$
+		\item $F' = f$ on $[a,b]$
+		\item $g'$ is integrable on $[a,b]$
+	\end{itemize}
+	Then 
+	\[
+		\int_a^b f(x)g(x)dx = F(b)g(b) - F(a)g(a) - \int_a^b F(x)g'(x)dx
+	\]
+	\textbf{Antiderivative Form: }
+	\begin{align*}
+		\int f(x)g(x)dx &= F(x)g(x) - \int F(x)g'(x)dx, \qquad 
+			F(x) = \int f(x)dx \qquad \text{Can choose $c=0$}\\
+		\int f'g &= fg-\int fg'
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	Product Rule: 
+	\[
+		\frac{d}{dx} [F(x)g(x)] = F'(x)g(x) + F(x)g'(x)
+		=f'(x)g(x) + F(x)g'(x)
+	\]
+	FToCII:
+	\begin{align*}
+		F(b)g(b) - F(a)g(a)
+		=& \int_a^b [f(x)g(x) + F(x)g'(x)] dx\\
+		\Rightarrow F(b)g(b) - F(a)g(a) - \int_a^b F(x)g'(x)dx
+		=&\int_a^b f(x)g(x)dx
+	\end{align*}
+\end{proof}
+
+{\color{Brown}
+\textbf{Example 1} 
+\begin{align*}
+	\int \arctan(x)dx 
+	=& \int 1\cdot \arctan(x)dx\\
+	=& x\arctan(x) - \int x \frac1{1+x^2}dx\\
+	=& x\arctan(x) - \frac12 \log(1+x^2) + C\\
+\end{align*}
+
+\textbf{Example 2} 
+\begin{align*}
+	\int x^2e^xdx 
+	=& x^2e^x - \int 2x\cdot e^x dx \\
+	=& x^2e^x - 2[xe^x-\int e^xdx] \\
+	=& x^2e^x -2xe^x + 2e^x + C
+\end{align*}
+
+\textbf{Example 3} 
+\begin{align*}
+	\int \cos^{2n}(x)dx \qquad n\geq 1 \tag{$I_n$} 
+	=& \int \cos x \cos^{2n-1} x dx\\
+	=& \sin x \cos^{2n-1} x - \int \sin x (2n-1) \cos^{2n-2}(-\sin x)dx\\
+	=& \sin x \cos ^{2n-1} x + (2n-1)\int (1-\cos^2 x)\cos^{2n-2}xdx\\
+	=& \sin x \cos^{2n-1} x + (2n-1)[\int\cos^{2n-2}xdx-\int \cos^{2n}xdx]\\
+	=& \sin x \cos^{2n-1} x + (2n-1) [I_{n-1}(x) - I_n(x)]\\
+	\Rightarrow 
+	2n I_n(x) =& \sin x \cos^{2n-1}x + (2n-1)I_{n-1}(x)\\
+	I_n(x) =& \frac1{2n} \sin x \cos^{2n-1}x +\frac{2n-1}{2n}I_{n-1}(x)
+	\tag{"Reduction Fomula"}
+\end{align*}
+Specific Example: $n=0$, $I_0(x) = \int\cos^0 x dx = \int 1dx = x+C$
+Hence 
+\begin{align*}
+	\int \cos^2 x dx = I_1 (x) 
+	=& \frac12\sin x\cos x + \frac12[x+C]\\
+	=&\frac12\sin x\cos x + \frac 12 x + C'\\\\
+%
+	\int \cos^2 x dx = &\frac12 \int [1+\cos 2x]dx\\
+	= &\frac 12 x + \frac 14 \sin 2x + C\\\\
+%
+	\int \cos^4 x dx 
+	=& I_2(x) 
+	=\frac 14 \sin x\cos^3 x +
+	\frac 34 [\frac 12 \sin x \cos x + \frac 12 x] + C\\
+	=& \frac 14 \sin x \cos^3 x + \frac 38\sin x \cos x + \frac 38 x + C
+\end{align*}
+
+\textbf{Exmaple 3'} 
+\begin{align*}
+	\int \frac{dt}{(t^2+1)^3}
+	=& \int \frac{\sec^2 \theta}{(\sec^2\theta)^3}d\theta\\
+	=& \int \cos^4\theta d\theta\\
+	=& \frac 14 \sin \theta\cos^3\theta + \frac 38 \sin \theta \cos \theta
+	+\frac 38 \theta + C\\
+	=& \frac 14 \frac t{(1+t^2)^2} + \frac 38 \frac t{1+t^2}
+	+\frac 38 \arctan (t) + C
+\end{align*}
+
+}
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Improper Integral - Jan 29}
+\textbf{Recall: }Integration involves upper and lower sums and hence
+requires 
+\begin{itemize}
+	\item bounded functions and 
+	\item bounded intervals
+\end{itemize}
+
+\begin{definition}
+	let $a<b$ and $f:(a,b]\to \mR$
+	\begin{itemize}
+		\item $f$ is integrable on $[x,b]$ fro each $x\in (a,b]$. 
+	\end{itemize}
+	Then we define the \textbf{improper integral} by 
+	\[
+		\int_a^b f = \lim_{x\to a^+} \int_x^b f, \qquad \text{provided that
+		limit exists}
+	\]
+\end{definition}
+
+{\color{Brown}
+
+	\textbf{Example 1:}
+
+	$f(t) = \frac1{\sqrt t}$ on $(0,2]$, notice that
+	$f$ is continuous, hence integrable on $[x,2]$, $0 < x < 2$. 
+
+	Compute 
+	\[
+		\int_x^2 \frac{dt}{\sqrt t} = \int_x^2 t^{-1/2}dt = 2t^{1/2}
+		\bigg\vert_x^2 = 2\sqrt 2-2\sqrt x
+	\]
+	Then 
+	\[
+		\int_0^2 \frac{dt}{\sqrt t} = \lim_{x\to 0^+} \int_x^2\frac{dt}
+		{\sqrt t} = 2\sqrt 2 - 2\sqrt 0 = 2\sqrt 2\\
+	\]
+	
+	\textbf{Example 2: } 
+
+	$g(t) = \frac 1{t^2}$ on $[0,2]$. g is cts, so 
+	integrable on each $[x,2]$, $0 < x < 2$. 
+	\[
+		\int_x^2\frac{dt}{t^2} = -\frac 1t\bigg\vert_x^2 = \frac1x-\frac12
+	\]
+	\[
+		\lim_{x\to 0^+} \int_x^2 \frac{dt}{t^2} = \lim_{x\to 0^+}
+		[\frac1x-\frac12] = \infty
+	\]
+	We write $\int_0^2 \frac{dt}{t^2}=\infty$ or $\int_0^2 \frac{dt}{t^2}$
+	D.N.E.. \\
+
+	\textbf{Example 3: } 
+
+	$h(t) - \frac{\abs{\sin\frac1t}}{\sqrt t}$, 
+	$t\in (0,2]$, $h$ is continuous on each $[x, 2]$, $0 < x < 2$. 
+
+	How can we show if this is improperly integrable? 
+
+	\textbf{Comparison method}
+	\begin{alignat*}{2}
+		& \qquad & 0\leq& \abs{\sin \frac1t} \leq 1\\
+		\Rightarrow & \qquad & 0 \leq& \frac{\abs{\sin \frac 1t}}{\sqrt t}
+		\leq \frac1{\sqrt t} \\
+		\Rightarrow & \qquad & 0\leq& \int _x^2 \frac{\abs{\sin \frac1t}}
+		{\sqrt t} dt \leq \int_x^2 \frac{dt}{\sqrt t} = 2\sqrt 2 - 2\sqrt x
+		\leq 2\sqrt 2
+	\end{alignat*}
+	
+	$H(x) = \int_x^2 \frac{\abs{\sin \frac1t}}{\sqrt t}dt$ is nonincreasing.
+
+	If $0<x'<x<2$, $H(x') - H(x) = \int_{x'}^2 h - \int_x^2 h =
+	\int_{x'}^x h + \int_x^2 h - \int_x^2 h = \int_{x'}^x h \geq 0$.
+	
+	\[
+		H(x') \geq H(x)
+	\]
+	$H'(x) - h(x) \leq 0$ by F.T. of C.I., $M.V.T. \Rightarrow$ $H$ is 
+	non-increasing, $H(x)$ is bouneded on $(0,2]$ and monotone. 
+	\[
+		\therefore \lim_{x\to 0^+} H(x) = \int_0^{\infty} 
+		\frac{\abs{\sin(\frac 1t)}}{\sqrt t} dt \qquad \text{exists}
+	\]
+}
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Jan 31}
+Facts from MATH 147: 
+\begin{enumerate}
+	\item $\lim_{x\to a} F(x) = L \Leftrightarrow$ for every sequence 
+		$(a_n)^{\infty}_{n=1}$ s.t. $\lim_{n\to\infty} a_n=a$, provides 
+		that $\lim_{n\to\infty} F(a_n) = L$. 
+	\item Let $(a_n)_{n=1}^{\infty}$ be a sequence in $\mR$, then 
+		$\lim_{n\to\infty} a_n$ exists $\Leftrightarrow$ for any $\ep>0$, 
+		there exists $n_\ep \in N$ s.t. 
+		$\abs{a_m-a_n} <\ep$ whenever $m,n \geq n_{\ep}$. \\
+\end{enumerate}
+
+Cauchy criterion[Deep Fact: Bolzano Weierstrass Theorem]\\
+
+\begin{theorem}[\textbf{Cauchy Criterion for limit of function}]
+	Let $F:(a,b]\to \mR$, then 
+	$\lim_{x\to a^+} F(x) \Leftrightarrow$ exists
+	for any $\ep>0$, there is $\delta > 0$ s.t. $\abs{F(u)-F(v)}<\ep$
+	whenever $\abs{u-a}<\delta$ and $\abs{v-a}<\delta$ for $u,v \in (a,b]$(*).
+\end{theorem}
+\begin{proof}
+	$\Rightarrow$ Let $L = \lim_{x\to \infty^+} F(x)$, then, given $\ep>0$, 
+	there is $\delta > 0$ s.t. 
+	\[
+		\abs{F(u) - L} < \frac{\ep}2
+	\]
+	where $\abs{u-a} < \delta$ and $u \in (a,b]$. 
+
+	Hence, if $u, v \in (a,b]$, $\abs{u-a} < \delta$, $\abs{v-a} < \delta$, then 
+	\[
+		\abs{F(u)- F(v)} \leq \abs{F(u) - L} + \abs{L-F(v)} < \ep
+	\]
+
+	$\Leftarrow$ We will verify Fact 1. Hence, let $(a_n)_{n=1}^{\infty} \subset
+	(a,b]$ be any sequence s.t. $\lim_{n\to\infty} a_n = a$, we wish to see 
+	that $(F(a_n))_{n=1}^{\infty}$ is Cauchy, hence, by fact 2, is convergent,
+	let $\ep>0$ be given, find $\delta > 0$ as in $(*)$
+
+	$\lim_{n\to\infty} a_n =a \Rightarrow$ there exists $n_{\delta} \in \mN$
+	s.t. $\abs{a-a_n} < \delta$ whenever $n \geq n_{\delta}$. 
+
+	Hence, if $m,n \geq n_{\delta}$, we have 
+	\[
+		\begin{rcases}
+			\abs{a-a_m} < \delta\\
+			\abs{a-a_n} < \delta
+		\end{rcases}
+		\Rightarrow \abs{a_m-a_n} < \delta
+	\]
+	note both $a_n, a_m$ are to the right of $a$. 
+
+	Thus $(*)$ provide that $\abs{F(a_n)-F(a_m)} < \ep$. Summary, we have
+	$n_{\ep} = n_{\delta}$ s.t. $\abs{F(a_n)-F(a_m)} < \ep$ whenever
+	$n,m \geq n_{\ep}$. 
+\end{proof}
+
+
+\textbf{Last Time: } 
+\[
+	\int_0^2 \frac{\abs{\sin (\frac 1t)}}{\sqrt t} dt =\lim_{x\to 0^+}
+	\underbrace{\int_x^2 \frac{\abs{\sin (\frac 1t)}}{\sqrt t} dt}_{H(x)}
+\]
+$H$ is monotone and bounded $\Rightarrow$ $\lim_{x\to a^+} H(x)$ exists. \\
+
+
+{\color{Brown}
+\textbf{Example 1: }
+
+Consider 
+\begin{align*}
+	&\int_0^1 \frac{\sin (\frac 1t)}{\sqrt t} dt = \lim_{x\to 0^+} 
+	\int_x^1 \frac{\sin(\frac 1t)}{\sqrt t} dt\\ 
+	&-1 \leq \sin (\frac 1t) \leq 1 \\
+	\Rightarrow & -\frac1{\sqrt y} \leq \frac{\sin(\frac 1t)}{\sqrt t}
+	\leq \frac1{\sqrt t} 
+	\overset{order\ properties}{\Rightarrow} -\int_x^1 \frac{dt}{\sqrt t}
+	\leq \int_x^1 \frac{\sin(\frac 1t)}{\sqrt t} dt
+	\leq \int_x^1 \frac{dt}{\sqrt t}
+\end{align*}
+Now we consider $0< u< v < 1$, again order properties give:
+\[
+	-\int_u^v \frac{dt}{\sqrt t} 
+	\leq \int_u^v \frac{\sin(\frac 1t)}{\sqrt t} dt
+	\leq \int_u^v \frac{dt}{\sqrt t}
+\]
+\[
+	-2(\sqrt v- \sqrt u) \leq F(v) - F(u) \leq 2 (\sqrt v - \sqrt u)
+\]
+\[	
+	\abs{F(v) - F(u)} \leq 2 (\sqrt v - \sqrt u) \leq 2\sqrt v
+\]
+If $\delta = \frac{\ep^2}{4}$ and if $0<u<v<\delta$
+\[
+	\abs{F(v) - F(u)} < 2\sqrt{\delta} = \ep
+\]
+hence, $\lim_{x\to 0 ^+}F(x)=\int_0^1 \frac{\sin(\frac 1t)}{\sqrt t}dt$
+exists. \\
+
+
+\textbf{Example 2:} $\int_0^{\infty} x^2 e^{-x} dx$ use integration by parts
+two times. \\
+}
+
+
+
+\textbf{Other Types of Integrals: }
+
+$\int_a^b f$, $f$ is integrable on each $[a,b]$, $a < x < b$, but unbounded. 
+
+{\color{Brown}
+	\textbf{Example: }
+
+	\[
+		\int_{-1}^1 \frac1{\sqrt{\abs t}}dt = \int_{-1}^0 \frac {dt}{\sqrt{-t}}
+		+ \int_0^1 \frac{dt}{\sqrt t}\\
+	\]
+}
+
+
+\begin{definition}
+	Let $a \in \mR$, $f : [a, \infty) \to \mR$ satisfy that $f$ is integrable
+	on each $[a,x]$, $a<x$, let the improper integral be given by 
+	\[
+		\int_a^{\infty} f = \lim_{x\to \infty} \int_a^x f, \qquad 
+		\text{if the limit exists}
+	\]
+\end{definition}
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+
+\newpage
+\subsection{Convergence and Comparison Test- Feb 3}
+
+
+\textbf{Notes on Comparison Test:}
+Consider the improper integral $\int_a^b f$, 
+either $f$ is unbounded at $a$ or at $b$, just one of $a,b$ is $-\infty$,
+or $\infty$. 
+
+\textbf{Case 1: }$f\geq 0$ on $(a,b)$, 
+\begin{itemize}
+	\item If we can find $0\leq f \leq g$ on $(a,b)$ and $\int_a^b g$ converges.
+		$\Rightarrow \int_a^b f$ converges. 
+
+		[We use monotone convergence theorem, and boundedness]
+	
+	\item 
+		If we can find $0\leq g \leq f$ on $(a,b)$ and $\int_a^b g$ diverges, 
+		then $\Rightarrow \int_a^b f$ diverges. 
+		\[
+			\int_a^x f \geq \int_a^x g \overset{x\to \infty}{\longrightarrow}
+			\infty
+		\]
+\end{itemize}
+\textbf{Case 2:}
+$f$ is not (neccessarily) non-negative on $(a,b)$, 
+\begin{itemize}
+	\item if we can find $g, h \geq 0$ with $-g \leq f \leq h$, and let
+		both $\int_a^b g$, $\int_a^b h$ converge, then $\int_a^b f$ converges. 
+
+		[Need is Cauchy criterion]\\
+\end{itemize}
+
+
+\begin{theorem}[\textbf{Cauchy Criterion for Limits at $\infty$}]
+	If $F : [0,\infty] \to \mR$, then
+	$\lim_{n\to\infty} F(x) \text{exists} \iff$ given $\ep>0$, there is 
+	$N>a$s.t. $\abs{F(u)-F(v)}<\ep$ whenever $u,v > N$. 
+\end{theorem}
+\begin{proof}
+	$(\Leftarrow)$ Let $(a_n)_{n=1}^{\infty} \subset [a,\infty)$ with
+	$\lim_{n\to\infty} a_n = \infty$, then there is $n_0 \in \mN$ so 
+	$m,n \geq n_0 \Rightarrow \abs{F(a_n) - F(a_m)} < \ep$.
+
+	Hence, $F(a_n)_{n=1}^{\infty}$ is Cauchy, hence admits limit $L$, 
+	check that for any $(b_n)_{n=1}^{\infty} \subset [a,\infty)$, 
+	$\lim_{n\to\infty} a_n \Rightarrow \lim_{n\to\infty} F(b_n) = L$.
+
+	Check that this implies that $\lim_{x\to \infty} F(x) = L$. 
+\end{proof}
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Integration and Area}
+
+let $f,g [a,b] \to \mR$ be integrable with $f\leq g$. 
+
+Let $S = \{(x,y): \text{y lies between} f(x) \text{and} g(x), a\leq x\leq b
+\}$.
+
+Partition $P=\{a=x_0<x_1<\cdots<x_n = b\}$. $s_j, t_j \in [x_{j-1},x_j]$. 
+\begin{align*}
+	area(S) \approx& \sum_{j=1}^n \underbrace{[g(t_j) - f(s_j)]}_{height}
+	\underbrace{(x_j-x_{j-1})}_{width}\\
+	=&\sum_{j=1}^n g(t_j) (x_j-x_{j-1}) - \sum_{j=1}^n f(s_j)(x_j-x_{j-1})\\
+	\approx& \int_a^b g - \int_a^b f = \int_a^b [g-f] 
+	\tag{Say $l(P) < \delta$, by A2Q1}
+\end{align*}
+
+hence we define 
+\[
+	area (S) : = \int_a^b [g(x) - f(x)] dx
+\]
+
+if $S$ is a nice region, 
+\begin{align*}
+	area (S) = \int_a^b h_S(x) dx
+	= \int_c^d W_S(y)dy
+\end{align*}
+
+{\color{Brown}
+\textbf{Warning Example: }
+\[
+	S = \{(x,y) : 0\leq y \leq 1, if \ x \in \mQ, -1 \leq y \leq 0; \quad
+	if \ x\in \mI, 0\leq x\ leq 1\} 
+\]
+
+Notice "height funciton" $h_S(x) = 1$. But we should \underline{not} 
+imagine that 
+\[
+	area(S) = \int_0^a h_S(x)dx = 1
+\]
+}
+
+
+{\color{Brown}
+\textbf{Example 1: }
+$S = \{(x,y): y \ between \ x^3, y = x^2 - 2x, -1 \leq x \leq 1\}$. 
+
+\[
+	area (S) = \int_{-1}^1 \abs{x^3 - (x^2-2x)}dx 
+	 = \int_{-1}^0 [x^2-2x-x^3]dx + \int_0^1 [x^3-x^2+2x]dx
+\]
+
+
+\textbf{Example 2: }
+Circle of radius $a> 0$: $x^2+y^2 = a^2$. 
+
+\[
+	area(C) = \int_{-a}^a [\sqrt{a^2-x^2} - (-\sqrt{a^2-x^2})]dx
+	 = 2\int_{-a}^a \sqrt{a^2-x^2}dx
+\]
+\underline{Method 1}: Substitute $x = au$, $dx=a\cdot du$, 
+\[
+	= 2\int_{-1}^1 \sqrt{a^2-(au)^2}du 
+	= a^2 \cdots 2\int_{-1}^1\sqrt{1-u^2}du = a^2 \pi
+\]
+
+\underline{Method 2}: $x = a\sin \theta$, $dx = a\cos \theta d\theta$, 
+$-\frac{\pi}2 \leq \theta \leq \frac{\pi}2$.
+\begin{align*}
+	area(C) 
+	=& 2\int_{-\frac{\pi}2}^{\frac{\pi}2} 
+	\sqrt{a^2-(a\sin \theta)^2} a\cos\theta d\theta\\
+	=& 2a^2 \int_{-\frac{\pi}2}^{\frac{\pi}2} \cos^2\theta d\theta\\
+	=& a^2 \int_{-\frac{\pi}2}^{\frac{\pi}2} [1+\cos2\theta] d\theta\\
+	=& a^2 [\theta+\frac12 \sin 2\theta]
+	\bigg\vert_{-\frac{\pi}2}^{\frac{\pi}2}
+	= a^2\pi + 0 = a^2\pi
+\end{align*}
+
+\textbf{Example 3: }
+let $W$ be a circular wedge: 
+\begin{align*}
+	area (W) 
+	=& \int_0^{a\cos \beta} (\tan\beta -\tan \alpha) xdx\\
+	=& \int_0^{a\cos \beta} (\tan \beta) \\
+	=& \frac{a^2}2 \sin \beta \cos \beta - \frac{a^2}2 \sin \alpha \cos \alpha
+	- a^2 \int_{\beta}^{\alpha} \sin^2 \theta d\theta\\
+	=& \frac{a^2}2 [\sin\beta \cos \beta - \sin \alpha \cos \alpha]
+	+ \frac{a^2}2 \left[(\beta - \alpha) - \frac 12 [\sin (2\beta) - 
+	sin 2\alpha]  \right]\\
+	=& a^2 \frac{\beta - \alpha}2 = a^2 \pi \frac{\beta - \alpha }{2\pi}
+\end{align*}
+Therefore, the area is 
+\[
+	area(W) = \frac{a^2}2 (\beta - \alpha)\\
+\]
+}
+
+\subsubsection{Average Value: }
+\[
+	a = \{a_1, a_2, \cdots, a_n\} \subset \mR 
+\]
+\[
+	a_{ave} = \frac{a_1 + \cdots + a_n}n 
+\]
+Let $f:[a,b]\to\mR$ be an integrable function, we wish to figure out 
+the "average value" $f_{ave}$. Uniform partition 
+\[
+	\{a < a+\frac{b-a}n < a + 2\frac{b-a}n < \cdots < b\} = P_n
+\]
+Sample values
+\[
+	t_j \in [a+(j-1)\frac{b-a}n . a+j\frac{b-a}n], \qquad j = 1, \cdots, n
+\]
+
+\textbf{Expect: }
+\[
+	f_{ave} \approx \frac{\sum_{j=1}^n f(t_j)} = \frac1{b-a}\sum_{j=1}^n 
+	f(t_j) \frac{b-a}n = \frac1{b-a} S(f,P_n)
+\]
+A2Q1 $\Rightarrow$ $\lim_{n\to \infty} \frac1{b-a} S(f,P_n)
+= \frac1{b-a}\int_a^b f$.\\
+
+\begin{definition}
+	The average height of $f$ is: 
+	\[
+		f_{ave} = \frac1{b-a} \int_a^b f
+	\]
+\end{definition}
+
+
+\subsubsection{Weighted Average}
+$a = \{a_1, \cdots, a_n\} \subset \mR$ weights $w_1, \cdots, w_n > 0$. 
+\[
+	a_{w, ave} = \frac{a_1w_1 + \cdots +a_nw_n}{w_1 + \cdots +w_n}
+\]
+We have integrable $f:[a,b] \to \mR$, $P=\{a = x_0 < x_1 < \cdots < x_n=b\}$,
+sample points $t_j \in [x_{j-1}, x_j]$. 
+\begin{align*}
+	f_{ave} 
+	\approx& \frac{f(t_1)(x_1-x_{0}) + f(t_2)(x_2-x_1) + 
+	\cdots + f(t_n)(t_n-t_{n-1})}{(x_1-x_0)+(x_2-x_1)+\cdots+(x_n-x_{n-1})}\\
+	=& \frac{\sum_{j=1}^n f(t_j) (x_j-x_{j-1})}{b-a} 
+	=& \frac1{b-a} S(f,P)
+\end{align*}
+
+\subsubsection{Centroid}
+$S$ is a "nice region", $P=\{a = x_0 < \cdots < x_n = b\}$, tags: 
+$t_j \in [x_{j-1}, x_j], j = 1, \cdots, n$. 
+
+$x$-center: $\bar x_s$, 
+\[
+	s_j = \{(x,y) \in S : x_{j-1} \leq x \leq x_j\}
+\]
+\[
+	\bar x_S \approx \frac{\sum_{j=1}^n t_j area(S_j) }{\sum_{j=1}^n area(S_j)}
+\]
+Then 
+\begin{align*}
+	\bar x_S =& \frac 1{area(S)} \cdot \int_a^b xh_S(x) dx\\
+	\bar y_S =& \frac 1{area(S)} \cdot \int_c^d yw_S(x) dy\\
+\end{align*}
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\section{S M H}
+
+\subsection{Polar Coordinates}
+Euclidean Coordinates: $(x,y) \in \mR^2$. 
+\[
+	r = \sqrt{x^2+y^2} \qquad \text{distance from origin}
+\]
+\[
+	x = r\cos \theta \qquad y = r\sin \theta
+\]
+
+Find $\theta$:
+\begin{itemize}
+	\item  $x > 0$, $-\frac{-\pi}2 < \theta < \frac{\pi}2$
+	\[
+		\frac yx = \frac{r\sin \theta}{r\cos \theta} = \tan \theta
+		\qquad \Rightarrow \qquad 
+		\arctan(\frac yx) = \theta
+	\]
+	\item $x < 0$: check that $\theta = \arctan (\frac yx)= \theta$
+	\item $x = 0$: \\
+		$y > 0$, $\theta = \frac{\pi}2$\\
+		$y < 0$, $\theta = -\frac{\pi}2$, $\frac{3\pi}2$
+\end{itemize}
+
+\textbf{Given} $r > 0$, $0 \leq \theta < 2\pi$,
+\[
+	(x, y) = (r\cos \theta, r\sin\theta) \text{is a unique point
+	in } \mR^2\ \{(0,0)\}
+\]
+
+{\color{Brown}
+\textbf{Example 1:} Circle
+$x^2 + y^2 = a^2$, $(a>0)$. 
+\begin{align*}
+	x =& r\cos \theta, y = r\sin\theta\\
+%
+	a^2 
+	=& (r\cos\theta^2) + (r\sin\theta)^2 \\
+	=& r^2 (\cos^2\theta+\sin^2\theta) = r^2\\
+	%
+	\Rightarrow a =& \pm r
+\end{align*}
+But $a = r$ survives, as $r\geq 0$. 
+
+Circle, in polar coordinates, $r = a$. \\
+
+
+\textbf{Example 2: }Vertical Lines: 
+
+\begin{itemize}
+	\item 	$x = a$, $a > 0$, 
+	\[
+		r\cos \theta = a 
+		\quad \Rightarrow \quad 
+		r = \frac a{\cos\theta} = a\sec\theta,
+		\qquad -\frac{\pi}2 < \theta < \frac{\pi}2
+	\]
+	\item $x = a$, $a < 0$, 
+		\[
+			r = \frac a{\cos\theta}, \qquad \frac{\pi}2 < \theta < \frac{3\pi}2
+		\]
+	\item $x = 0$, 
+		\[
+			\theta = \frac{\pi}2 \qquad  \lor \qquad  \theta = \frac{3\pi}2
+		\]
+\end{itemize}
+
+\newpage
+
+\textbf{Example 3:}
+\begin{figure}[!htbp]
+	\centering
+	\begin{tikzpicture}
+	\draw[thick,->] (-2,0)--(2,0) node[above] {$x$};
+	\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
+	\draw[domain=0:3*pi,scale=2.0,samples=500] 
+		plot ({deg(\x)}:{abs(sin(\x r))});
+	\end{tikzpicture}
+\end{figure}
+
+\textbf{Example 4: }
+\begin{figure}[!htbp]
+	\centering
+	\begin{tikzpicture}
+	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
+	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
+		plot ({deg(\x)}:{abs(cos(2*\x r))});
+	\end{tikzpicture}
+\end{figure}
+
+%		\begin{figure}[htbp]
+%		\centering
+%		\begin{tikzpicture}
+%		\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+%		\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
+%		\draw[domain=0:2*pi,scale=2.0,samples=500] 
+%			plot ({deg(\x)}:{cos(2*\x r)});
+%		\end{tikzpicture}
+%	\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}
+	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
+	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
+		plot ({deg(\x)}:{abs(sin(2*\x r))});
+	\end{tikzpicture}
+\end{figure}
+
+%
+%		\begin{figure}[htbp]
+%		\centering
+%		\begin{tikzpicture}
+%		\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+%		\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
+%		\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
+%			plot ({deg(\x)}:{acos(sin(\x r))});
+%		\end{tikzpicture}
+%	\end{figure}
+}
+
+
+\newpage
+\subsection{Arclength - Feb 7}
+\begin{definition}
+	$f:[a,b]\to \mR$ continuous,
+	\[
+		\Gamma = \{(x,y): y = f(x), a\leq x \leq b\}
+	\]
+	$P = \{a = x_0 < \cdots < x_n = b\}$, then 
+	\[
+		\Length(L_i) = \sqrt{(x_i-x_{i-1})^2 + [f(x_j)-f(x_{j-1})]^2}
+	\]
+	\[
+		\Length(\Gamma) \approx \sum_{j=1}^n length(\L_j) 
+		=\sum_{j=1}^n \sqrt{(x_j-x_{j-1})^2 + [f(x_j)-f(x_{j-1})]^2}
+	\]
+	Add assumptions: 
+	\begin{itemize}
+		\item f' exists on $[a,b]$ and is continuous on $[a,b]$
+	\end{itemize}
+	
+	\begin{alignat*}{2} 
+		M.V.T.
+		\Rightarrow &f(x_j-x_{j-1}) = f'(c_j) (x_j-x_{j-1}), \qquad
+		c_j\in (x_{j-1}, x_j)\\\\
+		%
+		\Rightarrow &\sqrt{(x_j-x_{j-1})^2 + [f(x_j)-f(x_{j-1})]^2}\\
+			=& \sqrt{(x_j-x_{j-1})^2 + [f'(c_j)(x_j-x_{j-1})]^2}\\
+			=& \sqrt{1+f'(c_j)^2}(x_j-x_{j-1})
+	\end{alignat*}
+	Then, 
+	\begin{align*}
+		\Length(\Gamma) \approx \sum_{j=1}^n \sqrt{1+[f'(c_j)]^2}
+		(x_j-x_{j-1})= S(\sqrt{1+(f')^2}, P)
+	\end{align*}
+\end{definition}
+
+\begin{definition}
+	If $f'$ exists and is continuous on $[a,b]$, $\Gamma = \{(x,y):
+	y= f(x), a\leq x \leq b\}$
+	\[
+		length(\Gamma) = \int_a^b \sqrt{1+[f'(x)]^2}dx
+	\]
+\end{definition}
+
+{\color{Brown}
+	\textbf{Example 1:}
+	
+	$0\leq \alpha<\beta\leq \pi$, $a > 0$ 
+	\[
+		\frac{dy}{dx} = \frac{-x}{\sqrt{a^2-x^2}}
+	\]
+	\begin{align*}
+		\Length(\Gamma) 
+		=&\int_{a\cos \beta}^{a\cos \alpha} 
+		\sqrt{1+(\frac{-x}{\sqrt{a^2-x^2}})^2}dx\\
+		%
+		=& \int_{a\cos \beta}^{a\cos \alpha} 
+		\frac{\alpha}{\sqrt{a^2-x^2}} dx\\
+		%
+		=& \int_{\beta}^{\alpha} 
+		\frac{\alpha}{\sqrt{a^2-a^2\cos^2\theta}}(-a\sin\theta)d\theta\\
+		%
+		=&\int_{\alpha}^{\beta} \alpha d\theta
+		= \alpha(\beta - \alpha)
+	\end{align*}
+	
+	\textbf{Example 2: }
+	$\Gamma = \{(x,y):y = x^2, 0\leq x\leq 2\}$, $\frac{dy}{dx} = 2x$
+	\[
+		\Length(\Gamma)= \int_0^2 \sqrt{1+(2x)^2}dx
+	\]
+	$2x = \sinh t = \frac{e^t-e^{-t}}2$, $dx = \frac12\cosh t dt$,
+	$\cosh t = \frac{e^t+e^{-t}}2$. 
+	
+	\begin{align*}
+		\Length(\Gamma) 
+		=& \int_0^{\log(4+\sqrt{17})} \sqrt{1+\sinh^2 t} \frac 12
+		\cosh t dt 
+		\tag{$t = \log(2x+\sqrt{(2x)^2+1})$}\\
+		=& \frac 12 \int_0^{\log(4+\sqrt{17})} \cosh^2 t dt
+		\tag{$\cosh^2 t = \frac 12 [\cosh (2t) + 1]$}\\
+		=& \frac12 \int_0^{\log(4+\sqrt{17})} [\cosh(2t) + 1]dt
+		\tag{$\sinh 2t= 2 \sinh t \cosh t$}\\
+		***check***=& \frac 14 \sinh(2t) + 
+		t\bigg\vert_0^{\log(4+\sqrt{17})}
+	\end{align*}
+
+	\textbf{Method 2}
+	$2x = \tan t$, $dx = \frac 12 \sec^2 t dt$, 
+	\[
+		length(\Gamma) = \int_0^{\arctan(4)} \sqrt{1+\tan^2 t}
+		\frac 12 \sec^2 t dt = \frac 12 \int_0^{\arctan (4)}\sec^2 t dt
+	\]
+	\begin{align*}
+		\int \sec^3 t dt 
+		=& \int \sec^2 t \sec t dt\\
+		=& \tan t \sec t - \int \tan t \tan t\sec t dt\\
+		=& \tan \sec t - \int (\sec^3 t - \sec t)dt\\\\
+		%
+		\Rightarrow 2 \int \sec^3 t dt \\
+		=& \tan t \sec t + \int \sec tdt \\
+		=& \tan t \sec + \log\abs{\sec t + \tan t} + C\\
+		%
+		\sec(\arctan 4) =& \sqrt{1+\tan^2(\arctan 4)} = \sqrt{1+16} = \sqrt{17}
+	\end{align*}
+}
+
+\newpage
+\subsection{Parameterization}
+
+We regard $x, y \in [a,b] \to \mR$ (coordinates are each functions)
+\[
+	\Gamma = \{y(t) : t \in [a,b]\} 
+\]
+{
+\color{Brown}
+Examples :
+
+\begin{itemize}
+	\item Polar Curves: 
+		$x(\theta) = r(\theta)\cos \theta$, 
+		$y(\theta) = r(\theta) \sin\theta$. 
+
+	\item Hyperbolic Coordinates: 
+		$a, b > 0$, $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$
+
+		$x(t) = a\cosh t$\\
+		$y(t) = b\sinh t$
+\end{itemize}
+}
+
+We wish to compute/define $\Length(\Gamma)$,
+
+assumption, 
+\begin{itemize}
+	\item $x'(t)$, $y'(t)$ always exist on $[a,b]$, $x',y' : [a,b] \to
+		\mR$ are each continuous, 
+		\[
+			P = \{a=t_0<t_1<\cdots<t_n=b\}
+		\]
+\end{itemize}
+\begin{align*}
+	length 
+	\approx& \sum_{j=1}^n length(L_j)\\
+	=& \sum_{j=1}^n \sqrt{[x(t_j) - x(t_{j-1})]^2 + [y(t_j)-y(t_{j-1})]^2}\\\\
+	%
+	M.V.T. \Rightarrow x(t_j) - x(t_{j-1}) =& x'(c_j) (t_j-t_{j-1}),
+	c_j \in (t_{j-1}, t_j)\\
+	y(t_j) - y(t_{j-1}) =& y'(c^*_j) (t_j-t_{j-1}),
+	c_j^* \in (t_{j-1}, t_j)\\
+\end{align*}
+
+\begin{align*}
+	length(\Gamma) 
+	\approx& \sum_{j=1}^n \sqrt{[x'(c_j)]^2 + [y'(c^*_j)]^2}(t_j-t_{j-1})\\
+	\approx& \sum_{j=1}^n \sqrt{[x'(c_j)]^2 + [y'(c_j)]^2}(t_j-t_{j-1})\\
+	=& S(\sqrt{(x')^2 + (y')^2}, P) \\\\
+	%
+	length(\Gamma)
+	=& \int_a^b \sqrt{(x'(t)^2 + y'(t)^2} dt
+\end{align*}
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+
+	\newpage
+	\subsection{Volume and Integration}
+	\textbf{Volume: }$S \subset \mR^3$ "nice region", typically bounded by
+	definable surfaces with definable cross-sections. 
+
+	\[
+		Partition = \{a = x_0 < x_1 < \cdots < x_n = b\} = Q 
+	\]	
+	\[
+		\Vol(P) = \sum_{j=1}^n \Vol(P_j) \approx 
+		\sum_{j=1}^n A(x_j)(x_j-x_{j-1})
+	\]
+	
+	We define $\Vol(P) = \int_a^b A(x)dx$. 
+
+	\[
+		A(x) = \int_{c(x)}^{d(x)}[z_{top, x}(y) - z_{bot, x}(y)]dy
+	\]
+	Hard Part: Figure out $z_{top, x}, z_{bot, x}, c(x), d(x)$. 
+
+	\textbf{Remark:} we may interchange roles of $x,y,z$. 
+
+	Circular Symmetry: circular symmetry about $x-$ axis, cross sections are 
+	circles. 
+	
+	\textbf{Method of Disks}
+	\[
+		A(x) = \pi[r(x)]^2
+	\]
+	\[
+		\Vol(S) = \pi\int_a^b [r(x)]^2 dx
+	\]
+
+	\textbf{Method of Cylindrical Shells}
+
+	Suppose that $R\subset \mR^3$ is circularly symmetric about $z-axis$. 
+
+	\[
+		P = \{0 = x_0 < x_1 < \cdots < x_n = b\}
+	\]
+	\begin{align*}
+		\Vol(R) \approx \sum_{j=1} \Vol(S_j)
+		= \sum_{j=1}^n 2\pi t_j h(t_j) (x_j-x_{j-1})\\
+		= \sum_{j=1}^n S(H,P) (x_j-x_{j-1})
+	\end{align*}
+	
+	\begin{align*}
+		\Vol(S_i) 
+		=& \Vol(cylinder, height\  h(t_j), radius \ x_j)
+		- \Vol(cylinder, height\ h(t_j), radius \ x_{j-1})\\
+		=& \pi x^2_j h(t_j) - \pi x^2_{j-1}h(t_j)\\
+		=& \pi(x^2_j-x^2_{j-1})h(t_j)\\
+		=& 2\pi \frac{x_j+x_{j+1}}2 (x_j-x_{j-1}) h(t_j)\\
+		=& 2\pi t_jh(t_j)(x_j-x_{j-1})
+	\end{align*}
+	\begin{align*}
+		\Vol (R) &= 2\pi \int_0^b xh(x)dx\\
+	%
+		\Vol (R) &= 2\pi \int_0^b x[z_{top, 0} (x) - z_{bot, 0}(x)]dx
+	\end{align*}
+%
+
+{\color{Brown}
+	\textbf{Example: }
+	$S$ a sphere, radius $a > 0$, $x^2+y^2+x^2 = a^2$. 
+
+	Compute volume $(S)$, 
+
+	\textbf{Disks: }
+	Fix $x$, for the moment, $-a \leq x \leq a$. Set $y =0$, 
+	\[
+		x^2+z^2 = a^2 \Rightarrow z^2=a^2-x^2 \Rightarrow r(x) = \sqrt{a^2-x^2}
+	\]
+
+	\[
+		\Vol(S) = \pi \int_0^a (\sqrt{a^2-x^2})^2dx = \frac 43 \pi a^3
+	\]
+	
+	\textbf{Cylindrical Shells: }
+	\begin{align*}
+		h(x) =& \sqrt{a^2-x^2}-(-\sqrt{a^2-x^2}) = 2\sqrt{a^2-x^2}\\\\
+		%
+		\Vol(S) =& 2\pi \int_0^a x 2\sqrt{a^2-x^2}dx \\
+		=& 4\pi \int_0^a x\sqrt{a^2-x^2}dx \\
+		=& \frac 43 \pi a^3
+	\end{align*}
+
+}
+
+\newpage
+	\subsection{Application of Antiderivatives: }
+
+	\textbf{}
+
+	\subsection{Differential Equations}
+	1st order D.E., standard form: 
+	\[
+		y' = f(x,y) \qquad , \qquad \underbrace{y(x_0) = y_0}_{initial
+		value}
+	\]
+	\textbf{Facts:} 
+	\begin{theorem}[\textbf{Caratheodory Existence Theorem:}]
+		$f(x,y)$ is continuous near $(x_0, y_0)$ $\Rightarrow$ solution to
+		$I.V.P.$ exists. 
+	\end{theorem}
+	\begin{theorem}[\textbf{Picard-Lindelof Theorem}]
+	\end{theorem}
+	Nice assumption of $2$nd variable of $f$ near $(x_0, y_0)$. 
+	Caratheodory Existence Theroem: 
 
 	{\color{Brown}
 	\textbf{Example: }
+	$y' = x \cdot y^{\frac 13}$, $y(0)=x_0$
 
-	Consider 
-	\begin{align*}
-		&\int_0^1 \frac{\sin (\frac 1t)}{\sqrt t} dt = \lim_{x\to 0^+} 
-		\int_x^1 \frac{\sin(\frac 1t)}{\sqrt t} dt\\ 
-		&-1 \leq \sin (\frac 1t) \leq 1 \\
-		\Rightarrow & -\frac1{\sqrt y} \leq \frac{\sin(\frac 1t)}{\sqrt t}
-		\leq \frac1{\sqrt t} 
-		\overset{order\ properties}{\Rightarrow} -\int_x^1 \frac{dt}{\sqrt t}
-		\leq \int_x^1 \frac{\sin(\frac 1t)}{\sqrt t} dt
-		\leq \int_x^1 \frac{dt}{\sqrt t}
-	\end{align*}
-	Now we consider $0< u< v < 1$, again order properties give:
-	\[
-		-\int_u^v \frac{dt}{\sqrt t} 
-		\leq \int_u^v \frac{\sin(\frac 1t)}{\sqrt t} dt
-		\leq \int_u^v \frac{dt}{\sqrt t}
-	\]
-	\[
-		-2(\sqrt v- \sqrt u) \leq F(v) - F(u) \leq 2 (\sqrt v - \sqrt u)
-	\]
-	\[	
-		\abs{F(v) - F(u)} \leq 2 (\sqrt v - \sqrt u) \leq 2\sqrt v
-	\]
-	If $\delta = \frac{\ep^2}{4}$ and if $0<u<v<\delta$
-	\[
-		\abs{F(v) - F(u)} < 2\sqrt{\delta} = \ep
-	\]
-	hence, $\lim_{x\to 0 ^+}F(x)=\int_0^1 \frac{\sin(\frac 1t)}{\sqrt t}dt$
-	exists. 
+	\textit{Solution \#1:} $y(x) = 0$ 
+	
+	\textit{Solution \#2:} assume $y(0)\neq 0$, hence $y(x)\neq 0$ in 
+	neighborhood of $x$. 
 	}
 
-	
-	\subsection{Feb 3}
 
-	\textbf{notes on comparison}
-	
 
+	\newpage
+	\subsection{Feb 14}
+	An object e.g. person with open parachute falls from a standstill to the 
+	earth from height $H$.  (H large $H < R$. ) 
+
+	As the object falls, it experiences wind resistance proportional to
+	velocity. 
 
 
 
 \end{document}
+
 
