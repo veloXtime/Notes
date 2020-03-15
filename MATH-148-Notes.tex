@@ -3957,30 +3957,264 @@ $b-a=1 \Rightarrow$ converges.
 	\]
 	If $n\geq 2N+1$, and with $k = \floor{\frac n2} \geq N$, we have
 
+	\[
+		S_n 
+		= 
+		\begin{cases}
+			S_{2k}, &n  \text{ even}		\\
+			S_{2k=1}, &n \text{ odd}
+		\end{cases}
+	\]
+	and thus 
+	\[
+		\abs{L-S_n} = \begin{cases}
+		\abs{L-S_{2k}}, & n \text{even}	\\
+		\abs{L-S_{2k} - a_{2k+1}}, & n \text{odd}
+		\end{cases}
+		< 
+		\begin{cases}
+			\frac{\ep}2	\\
+			\frac{\ep}2 + \frac{\ep}2 
+		\end{cases}
+		\leq \ep
+	\]
+	So we conclude that $\lim_{n\to\infty} (-1)^{k+1}a_{k} = L$. 
+\end{proof}
+
+\begin{corollary}
+	Let $(a_n)_{n=1}^{\infty} \subset \mR$ satisfy that 
+	\begin{itemize}
+		\item $a_k$ is eventually non-increasing, non-negative, there is $N \in
+			\mN$, $a_k \geq a_{k+1} \geq 0$ if $k \geq N$. 
+		\item $\lim_{k\to\infty} a_n = 0$,
+	\end{itemize}
+	then, 
+	\begin{enumerate}
+		\item $\sum_{k=1}^{\infty} (-1)^{k+1}a_k$ converges
+		\item Error estimate: if $m \geq N$, $\abs{\sum_{k=m}^{\infty}(-1)^k a_k}
+			\leq a_m$
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	Let $n > m \geq N$, 
+	\begin{align*}
+		\sum_{k=1}^n (-1)^{k+1}a_k 
+		=& \sum_{k=1}^n (-1)^{k+1}a_k + \sum_{k=m+1}^n(-1)^{k+1} a_k	\\
+		=& \sum_{k=1}^n (-1)^{k+1}a_k + (-1)^m \sum_{k=m+1}^n(-1)^{k-m+1} a_k\\\\
+		%
+		\lim_{n\to\infty} \sum_{k=m+1}^n(-1)^{k-m+1} a_k 
+		=& \lim_{n\to\infty} \sum_{l=1}^{n-m} (-1)^{l+1} a_{l+m}	\\
+		=& \sum_{l=1}^{\infty} (-1)^{l+1} a_{l+m} \in [0, a_{m+1}]
+	\end{align*}
+\end{proof}
+
+{\color{Brown}
+\textbf{Example: }
+Let $F(x) = \int_0^x \sin(\frac 1t) dt$.
+
+FTofCI, $x \neq 0$, $F'(x) = \sin(\frac 1t)$, as $x\mapsto \sin(\frac 1x)$ is 
+continuous away from $0$. 
+
+Notice that hte integrand is not continuous at $x = 0$, can we evaluate
+$F'(0)$?  
+
+\textit{Answer:} $F'(0) = 0$. 
+
+Notice that 
+\[
+	F(-x) = \int_0^{-x} \sin (\frac 1t)dt = \int_0^x \sin(-\frac 1u)du
+	= \int_0^x \sin(\frac 1u)du = F(x)
+\]
+so $F$ is even, also, $F(0) = 0$, want 
+\[
+	\lim_{x\to 0} \frac{F(x) - F(0)}{x-0} 
+	= \lim_{x\to 0} \frac{F(x)}x 
+\]
+We will assess $\lim_{x\to 0^+} \frac{F(x)}x$. 
+
+Set $x > 0$, since $t \mapsto \sin(\frac 1t)$ is bounded and continuous on
+$(o,x]$,
+\[
+	F(x) = \int_0^x \sin(\frac 1t)dt
+	= \lim_{u\to 0^+} \int_u^x \sin(\frac 1t)dt
+\]
+Since 
+\[
+	F(x) = \lim_{n\to\infty} \int_{\frac1{(n+1)\pi}}^x \sin (\frac 1t)dt 
+	= \lim_{n\to\infty}
+	\left[
+		\sum_{k=k_x}^n \int_{\frac1{(k+1)\pi}}^{\frac 1{k\pi}} 
+		\sin(\frac 1t)dt 
+		+ 
+		\int_{\frac1{k_x\pi}}^x \sin (\frac 1t)dt
+	\right]
+\]
+where $k_x$ in $\mN$ satisfy that 
+\begin{align*}
+	& &\frac1{k_x\pi} \leq x <& \frac 1{(k_x-1)\pi}	\\
+	\Rightarrow &	&\frac 1{k\pi} \leq& k_x	\\
+	\Rightarrow &	&k_x - 1 <& \frac 1{k\pi}	\\
+	\Rightarrow &	&k_x =& \ceil{\frac1{k\pi}}	\geq \frac1{x\pi}
+\end{align*}
+let 
+\[
+	a_k = \int_{\frac1{(k+1)\pi}}^{\frac 1{k\pi}} \abs{\sin(\frac 1t)}dt > 0
+\]
+\[
+	\sum_{k=k_x} \int_{\frac1{(k+1)\pi}}^{\frac 1{k\pi}} \sin(\frac 1t)dt 
+	=\sum_{k=k_x}^n (-1)^k a_k
+\]
+Now 
+\begin{align*}
+	a_{k+1} 
+	=& \int_{\frac1{(k+2)\pi}}^{\frac 1{(k+1)\pi}} \abs{\sin(\frac 1t)dt}	\\
+	=& \frac k{k+2} 
+	\int_{\frac1{(k+1)\pi}}^{\frac 1{k\pi}} \abs{\sin(\frac 1u)}du< a_k		\\\\
+	%
+	u =& \frac{\frac1{k\pi}-\frac1{(k+1)\pi}}{\frac1{(k+1)\pi}-\frac1{(k+2)\pi}}
+	- (t - \frac 1{(k+2)\pi}) + \frac 1{(k+1)\pi}	\\
+	=& \frac{k+2}k (t- \frac1{(k+2)\pi}) + \frac1{(k+1)\pi} 
+	\Rightarrow \frac{k+2}k dt
+\end{align*}
+Hence,r
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{March 12}
+\begin{proposition}[\textbf{Arbitrary Rearrangement}]
+	If $\sum_{k=1}^{\infty} a_k$ converges absolutely, and let $\sigma :\mN
+	\to \mN$ be one-to-one and onto, (arbitrary rearrangement of $\mN$), then
+	$\sum_{k=1}^{\infty} a_{\sigma}(k)$ converges, to the value of 
+	$\sum_{k=1}^{\infty} a_k$. 
+\end{proposition}
+\begin{proof}
+	We start with Cauchy Criterion, given $\ep > 0$, there is $N$ in $\mN$, 
+	s.t. 
+	\[
+		\sum_{k=m}^n \abs{a_k} < \frac{\ep}2 \qquad 
+		\text{whenever } n > m \geq N
+	\]
+	We next choose $N_{\sigma}$ s.t. 
+	\[
+		\{1, \ldots, N\} \subseteq 
+		\{\sigma(1), \sigma (2), \ldots, \sigma(N_{\sigma})\}
+	\]
+	[ontoness of $\sigma$ is required]. Thus we let $n > N_{\sigma} \geq N$,
+	then. 
+	\begin{align*}
+		\abs{\sum_{k=1}^n a_k - \sum_{k=1}^n a_{\sigma(k)}}
+		=& \abs{\sum_{k=N+1}^n a_k - \sum_{k=1}^n a_{\sigma(k)}}	\\
+		\leq& \sum_{k=N+1} \abs{a_k} +
+		\sum_{k = N+1}^{\max\{\sigma(j) : j=1,\ldots, N\}} \abs{a_k}	\\
+		<& \frac{\ep}2 + \frac{\ep}2 = \ep
+	\end{align*}
+	it follows that 
+	$\sum_{k=1}^{\infty} a_k = \lim_{a\to\infty} \sum_{k=1}^n a_k 
+	= \lim_{k\to\infty} \sum_{k=1}^n a_{\sigma(k)} = \sum_{k=1}^{\infty}
+	= \sum_{k=1}^{\infty} a_{\sigma(k)}$. 
 
 \end{proof}
 
+
+\textbf{\textit{Remark:}} 
+
+We say that $\sum_{k=1}^{\infty} a_k$ is 
+\textbf{conditionally convergent} if it is convergent, but not absolutely
+convergent. 
+
+{\color{Brown}
+	\textbf{Example:}
+	$\sum_{k=1}^n \frac{(-1)^k}k$ (L.A.S.T $\Rightarrow$ convergent), if fact,
+	$= -\log 2$(A4)
+}
+
+if $\sum_{k=1}^{\infty}a_k$ is conditionally convergent, and $\alpha\in\mR$(any
+$\alpha$ will do). then there exists a rearrangement $\sigma_{\alpha}:\mN\to
+\mN$ s.t. 
+\[
+	\sum_{k=1}^{\infty} = a_{\sigma(k)} = \alpha
+\]
+
+\begin{proposition}[\textbf{Cauchy Product Formula}]
+Let $\sum_{k=0}^{\infty} a_k, \sum_{l=0}^{\infty}b_k$ each be absolutely 
+convergent, then,
+\[
+	\sum_{k=0}^{\infty} a_k \ldots \sum_{l=0}^{\infty}b_k
+	= \sum_{k=0}^{\infty} (\sum_{j=0}^{k} a_jb_{k-j})
+\]
+\end{proposition}
+\begin{proof}
+	Let $N \in \mN$ be so for $n>m \geq N$ we have 
+	\[
+		\sum_{k=m}^n \abs{a_k} < \sqrt{\ep}, \sum_{l=m}^n \abs{b_l}<\sqrt{\ep}
+	\]
+	$n \in \mN$, 
+	\[
+		\sum_{k=0}^{n} a_k \cdot \sum_{l=0}^n b_l
+		= \sum_{k=0}^n \sum_{l=0}^n a_kb_l
+	\]
+	Now let $n\geq 2N+2$, $\frac n2 \geq N+1\Rightarrow \floor{\frac n2}\geq N$.
+	\begin{align*}
+		& \abs{\sum_{k=0}^n a_k \cdot \sum_{l=0}^n b_k - \sum_{k=0}^{n}
+		(\sum_{j=0}^k a_jb_{k-j})}	\\
+		=& \abs{\sum_{k,l=1, k+l>n}^n a_kb_l}
+		\leq \sum_{k,l=1, k+l>n}^n \abs{a_k}\abs{b_l}	\\
+		\leq& \sum_{k=\floor{\frac n2}}^n \abs{a_k} \cdot 
+		\sum_{l = \floor{\frac n2}} < \sqrt{\ep} \cdot \sqrt{\ep} = \ep
+	\end{align*}
+	\begin{align*}
+		\sum_{k=0}^{\infty} a_k \cdot \sum_{l=0}^{\infty} b_l
+		=& \lim_{n\to\infty} \sum_{k=0}^{\infty} a_k\cdot \sum_{l=0}^n b_l \\
+		=& \lim_{n\to\infty} \sum_{k=0}^{\infty} (\sum_{j=0}^k a_j b_{k-j})	\\
+		=& \sum_{k=0}^{\infty}(\sum_{j=0}^k a_j b_{k-j})
+	\end{align*}
+\end{proof}
+
+
+\begin{definition}
+	Let $f:[1,\infty) \to\mR$, be integrable on $[1,x]$, $x > 1$, we say that
+	$\int_1^{\infty} f$ converges absolutely, if $\int_1^{\infty}\abs{f}$
+	converges. \\
+\end{definition}
+
+\begin{proposition}
+	With $f$ satisfying first assumption above, t$\int_1^{\infty}$ converges
+	absolutely $\Rightarrow \int_1^{\infty} f$ converges. 
+\end{proposition}
+\begin{proof}\textbf{Cauchy Criterion}
+
+	Given $\ep > 0$, there is $M > 1$ s.t. 
+	\[
+		\int_u^v \abs f < \ep \qquad 
+		\text{whenever} v > u \geq M
+	\]
+	hence, 
+	\[
+		\abs{\int_u^v f} \leq \int_u^v \abs{f} < \ep
+		\qquad 
+		\text{if}
+		\quad 
+		v > u \geq M
+	\]
+	Thus $F()x = \int_1^x f$ converges as $x \to \infty$.
+\end{proof}
+
+\begin{proposition}
+	Let $f$ satisfy first assumption ab ove, if there is $g:[1,\infty) \to
+	\mR$, then 
+	\begin{itemize}
+		\item $\abs{f(t)} \leq g(t)$
+	\end{itemize}
+\end{proposition}
 
 
 
