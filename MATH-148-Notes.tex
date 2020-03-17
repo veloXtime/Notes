@@ -3406,7 +3406,7 @@ $\sum_{k=1}^{\infty} \frac 1k$. \\
 		\leq& \sum_{k=1}^n a_k + \sum_{k=N}^{\infty} b_k	\\
 		\leq& \sum_{k=1}^n a_k +\underbrace{\lim_{n\to\infty} \sum_{k=1}^n b_k}
 		_{nondecreasing \ in\ n} \\
-		\leq& \underbrace{\sum_{k=1}^{N+1} a_k}_{finite}
+		\leq& \underbrace{\sum_{k=1}^{N-1} a_k}_{finite}
 		+ \underbrace{\sum_{k=1}^{\infty} b_k }_{<\infty}
 		\tag{added in $\sum_{k=1}^{\infty} b_k \geq 0$} 
 	\end{align*}
@@ -3539,7 +3539,7 @@ test or limit comparison test, we will see that it has strong theoretical value.
 		\Rightarrow & \qquad & \frac{a_{k+1}}{b_{k+1}} \leq&\frac{a_k}{b_k}	\\
 		\Rightarrow & \qquad & \frac{a_k}{b_k} \leq &\frac{a_N}{b_N} = M
 		\qquad for \ k \geq N	\\
-		\Rightarrow & \qquad & a_k \geq& Mb_k, \quad for\ k \geq N
+		\Rightarrow & \qquad & a_k \leq& Mb_k, \quad for\ k \geq N
 	\end{alignat*}
 	Then $\sum_{k=1}^{\infty} b_k$ converges 
 	$\Rightarrow \sum_{k=1}^{\infty} Mb_k$ converges $\Rightarrow$ 
@@ -3550,7 +3550,7 @@ test or limit comparison test, we will see that it has strong theoretical value.
 \begin{theorem}[\textbf{Ratio test}]
 	Suppose $a_k > 0$ and that 
 	\[
-		\lim_{k\to\infty} a_k = r \qquad \text{exists}
+		\lim_{k\to\infty} \frac{a_{k+1}}{a_k} = r \qquad \text{exists}
 	\]
 	Then $r \geq 0$, and 
 	\begin{enumerate}
@@ -3752,7 +3752,7 @@ $\gamma = \lim_{n\to\infty} [\sum_{k=1}^n \frac 1k - \log n]$ exists.
 
 \textit{Recall:} \\
 $\floor{x} = \max \{k \in \mZ : k \leq x\}$	\\
-$\floor(t) \leq t \leq \floor{t} + 1; t \geq 1$\\
+$\floor{t} \leq t \leq \floor{t} + 1; t \geq 1$\\
 $\frac 1{\floor{t}} \geq \frac 1t \geq \frac 1{\floor{t} + 1}$	\\
 $\Rightarrow \qquad \frac 1{\floor{t}} - \frac 1t = 0$
 
@@ -3774,7 +3774,7 @@ When $a_k > 0$, $\lim_{n\to\infty} \frac{a_{k+1}}{a_k} = 1$.
 }
 
 \begin{proposition}[\textbf{Raabe's Test}]
-	Suppose $\lim_{n\to\infty} k (1-\frac{a_{k+1}}{a_k}) = p \in \mR$,
+	Suppose $\lim_{k\to\infty} k (1-\frac{a_{k+1}}{a_k}) = p \in \mR$,
 	then 
 	\begin{enumerate}
 		\item If $p > 1 \Rightarrow \sum_{k=1}^{\infty} a_k$ converges
@@ -3791,9 +3791,9 @@ When $a_k > 0$, $\lim_{n\to\infty} \frac{a_{k+1}}{a_k} = 1$.
 \item 
 	Let $q>0 \in \mR$, 
 	\[
-		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} = 1-\frac 1k + \frac{B_k}{k^2}
+		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} = 1-\frac qk + \frac{B_k}{k^2}
 	\]
-	where $0 \leq B_k \leq (q+1)1$ (i.e. is bounded).
+	where $0 \leq B_k \leq (q+1)q$ (i.e. is bounded).
 
 	Indeed, 
 	\[
@@ -3804,8 +3804,8 @@ When $a_k > 0$, $\lim_{n\to\infty} \frac{a_{k+1}}{a_k} = 1$.
 	\]
 	Let $f = (1+x)^{-q}$, $f(x) = -q(1+x)^{-q-1}$, $f''(x) = q(q+1)(1+x)^{-q-2}$.
 
-	Taylor's Theorem about $a = 0$: $f(x) = 1-qx \frac{q(q+1)}{(1+cx)^{q+2}}x^2$,
-	$cx$ between $0$ and $x$.
+	Taylor's Theorem about $a = 0$: $\displaystyle f(x) = 1-qx + \frac{q(q+1)}{(1+c_x)^{q+2}}x^2$,
+	$c_x$ between $0$ and $x$.
 	\[
 		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} 
 		= (1+\frac 1k)^{-q}
@@ -3819,7 +3819,7 @@ When $a_k > 0$, $\lim_{n\to\infty} \frac{a_{k+1}}{a_k} = 1$.
 	\begin{align*}
 		\frac{a_{k+1}}{a_k} 
 		=& 1-\frac pk + \frac pk - 1 + \frac{a_{k+1}}{a_k}	\\
-	=& 1- \frac pk \frac 1k \underbrace{p-k(1-\frac {a_{k+1}}{a_k}))}_{:=A_k}\\
+	=& 1- \frac pk + \frac 1k (\underbrace{p-k(1-\frac {a_{k+1}}{a_k}))}_{:=A_k}\\
 	=& 1- \frac pk + \frac{A_k}k
 	\end{align*}
 \[
@@ -3887,7 +3887,7 @@ converges.
 	\frac{a_{k+1}}{a_k} 
 	= \sum_{k=1}^{\infty} 
 	\frac{\prod_{i=1}^{k+1} \frac{a+i}{b+i}}{\prod_{i=1}^k \frac{a+i}{b+i}} 
-	= \frac{a+k+1}{a+k} \overset{k\to\infty}{\longrightarrow} 1
+	= \frac{a+k+1}{b+k+1} \overset{k\to\infty}{\longrightarrow} 1
 \]
 
 By Raabe's Test: 
