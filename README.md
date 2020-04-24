@@ -1,6 +1,6 @@
 # Notes(updating)
 
-Felicity Xu (velo.x) 
+velo.x
 
 MATH 147: <br/>
 prof: Kenneth Davidson<br/>
