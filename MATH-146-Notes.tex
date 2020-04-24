@@ -19,7 +19,7 @@
 
 \usetkzobj{all}
 
-\theoremstyle{plain}
+%\theoremstyle{plain}
 
 \newtheorem{theorem*}{Theorem}[subsection]
 \newtheorem{theorem}{Theorem}[subsection]
@@ -1368,7 +1368,7 @@ Tutorial: Monday, 4:30, MC1085
 
 
 	\newpage
-	\section{LINEAR TRANSFORMATION}
+	\section{LINEAR TRANSFORMATION and MATRIX}
 	\subsection{Introduction to Linear Transformation - Jan 27}
 	\begin{definition}
 		Let $V$, $W$ be vector spaces over $\mF$, a function $T:V\to W$
@@ -2340,8 +2340,7 @@ Tutorial: Monday, 4:30, MC1085
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
 	\newpage
-	\section{MATRIX}
-	\subsection{Introduction - Feb 7}
+	\subsection{Introduction to Matrix - Feb 7}
 	\begin{proposition}
 		Suppose $T:V\to W$ linear over $\mF$, 
 		let $\beta = (v_1,\cdots, v_n)$ be an ordered basis for $V$,
@@ -3075,7 +3074,7 @@ Tutorial: Monday, 4:30, MC1085
 %==============================================================================
 %==============================================================================
 \newpage
-\section{Chapter 3?}
+\section{CHAPTER 3}
 
 	\textbf{Facts: } 
 	\begin{enumerate}
@@ -5094,5 +5093,153 @@ By a sequence of adjacent row switches, $A \leadsto A' = \begin{pmatrix}
 		4.5, 
 		
 \end{proof}
+
+
+
+
+\newpage
+\subsection{March 13}
+Every elementary matrix arises
+\[
+	I_n \overset{row \ ope}{\longrightarrow} E
+\]
+So, if $E$ is a elementary matrix of 
+\begin{itemize}
+\item type 1: 
+\[
+	\det E = -\det I_n = -1
+\]
+if $E$ is an elementary matrix of type 2: 
+\item type 2:
+\[
+	\det E = c\cdot \det I_n = c
+\]
+\item type 3:
+	\[
+		\det E = \det I_n = 1
+	\]
+\end{itemize}
+
+\textbf{\textit{Observe:}} for elementary matrix $E$, 
+\begin{enumerate}
+	\item $\det E \neq 0$
+	\item $\det (E^t) = \det (E)$ 
+\end{enumerate}
+Because $E^t$ is an elementary matrix of the same type. 
+
+\textbf{\textit{Pause:}} 
+we get an "easy" way to calculate $\det A$, use type 1 and 3 row operations
+to $A \leadsto B$ upper triangle. 
+
+{\color{Brown}
+	\textbf{Example: }
+	\[
+		\det 
+		\begin{pmatrix}
+			0 & 1 & 3	\\
+			-2 & -3 & -5	\\
+			3 & -1 & 1
+		\end{pmatrix}
+	\]
+	\[
+		A = 
+		\begin{pmatrix}
+			0 & 1 & 3	\\
+			-2 & -3 & -5\\
+			3 & -1 & 1	\\
+		\end{pmatrix}
+		\overset{R_1 \rightleftharpoons R_3}{\longrightarrow}
+		\begin{pmatrix}
+			3 & -1 & 1	\\
+			-2 & -3	& -5	\\
+			0 & 1 & 3
+		\end{pmatrix}
+		\overset{R_2 \leftarrow R_2 + \frac 23 R_1}{\longrightarrow}
+		\begin{pmatrix}
+			3 & -1 & 1	\\
+			0 & -\frac{11}3 & -\frac{13}3	\\
+			0 & 1 & 3
+		\end{pmatrix}
+	\]
+	\[
+		\overset{R_3 \rightleftharpoons R_3}{\longrightarrow} 
+		\begin{pmatrix}
+			3 & -1 & 1	\\
+			0 & 1 & 3	\\
+			0 & -\frac{11}3 & -\frac{13}3	\\
+		\end{pmatrix}
+		\overset{R_3 \leftarrow R_3+\frac{11}3R_2}{\longrightarrow}
+		\begin{pmatrix}
+			3 & -1 & 1	\\
+			0 & 1 & 3	\\
+			0 & 0 & \frac{20}3 
+		\end{pmatrix} = B
+	\]
+	so $\det A = (-1)^2 \det (B) = 20$. 
+	$\det B = 3(1)(\frac{20}3) = 20$. 
+}
+
+
+
+\begin{theorem}[\textbf{Thm 4.11}]
+	For any $A, B \in M_{n\times n}(\mF)$, 
+	\[
+		\det (AB) = \det (A) \det (B) 
+	\]
+\end{theorem}
+\begin{proof}
+	\textit{Case 1}:
+	$A$ invertible, so $A = E_k \ldots E_2 E_1$, $E_i$ elementary. 
+
+	So 
+	\begin{align*}
+		\det (AB) 
+		=& \det (E_k \ldots E_1 B)	\\
+		=& \det (E_k) \ldots \det(E_1) \det (B)	\tag{By *}\\
+		=& \det(E_k \ldots E_1) \det(B)	\tag{By **}\\
+		=& \det (A) \det(B)
+	\end{align*}
+	\textit{Case 2:} 
+	$A$ is not invertible $\det(A) = 0 \Rightarrow (\det A) (\det B) = 0$, 
+	Need $\det(AB) = 0$, need $AB$ non-invertible. 
+	
+	If $AB$ were invertible then $A$ would be too, Feb 14, so AB is not 
+	invertible. 
+
+\end{proof}
+
+
+\begin{corollary}
+	If $A$ is invertible, then $\det(A^{-1}) = \frac1{\det(A)}$. 
+\end{corollary}
+\begin{proof}
+	$AA^{-1} = I_n$ so Thm 4.10, $(\det A) (\det A^{-1}) = \det(I_n) = 1$. 
+\end{proof}
+
+\begin{corollary}[\textbf{Cor 4.12}]
+	For $A \in M_{n\times n}(\mF)$, $\det(A^t) = \det A$. 
+\end{corollary}
+\begin{proof}
+	\textit{Case 1:} 
+	$A$ is not invertible, so $A^t$ also not invertible. 
+
+	$\Rightarrow \det A^t = \det A = 0$. 
+
+	\textit{case 2:} 
+	$A$ invertible, so $A = E_k \ldots E_2 E_2$, and $A^t = E_1^t E_2^t \ldots
+	E_k^t$. 
+\end{proof}
+
+
+
+
+
+\subsection{}
+
+
+
+
+
+
 
 \end{document}
