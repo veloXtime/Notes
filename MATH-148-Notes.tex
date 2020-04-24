@@ -85,6 +85,7 @@
 \newpage
 
 \section{INTEGRATION, SUMMATION}
+
 	MOTIVATION: area, let $a<b$ in $\mathbb{R}$, and 
 	let $f:[a,b]\to [0,\infty]$, let 
 	\[
@@ -440,7 +441,7 @@
 	$\abs{x_n-x_n'}=\frac1{2n} \overset{\to}{n\to\infty} 0$.
 	\[
 		\abs{f(x_n)-f(x_n')} = \abs{n-2n} = n
-	\]
+	:\]
 	Hence, not uniformly continuous. \\
 
 	\textbf{Example 2:} $g:(0,1]\to\mathbb{R}$, $g(x) = \sin \frac 1x$, then
@@ -2275,7 +2276,7 @@ Therefore, the area is
 \]
 }
 
-\subsubsection{Average Value: }
+\subsubsection{Average Value}
 \[
 	a = \{a_1, a_2, \cdots, a_n\} \subset \mR 
 \]
@@ -2416,59 +2417,59 @@ Circle, in polar coordinates, $r = a$. \\
 \end{itemize}
 
 \newpage
-%
-%\textbf{Example 3:}
-%\begin{figure}[!htbp]
-%	\centering
-%	\begin{tikzpicture}
-%	\draw[thick,->] (-2,0)--(2,0) node[above] {$x$};
-%	\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
-%	\draw[domain=0:3*pi,scale=2.0,samples=500] 
-%		plot ({deg(\x)}:{abs(sin(\x r))});
-%	\end{tikzpicture}
-%\end{figure}
-%
-%\textbf{Example 4: }
-%\begin{figure}[!htbp]
-%	\centering
-%	\begin{tikzpicture}
-%	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
-%	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
-%	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
-%		plot ({deg(\x)}:{abs(cos(2*\x r))});
-%	\end{tikzpicture}
-%\end{figure}
-%
-%%		\begin{figure}[htbp]
-%%		\centering
-%%		\begin{tikzpicture}
-%%		\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
-%%		\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
-%%		\draw[domain=0:2*pi,scale=2.0,samples=500] 
-%%			plot ({deg(\x)}:{cos(2*\x r)});
-%%		\end{tikzpicture}
-%%	\end{figure}
-%
-%\begin{figure}[htbp]
-%	\centering
-%	\begin{tikzpicture}
-%	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
-%	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
-%	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
-%		plot ({deg(\x)}:{abs(sin(2*\x r))});
-%	\end{tikzpicture}
-%\end{figure}
 
-%
+\textbf{Example 3:}
+\begin{figure}[!htbp]
+	\centering
+	\begin{tikzpicture}
+	\draw[thick,->] (-2,0)--(2,0) node[above] {$x$};
+	\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
+	\draw[domain=0:3*pi,scale=2.0,samples=500] 
+		plot ({deg(\x)}:{abs(sin(\x r))});
+	\end{tikzpicture}
+\end{figure}
+
+\textbf{Example 4: }
+\begin{figure}[!htbp]
+	\centering
+	\begin{tikzpicture}
+	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
+	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
+		plot ({deg(\x)}:{abs(cos(2*\x r))});
+	\end{tikzpicture}
+\end{figure}
+
 %		\begin{figure}[htbp]
 %		\centering
 %		\begin{tikzpicture}
 %		\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
-%		\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
-%		\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
-%			plot ({deg(\x)}:{acos(sin(\x r))});
+%		\draw[thick,->] (0,-3)--(0,3) node[left] {$y$};
+%		\draw[domain=0:2*pi,scale=2.0,samples=500] 
+%			plot ({deg(\x)}:{cos(2*\x r)});
 %		\end{tikzpicture}
 %	\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}
+	\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+	\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
+	\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
+		plot ({deg(\x)}:{abs(sin(2*\x r))});
+	\end{tikzpicture}
+\end{figure}
+
+
+		\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}
+		\draw[thick,->] (-3,0)--(3,0) node[above] {$x$};
+		\draw[thick,->] (0,-1)--(0,3) node[left] {$y$};
+		\draw[domain=0:4*pi/3,scale=2.0,samples=500] 
+			plot ({deg(\x)}:{acos(sin(\x r))});
+		\end{tikzpicture}
+	\end{figure}
 }
 
 
@@ -3238,7 +3239,7 @@ $e_n$ error in $n$ $e_n \sim r^n$ $(0 < r < 1)$, $\frac{e_{n+1}}{e_n} = r$
 %---------------------------------------A--------------------------------------
 %---------------------------------------K--------------------------------------
 \newpage
-\section{SERIES }
+\section{SERIES CONVERGENCE}
 \subsection{Introduction to Series - Feb 28}
 \begin{definition}
 	Let $(a_k)_{k=1}^{\infty} \subset \mR$ be a sequence. We define the series
@@ -3309,7 +3310,7 @@ Series converges to 1.
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
 \newpage
-\subsection{Series Convergence Test I - March 2}
+\subsection{Series Convergence Test I: NTT and CT - March 2}
 
 \textbf{Recall: }
 \[
@@ -3406,7 +3407,7 @@ $\sum_{k=1}^{\infty} \frac 1k$. \\
 		\leq& \sum_{k=1}^n a_k + \sum_{k=N}^{\infty} b_k	\\
 		\leq& \sum_{k=1}^n a_k +\underbrace{\lim_{n\to\infty} \sum_{k=1}^n b_k}
 		_{nondecreasing \ in\ n} \\
-		\leq& \underbrace{\sum_{k=1}^{N-1} a_k}_{finite}
+		\leq& \underbrace{\sum_{k=1}^{N+1} a_k}_{finite}
 		+ \underbrace{\sum_{k=1}^{\infty} b_k }_{<\infty}
 		\tag{added in $\sum_{k=1}^{\infty} b_k \geq 0$} 
 	\end{align*}
@@ -3457,7 +3458,7 @@ $\sum_{k=1}^{\infty} \frac 1k$. \\
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
 \newpage
-\subsection{Series Convergence Test II - March 4}
+\subsection{Series Convergence Test II: LCT, RCT, and Ratio Test - March 4}
 
 
 \textbf{Remark:}
@@ -3539,7 +3540,7 @@ test or limit comparison test, we will see that it has strong theoretical value.
 		\Rightarrow & \qquad & \frac{a_{k+1}}{b_{k+1}} \leq&\frac{a_k}{b_k}	\\
 		\Rightarrow & \qquad & \frac{a_k}{b_k} \leq &\frac{a_N}{b_N} = M
 		\qquad for \ k \geq N	\\
-		\Rightarrow & \qquad & a_k \leq& Mb_k, \quad for\ k \geq N
+		\Rightarrow & \qquad & a_k \geq& Mb_k, \quad for\ k \geq N
 	\end{alignat*}
 	Then $\sum_{k=1}^{\infty} b_k$ converges 
 	$\Rightarrow \sum_{k=1}^{\infty} Mb_k$ converges $\Rightarrow$ 
@@ -3550,7 +3551,7 @@ test or limit comparison test, we will see that it has strong theoretical value.
 \begin{theorem}[\textbf{Ratio test}]
 	Suppose $a_k > 0$ and that 
 	\[
-		\lim_{k\to\infty} \frac{a_{k+1}}{a_k} = r \qquad \text{exists}
+		\lim_{k\to\infty} a_k = r \qquad \text{exists}
 	\]
 	Then $r \geq 0$, and 
 	\begin{enumerate}
@@ -3607,7 +3608,7 @@ test or limit comparison test, we will see that it has strong theoretical value.
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
-\subsection{Series Convergence Test III - March 6}
+\subsection{Series Convergence Test III: Integral Test - March 6}
 
 \begin{theorem}[\textbf{Integral Test}]
 	Let $a_k > 0$, $k \in \mN$, suppose there is a function $f:[1,\infty) \to
@@ -3744,7 +3745,7 @@ f(t)dt$ converges. [exercise]
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
 \newpage
-\subsection{Series Convergence Test IV - March 9}
+\subsection{Series Convergence Test IV: Raabe's Test - March 9}
 {\color{Brown}
 \textbf{Example:} Euler's Constant
 
@@ -3752,7 +3753,7 @@ $\gamma = \lim_{n\to\infty} [\sum_{k=1}^n \frac 1k - \log n]$ exists.
 
 \textit{Recall:} \\
 $\floor{x} = \max \{k \in \mZ : k \leq x\}$	\\
-$\floor{t} \leq t \leq \floor{t} + 1; t \geq 1$\\
+$\floor(t) \leq t \leq \floor{t} + 1; t \geq 1$\\
 $\frac 1{\floor{t}} \geq \frac 1t \geq \frac 1{\floor{t} + 1}$	\\
 $\Rightarrow \qquad \frac 1{\floor{t}} - \frac 1t = 0$
 
@@ -3774,13 +3775,13 @@ When $a_k > 0$, $\lim_{n\to\infty} \frac{a_{k+1}}{a_k} = 1$.
 }
 
 \begin{proposition}[\textbf{Raabe's Test}]
-	Suppose $\lim_{k\to\infty} k (1-\frac{a_{k+1}}{a_k}) = p \in \mR$,
+	Suppose $\lim_{n\to\infty} k (1-\frac{a_{k+1}}{a_k}) = p \in \mR$,
 	then 
 	\begin{enumerate}
 		\item If $p > 1 \Rightarrow \sum_{k=1}^{\infty} a_k$ converges
 		\item If $p < 1 \Rightarrow \sum_{k=1}^{\infty} a_k$ diverges
 		\item If $p = 1$ and $\abs{k(1-\frac{a_{k+1}}{a_k})-1}\leq \frac mk$ 
-			for some $M>0$, then $\sum_{k=1}^{\infty} a_k$ converges
+			for some $M>0$, then $\sum_{k=1}^{\infty} a_k$ diverges
 	\end{enumerate}
 	\textit{Remark:} the case $p = \infty$ also gives convergence, the proof is
 	similar to $p > 1$ case. 
@@ -3791,9 +3792,9 @@ When $a_k > 0$, $\lim_{n\to\infty} \frac{a_{k+1}}{a_k} = 1$.
 \item 
 	Let $q>0 \in \mR$, 
 	\[
-		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} = 1-\frac qk + \frac{B_k}{k^2}
+		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} = 1-\frac 1k + \frac{B_k}{k^2}
 	\]
-	where $0 \leq B_k \leq (q+1)q$ (i.e. is bounded).
+	where $0 \leq B_k \leq (q+1)1$ (i.e. is bounded).
 
 	Indeed, 
 	\[
@@ -3804,8 +3805,8 @@ When $a_k > 0$, $\lim_{n\to\infty} \frac{a_{k+1}}{a_k} = 1$.
 	\]
 	Let $f = (1+x)^{-q}$, $f(x) = -q(1+x)^{-q-1}$, $f''(x) = q(q+1)(1+x)^{-q-2}$.
 
-	Taylor's Theorem about $a = 0$: $\displaystyle f(x) = 1-qx + \frac{q(q+1)}{(1+c_x)^{q+2}}x^2$,
-	$c_x$ between $0$ and $x$.
+	Taylor's Theorem about $a = 0$: $f(x) = 1-qx \frac{q(q+1)}{(1+cx)^{q+2}}x^2$,
+	$cx$ between $0$ and $x$.
 	\[
 		\frac{\frac 1{(k+1)^q}}{\frac 1{k^q}} 
 		= (1+\frac 1k)^{-q}
@@ -3819,7 +3820,7 @@ When $a_k > 0$, $\lim_{n\to\infty} \frac{a_{k+1}}{a_k} = 1$.
 	\begin{align*}
 		\frac{a_{k+1}}{a_k} 
 		=& 1-\frac pk + \frac pk - 1 + \frac{a_{k+1}}{a_k}	\\
-	=& 1- \frac pk + \frac 1k (\underbrace{p-k(1-\frac {a_{k+1}}{a_k}))}_{:=A_k}\\
+	=& 1- \frac pk \frac 1k \underbrace{p-k(1-\frac {a_{k+1}}{a_k}))}_{:=A_k}\\
 	=& 1- \frac pk + \frac{A_k}k
 	\end{align*}
 \[
@@ -3887,7 +3888,7 @@ converges.
 	\frac{a_{k+1}}{a_k} 
 	= \sum_{k=1}^{\infty} 
 	\frac{\prod_{i=1}^{k+1} \frac{a+i}{b+i}}{\prod_{i=1}^k \frac{a+i}{b+i}} 
-	= \frac{a+k+1}{b+k+1} \overset{k\to\infty}{\longrightarrow} 1
+	= \frac{a+k+1}{a+k} \overset{k\to\infty}{\longrightarrow} 1
 \]
 
 By Raabe's Test: 
@@ -3923,10 +3924,9 @@ $b-a=1 \Rightarrow$ converges.
 %------------------------------------------------------------------------------
 %------------------------------------------------------------------------------
 \newpage
-\subsection{Serires Convergence Test V - March 11}
+\subsection{Serires Convergence Test V: AST - March 11}
 
-\subsubsection{Leibnitz Alternating Series Test}
-\begin{theorem}[\textbf{leibnitz Alternating Series Test}]
+\begin{theorem}[\textbf{Leibnitz Alternating Series Test}]
 	Suppose 
 	\begin{itemize}
 		\item $a_1 \geq a_2 \geq \cdots \geq 0$
@@ -4015,7 +4015,7 @@ Let $F(x) = \int_0^x \sin(\frac 1t) dt$.
 FTofCI, $x \neq 0$, $F'(x) = \sin(\frac 1t)$, as $x\mapsto \sin(\frac 1x)$ is 
 continuous away from $0$. 
 
-Notice that hte integrand is not continuous at $x = 0$, can we evaluate
+Notice that the integrand is not continuous at $x = 0$, can we evaluate
 $F'(0)$?  
 
 \textit{Answer:} $F'(0) = 0$. 
@@ -4213,11 +4213,438 @@ convergent, then,
 	\mR$, then 
 	\begin{itemize}
 		\item $\abs{f(t)} \leq g(t)$
+		\item $\int_1^{\infty} g$ converges
 	\end{itemize}
 \end{proposition}
 
 
 
 
+\section{SERIES AND FUNCTION}
+\subsection{Pointwise Convergence and Integral Test Revisited - March 23}
+{\color{Brown}
+	\textbf{Example: } Does $\sum_{k=2}^{\infty} \frac1{(\log k)^{\log k}}$
+	converge? 
+}
+
+{\color{Orchid}
+\textit{Remark: } The integral Test is useful and works in both directions.\\ 
+}
+
+\begin{definition}[\textbf{Pointwise Convergence}]
+	Let $f_1, f_2, \ldots$  and $f$ be functions on an interval $I$. We say
+	that
+	\[
+		\lim_{n\to\infty} f_n = f \text{ \textbf{pointwise} on } I,
+		\text{ if } \lim_{n\to\infty} f_n(x) = f(x)
+		\text{ for each } x \text{ in } I
+	\]\\
+\end{definition}
+
+
+{\color{Orchid}
+\textit{Remark:}
+1. Pointwise Convergence is highly unstable. \\
+2. The pointwise limit of differentiable/continuous functions need not be 
+continuous. 
+}
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------d\newpage
+\subsection{Uniform Convergence}
+\begin{definition}[\textbf{Uniform Convergence}]
+	Let $f_1, f_2, \ldots$, and $f$ be functions on a interval $I$. We say that
+	\[
+		\lim_{n\to\infty} f_n = f \text{ uniformly on I} 
+	\]
+	if given $\ep > 0$, there is $N$ in $\mN$ for which 
+	\[
+		\abs{f_n(x) - f(x) < \ep)} \text{ for every } x \text{ in } I, 
+		\text{whenever } n \geq N
+	\]
+	i.e.
+	\[
+		f(x) - \ep < f_n(x) < f(x) + \ep \text{ for every } x \text{ in }
+		I, \text{ whenever } n \geq N
+	\]
+	Hence, for $n\geq N$, we have
+	\[
+		\{(x , f_n(x)) : x \in I\} 
+		\subset 
+		\{(x, y) : f(x) - \ep < y < f(x) + \ep : x \in I)\}
+		\\
+	\]
+\end{definition}
+
+\begin{theorem}[\textbf{Uniform Convergence and Integrals}]
+	Let $f_1, f_2, \ldots$ and $f$ be functions on $[a, b]$, such that
+	\begin{itemize}
+		\item each of $f, f_1, f_2, \ldots$ are integrable on $[a,b]$ and
+		\item $\lim_{n\to\infty} = f$ uniformly on $[a,b]$.
+	\end{itemize}
+	then, 
+	\[
+		\lim_{n\to\infty} \int_a^b f_n = \int_a^b f \,\, .
+	\]
+\end{theorem}
+\begin{proof}
+	We use uniform convergence: given $\ep > 0$ there is $N$ be so that
+	\[
+		\abs{f_n (x) - f(x)} < \frac{\ep}{b-a+1} \text{ for every } x 
+		\text{ in } [a, b], \text{ whenever } n \geq N
+	\]
+	Thus, if $n \geq N$, we use linearity and order properties of integrals to 
+	see that 
+	\[
+		\abs{\int_a^b f_n - \int_a^b f} = \abs{\int_a^b (f_n - f)}
+		\leq \int_a^b \abs{f_n - f} \leq \int_a^b \frac{\ep}{b-a+1} < \ep
+	\]
+	hence, $\lim_{n\to\infty} \int_a^b f_n = \int_a^b f$.
+\end{proof}
+
+\begin{theorem}[\textbf{Uniform Convergence and Continuity}]
+	Let $f_1, f_2, \ldots, $ and $f$ be functions on an interval $I$, such that
+	\begin{itemize}
+		\item each of $f_1, f_2, \ldots$ is continuous on $I$, and 
+		\item $\lim_{n\to\infty} f_n = f$ uniformly on $I$.
+	\end{itemize}
+	Then, $f$ is continuous on $I$. 
+\end{theorem}
+\begin{proof}
+	Fix $x_0$ in $I$ and $\ep > 0$, then uniform convergence provides $N$ in 
+	$\mathbb{N}$ for which 
+	\[
+		\abs{f_n(x) - f(x)} < \frac{\ep}3 \text{ for every } x \text{ in }
+		I, \text{ whenever } n \geq N. 
+	\]
+	Next, we let $\delta > 0$ satisfy the definition of continuity of $f_N$ at
+	$x_0$: 
+	\[
+		\abs{f_N(x) - f_N(x_0)} < \frac{\ep}3 \text{ whenever } x \in I, 
+		\abs{x - x_0} < \delta \,\, .
+	\]
+	Let $ x\in I$, $\abs{x - x_0} < \delta$, then, 
+	\begin{align*}
+		&\abs{f(x) - f(x_0)}
+		\\
+		\leq& \abs{f(x) - f_N(x)} + \abs{f_N(x) -f(x_0)}
+		\\
+		<& \frac{\ep}3 + \frac{\ep}3 + \frac{\ep}3 = \ep \,\, , 
+	\end{align*}
+	this shows that $f$ is continuous at $x_0$. THis is true for any $x_0$ in 
+	$[a,b]$, we see that $f$ is continuous on $[a,b]$.	\\
+\end{proof}
+
+\begin{theorem}[\textbf{Weierstrass M-Test}]
+	Let $f_1, f_2, \ldots $ be functions on an interval $I$, such that 
+	there are $M_1, M_2, \ldots$, such that each $\sup_{x \in I} \abs{f_k(x)}
+	\leq M_k$ and $M = \sum_{k = 1}^{\infty} M_k$ converges. 
+	then there is a function $f: I \to \mR$ such that 
+	\[
+		\sum_{k=1}^{\infty} f_k = \lim_{n\to\infty} \sum_{k=1}^{n} f_k = f
+		\text{ uniformly on } I \,\, ,
+	\]
+	In particular, if each $f_k$ is continuous, then so too is $f$. 
+\end{theorem}
+\begin{proof}
+	For each $x$ in $I$, $\abs{f_k(x)} \leq M_k$ so $\sum_{k=1}^{\infty} f_k(x)$,
+	by Comparison test. Define $f(x) = \sum_{k=1}^{\infty} f_k(x)$ for $x$ in
+	$I$. 
+
+	Given $\ep > 0$, there is $N$ in $\mN$ such that for $m\geq N$ we have
+	\[
+		\ep > \abs{M - \sum_{k=1}^m M_k} = \abs{\sum_{k=m+1}^{\infty} M_k}
+		= \sum_{k = m+1} ^{\infty} M_k
+	\]
+	Hence $n \geq N$ we have for any $x \in I$ that 
+	\begin{align*}
+		\abs{f(x) - \sum_{k=1}^{m} f_k(x)} 
+		=& \abs{\sum_{k=1}^m f_k(x)}\\
+		=& \abs{\lim_{n\to\infty} \sum_{k=m+1}^n f_k(x)}\\
+		\leq & \lim_{n\to\infty} \sum_{k=m+1}^n \abs{f_k(x)}
+		\leq \lim_{n\to\infty} \sum_{k=m+1}^n M_k	\\
+		=& \sum_{k=m+1}^{\infty} M_j < \ep
+	\end{align*}
+	Notice that the above estimate is for every $x$ in $I$, and hence, we get
+	$f = \lim_{m\to\infty} \sum_{k=1} f_k = \sum_{k=1}^{\infty} f_k$ uniformly
+	on $I$. 
+
+	In each $f_k$ is continuous, then each $\sum_{k=1}^m f_k$ is continuous, 
+	and the Theorem on \textit{Uniform Convergence and Continuity} shows that
+	$f$ must be, too. 
+\end{proof}
+
+\textbf{Summary: }
+
+
+
+
+
+
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\newpage
+\subsection{Power Series and Taylor Series - March 27}
+
+\begin{definition}
+	A power series about $a$ in $\mR$ is any function defined in a
+	neighborhood of $a$ of the form
+	\[
+		f(x) = \sum_{k=0}^{\infty} a_k(x-a)^k 
+	\]
+	where $(a_k)_{k=0}^{\infty} \subset \mR$. This being a series, the 
+	determination of when it converges is an issue. 
+
+	\textbf{Radius of Convergence: } 
+	\[
+		R = \frac 1{\limsup _{k\to\infty} \sqrt[k]{\abs{a_k}}}
+		= \lim_{k\to\infty} \frac{\abs{a_k}}{\abs{a_{k+1}}}
+		\text{ if the limit exists} \,\, .
+	\]
+	Give a power series $f(x)$ as in ($\heartsuit$) with radius of convergence
+	$R$, we have that 
+	\[
+		f(x) = \sum_{k\to\infty}^{\infty} a_k(x-1)^k 
+		\begin{cases}
+			\text{converges if } \abs{x-a} < R	\\
+			\text{diverges if } \abs{x-a} > R
+		\end{cases}
+	\]\\ 
+\end{definition}
+
+
+\begin{theorem}[\textbf{Convergence of Power Series}]
+	Let $f(x) = \sum_{k=0}^{\infty} a_k(x-a)^k$ be a power series with radius
+	of convergence $R > 0$. Then for any $0 < r < R$ we have that 
+	\[
+		f(x) = \lim_{n\to\infty} a_k (x-a)^k 
+		\text{ uniformly on } [a-r, a+r]
+	\]
+	In particular, $f$ is continuous on $(a-R, a+R)$. 
+\end{theorem}
+\begin{proof}
+	The heart of this proof is the Weierstrass M-Test. 
+
+	Since $r < R$ we exploit the method by which we devised $R$.
+	
+\end{proof}
+
+
+
+
+\begin{definition}[\textbf{Taylor Series}] 
+	The \textbf{Taylor Series} of $f$ about $a$ by 
+	\[
+		\sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!} (x-a)^k \,\, .
+	\]
+\end{definition}
+
+
+
+\begin{proposition}
+	Suppose $f$ as above admits $r>0$ for which the remainder terms admits 
+	uniform bound
+	\[
+		\abs{R_n(x)} = \abs{\frac{f^{(n+1)}(c_x)}{(n+1)!} (x-a)^{n+1}} 
+		\leq M_n 
+		\text{ for } \abs{x-a} \leq r 
+		\text{ where } \lim_{n\to\infty} M_n = 0
+	\]
+	then the radius of convergence of the Taylor series satisfies $R > r$, and
+	\[
+		f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!} (x-a)^k 
+		\text{ for } \abs{x-a} \leq r
+	\]
+\end{proposition}
+
+
+\begin{lemma}
+	Let $(a_k)^{\infty}_{k=0} \subset \mR$, then the power series
+	\[
+	f(x) = \sum_{k=1}^{\infty} k a_k (x-a)^{k-1} 
+	\text{ converges } 
+	\Leftrightarrow (x-a)g(x) = \sum_{k=1}^{\infty} ka_k(x-a)^k 
+	\text{ converges} 
+	\]
+	admit the same radius. 
+\end{lemma}
+
+
+
+\begin{theorem}[\textbf{Derivative and Interals of Power Series}]
+	Let $f(x) = \sum_{k=0}^{\infty} a_k (x-a)^k$ have radisu of convergence 
+	$R > 0$. Then, 
+	\begin{enumerate}
+		\item for $x \in (a-R, a+R)$, $\int_a^x f(t) dt = \sum_{k=0}^{\infty}
+			\frac{a_k}{k+1} (x-a)^{k+1}$, 
+		\item $f$ is differentiable on $(a-R, a+R)$ with $f'(x) = \sum_{k=1}
+			^{\infty} ka_k (x-a)^{k-1}$. 
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item Since $f_n(x) = \sum_{k=0}^n a_k(x-a)^k$, above, converge 
+			uniformly on $[a,x]$ for each $x$ in $(a-R, a+R)$, we can use 
+			Uniform Convergence and Integrals to see that
+			\begin{align*}
+				\int_a^x f(t) dt 
+				=& \int_a^x \lim_{n\to\infty} \sum_{k=0}^n a_k (k-a)^k dt 
+				\\
+				=& \lim_{n\to\infty} \int_a^x \sum_{k=0}^n \frac{a_k}{k+1}
+				(x-a)^{k+1}
+				\\
+				=& \sum_{k=0}^{\infty} \frac{a_k}{k+1} (x-a)^{k+1} 
+			\end{align*}
+
+		\item The function $f_n$ above satisfy $f_n'(x) = \sum_{k=1}^n ka_k
+			(x-a)^{k-1}$. Let 
+			\[
+				g(x) = \sum_{k=1}^{\infty} k a_k (x-a)^{k-1}
+			\]
+			as in the Lemma above, then by Convergence of Power Series we have
+			that 
+			\[
+				\lim_{n\to\infty} f'_n = f 
+				\text{ uniformly on } [a-r, a+r] 
+				\text{ for } 0 < r < R
+			\]
+			Since each $f_n(a) = a_0$, we apply F.T. of C. II to each
+			$f_n'$, and then Uniform Convergence and Integrals to see for $x$
+			in $(a-R, a+R)$ that 
+			\[
+				f(x) = \lim_{n\to\infty} f_n(x) = \lim_{n\to\infty} 
+				= \lim_{n\to\infty} [a_0 + \int_a^x f'_n(t)dt]
+				= a_0 + \int_a^ x g(t) dt
+			\]
+			but then, by F.T.of C.I, we see that
+			\[
+				f'(x) = g(x) = \sum_{k=1}^{\infty} ka_k (x-a)^{k-1} .
+			\]	
+	\end{enumerate}
+\end{proof}
+
+
+\begin{corollary}
+	Let $f(x) = \sum_{k=0}^{\infty} a_k (x-a)^k$ be as above, then 
+	\[
+		a_k = \frac{f^{(k)}(a)}{k!} 
+		\text{ for each } k = 0, 1, 2, \ldots 
+	\]
+	In particular, the power series representation for $f$ is unique on 
+	$(a - R, a + R)$. 
+\end{corollary}
+\begin{proof}
+	A simple induction shows that 
+	\[
+		f(a) = a_0, \qquad f'(a) = a_1, \qquad f''(a) = 2a_2. 
+		\qquad 
+		\ldots, 
+		\qquad 
+		f^{(k)}(a) = k!a_k
+	\]
+\end{proof}
+
+
+\begin{proposition}
+	Suppose $f$ is in infinitely differentiable in a neighbourhood of $a$ and
+	admits $r > 0$ for which the remainder terms admit uniform bounds:
+	\[
+		\abs{R_n(x)} 
+		= \abs{\frac{f^{(n+1)}(c_x)}{(n+1)!} (x-a)^{n+1}}
+		= \abs{\frac 1{n!} \int_a^x f^{(n+1)} (t) (x-t)^n dt}
+		\leq M_n
+		\text{ for } 
+		\abs{x-a} \leq r
+	\]
+	where $\lim_{n\to\infty} M_n = 0$. Then 
+	\[
+		f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!} (x-a)^k
+		\text{ for } \abs{x-a} \leq r
+	\]
+	Hence the Taylor Series has radius of convergence $R \geq r$. 
+\end{proposition}
+
+
+
+
+
+{\color{Brown}
+
+	\textbf{Example 1:} $e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!}$ on $\mR$,
+	centered at $a=0$.  
+	
+	Consider any $r > 0$, then we have remainder item 
+	\[
+		0 < R_n(x) = \frac{e^{c_x}}{(n+1)!} x^{n+1} 
+		\leq \frac{e^r}{(n+1)!} r^{n+1} 
+		\text{ if } 
+		\abs{x} \leq r 
+	\]
+\[
+	e^x = \sum_{k=0}^{\infty} \frac{x^k}{k!} \text{on} \mR 
+\]
+then, for $n > N > r$, we have
+\[
+	\frac{e^r}{(n+1)!} r^{n+1} \leq e^r \frac{r^N}{N!}\bigg(\frac r{N+1}\bigg)
+	^{n+1-N} 
+	\overset{n\to\infty}{\longrightarrow} 0 \,\, .
+\]
+\\
+}
+
+
+
+\begin{proposition}[\textbf{Endpoints}] 
+	Suppose the Taylor Series of $f$ about $a$ has radius of convergence
+	$0 < R < \infty$, and on $[a, a+R]$ or $[a-R, a]$ we have that 
+	\[
+		\abs{R_n(x)} = \abs{\frac{f^{(n+1)}(c_x)}{(n+1)!} (x-a)^{n+1}}
+		= \abs{\frac1{n!} \int_a^x f^{(n+1)}(t)(x-t)^n dt} \leq M_n
+		\text{ where } \lim_{n\to\infty} M_n = 0\,\, .
+	\]
+	then 
+	\[
+		\sum_{k=0}^{\infty} \frac{f^{(n)}(a)}{k!} (x-a)^k 
+		\text{ on } [a, a + R] \text{ and/or } 
+		[a - R , a] 
+	\]
+	with uniform convergence on that interval. 
+\end{proposition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
+
