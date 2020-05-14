@@ -13,3 +13,7 @@ term: 2020/1<br/>
 MATH 148:<br/>
 prof: Nico Spronk<br/>
 term: 2020/1<br/>
+<br/>
+MATH 247:
+prof: Madill
+term: 2020/5
