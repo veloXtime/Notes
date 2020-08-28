@@ -3,14 +3,14 @@
 velo.x
 
 
-##1A
+## 1A
 
 MATH 147: <br/>
 prof: Kenneth Davidson<br/>
 term: 2019/09<br/>
 <br/>
 
-##1B
+## 1B
 
 MATH 146:<br/>
 prof: Ross Willard<br/>
@@ -25,4 +25,4 @@ CS 146<br/>
 prof: Brad Lushman<br/>
 term: 2020/1<br/>
 
-##2B
+## 2B
