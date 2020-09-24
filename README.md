@@ -24,5 +24,3 @@ term: 2020/1<br/>
 CS 146<br/>
 prof: Brad Lushman<br/>
 term: 2020/1<br/>
-
-## 2B
