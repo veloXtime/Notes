@@ -30,3 +30,16 @@ term: 2020/1<br/>
 MATH 247:<br/>
 prof: Alexandru Nica<br/>
 term: 2020/9
+
+
+## 3B
+
+PMATH 352
+term: 2022/5
+
+
+
+## 4B
+PMATH 336
+term: 2023/1
+
